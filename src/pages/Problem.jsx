@@ -1,7 +1,28 @@
+import { useState } from "react";
 import Hero from "../components/sections/Hero";
+import TCLEModal from "../components/ui/TCLEModal";
+import InterviewModal from "../components/ui/InterviewModal";
 import "./Problem.css";
 
 const Problem = () => {
+  const [isTCLEModalOpen, setIsTCLEModalOpen] = useState(false);
+  const [isInterviewModalOpen, setIsInterviewModalOpen] = useState(false);
+
+  const handleOpenTCLE = () => {
+    setIsTCLEModalOpen(true);
+  };
+
+  const handleCloseTCLE = () => {
+    setIsTCLEModalOpen(false);
+  };
+
+  const handleOpenInterview = () => {
+    setIsInterviewModalOpen(true);
+  };
+
+  const handleCloseInterview = () => {
+    setIsInterviewModalOpen(false);
+  };
   return (
     <div className="problem-page">
       <Hero
@@ -360,20 +381,26 @@ const Problem = () => {
                   <p>
                     Documento TCLE seguindo normas éticas de pesquisa acadêmica
                   </p>
-                  <button className="document-btn" disabled>
-                    Em Breve
+                  <button
+                    className="document-btn document-btn-active"
+                    onClick={handleOpenTCLE}
+                  >
+                    Visualizar TCLE
                   </button>
                 </div>
 
                 <div className="document-card">
                   <div className="document-icon">📋</div>
-                  <h4>Roteiro de Perguntas</h4>
+                  <h4>Roteiro Entrevista</h4>
                   <p>
                     Script validado para condução das entrevistas
                     semi-estruturadas
                   </p>
-                  <button className="document-btn" disabled>
-                    Em Breve
+                  <button
+                    className="document-btn document-btn-active"
+                    onClick={handleOpenInterview}
+                  >
+                    Visualizar Roteiro
                   </button>
                 </div>
 
@@ -402,6 +429,12 @@ const Problem = () => {
           </div>
         </div>
       </section>
+
+      {/* Modal do TCLE */}
+      <TCLEModal isOpen={isTCLEModalOpen} onClose={handleCloseTCLE} />
+      
+      {/* Modal do Roteiro de Entrevista */}
+      <InterviewModal isOpen={isInterviewModalOpen} onClose={handleCloseInterview} />
     </div>
   );
 };

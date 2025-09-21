@@ -3,7 +3,14 @@
 }
 
 .features-section {
-  background-color: var(--bg-secondary);
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.features-section .section-title,
+.features-section .section-subtitle {
+  color: white;
 }
 
 .features-grid {
@@ -11,6 +18,32 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   margin-top: 3rem;
+}
+
+/* Cards brancos para as funcionalidades */
+.features-grid .card {
+  background: white;
+  border: none;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.features-grid .card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.features-grid .card-icon {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+}
+
+.features-grid .card-title {
+  color: #212529;
+}
+
+.features-grid .card-description {
+  color: #6c757d;
 }
 
 .feature-icon {

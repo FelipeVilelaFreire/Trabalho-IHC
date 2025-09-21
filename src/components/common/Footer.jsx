@@ -56,7 +56,7 @@ const Footer = () => {
               <br />
               Período: 2025.2
               <br />
-              Instituição: Universidade
+              Instituição: Universidade Federal Fluminense
             </p>
           </div>
         </div>
