@@ -1,0 +1,409 @@
+import Hero from "../components/sections/Hero";
+import "./Problem.css";
+
+const Problem = () => {
+  return (
+    <div className="problem-page">
+      <Hero
+        title="Imersão no Problema"
+        subtitle="Processo de pesquisa e descoberta utilizando metodologias de IHC para compreender profundamente os desafios dos usuários"
+        showScrollIndicator={true}
+      />
+
+      {/* How Might We Section */}
+      <section className="research-section section-howmightwe">
+        <div className="container">
+          <div className="section-content">
+            <div className="section-header">
+              <span className="section-number">01</span>
+              <h2 className="section-title">
+                <span className="section-icon">💡</span>
+                How Might We
+              </h2>
+              <span className="section-status status-completed">Concluído</span>
+            </div>
+
+            <div className="section-body">
+              <div className="section-description">
+                <p className="lead-text">
+                  Como podemos criar uma solução que centralize informações
+                  sobre hobbies e atividades locais, tornando mais fácil para as
+                  pessoas descobrirem, escolherem e se engajarem em novas
+                  experiências?
+                </p>
+              </div>
+
+              <div className="insights-container">
+                <h4>Questões Exploradas:</h4>
+                <div className="insights-grid">
+                  <div className="insight-item">
+                    <span className="insight-icon">🔍</span>
+                    <p>
+                      Como facilitar a descoberta de atividades locais de forma
+                      intuitiva?
+                    </p>
+                  </div>
+                  <div className="insight-item">
+                    <span className="insight-icon">🚪</span>
+                    <p>
+                      Como reduzir barreiras de entrada para iniciantes em novos
+                      hobbies?
+                    </p>
+                  </div>
+                  <div className="insight-item">
+                    <span className="insight-icon">🤝</span>
+                    <p>
+                      Como conectar pessoas com interesses similares de forma
+                      significativa?
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Desk Research Section */}
+      <section className="research-section section-deskresearch">
+        <div className="container">
+          <div className="section-content">
+            <div className="section-header">
+              <span className="section-number">02</span>
+              <h2 className="section-title">
+                <span className="section-icon">📚</span>
+                Desk Research
+              </h2>
+              <span className="section-status status-progress">
+                Em Andamento
+              </span>
+            </div>
+
+            <div className="section-body">
+              <div className="section-description">
+                <h3>Análise de Dados Secundários e Literatura Existente</h3>
+                <p className="lead-text">
+                  Investigação aprofundada sobre o mercado de lazer e hobbies,
+                  comportamento do consumidor e tendências de socialização
+                  urbana através de fontes confiáveis e estudos acadêmicos.
+                </p>
+              </div>
+
+              <div className="research-findings">
+                <div className="finding-card">
+                  <div className="finding-icon">📈</div>
+                  <h4>Tendência de Crescimento</h4>
+                  <p>
+                    Aumento na busca por atividades locais e experiências
+                    presenciais
+                  </p>
+                </div>
+                <div className="finding-card">
+                  <div className="finding-icon">🎯</div>
+                  <h4>Necessidade de Centralização</h4>
+                  <p>
+                    Demanda por uma plataforma unificada de descoberta de
+                    hobbies
+                  </p>
+                </div>
+                <div className="finding-card">
+                  <div className="finding-icon">🤝</div>
+                  <h4>Componente Social</h4>
+                  <p>
+                    Importância das conexões humanas nas atividades de lazer
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Competitive Analysis Section */}
+      <section className="research-section section-competitive">
+        <div className="container">
+          <div className="section-content">
+            <div className="section-header">
+              <span className="section-number">03</span>
+              <h2 className="section-title">
+                <span className="section-icon">🔍</span>
+                Análise Competitiva
+              </h2>
+              <span className="section-status status-progress">
+                Em Andamento
+              </span>
+            </div>
+
+            <div className="section-body">
+              <div className="section-description">
+                <h3>Estudo Comparativo de Soluções Existentes</h3>
+                <p className="lead-text">
+                  Mapeamento e análise de plataformas similares, identificando
+                  gaps e oportunidades de diferenciação no mercado brasileiro e
+                  internacional.
+                </p>
+              </div>
+
+              <div className="competitors-analysis">
+                <div className="competitor-card">
+                  <h4>Meetup</h4>
+                  <div className="competitor-pros">
+                    <p>✓ Grande base de usuários</p>
+                    <p>✓ Interface conhecida</p>
+                  </div>
+                  <div className="competitor-cons">
+                    <p>✗ Foco em eventos únicos</p>
+                    <p>✗ Não suporta hobbies contínuos</p>
+                  </div>
+                </div>
+
+                <div className="competitor-card">
+                  <h4>Facebook Groups</h4>
+                  <div className="competitor-pros">
+                    <p>✓ Alcance massivo</p>
+                    <p>✓ Gratuito</p>
+                  </div>
+                  <div className="competitor-cons">
+                    <p>✗ Informação fragmentada</p>
+                    <p>✗ Difícil descoberta</p>
+                  </div>
+                </div>
+
+                <div className="competitor-card">
+                  <h4>Apps Locais</h4>
+                  <div className="competitor-pros">
+                    <p>✓ Foco regional</p>
+                    <p>✓ Conteúdo curado</p>
+                  </div>
+                  <div className="competitor-cons">
+                    <p>✗ Escopo limitado</p>
+                    <p>✗ Pouca integração</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Questionnaire Section */}
+      <section className="research-section section-questionnaire">
+        <div className="container">
+          <div className="section-content">
+            <div className="section-header">
+              <span className="section-number">04</span>
+              <h2 className="section-title">
+                <span className="section-icon">📋</span>
+                Questionário
+              </h2>
+              <span className="section-status status-planned">Planejado</span>
+            </div>
+
+            <div className="section-body">
+              <div className="section-description">
+                <h3>Coleta Quantitativa de Dados com Usuários Potenciais</h3>
+                <p className="lead-text">
+                  Aplicação de questionário estruturado para identificar padrões
+                  de comportamento, preferências e necessidades do público-alvo.
+                </p>
+              </div>
+
+              <div className="questionnaire-info">
+                <div className="info-grid">
+                  <div className="info-card">
+                    <h4>Amostra</h4>
+                    <p className="info-highlight">Em definição</p>
+                    <p>Buscando diversidade demográfica</p>
+                  </div>
+                  <div className="info-card">
+                    <h4>Estrutura</h4>
+                    <p className="info-highlight">Questionário estruturado</p>
+                    <p>Perguntas abertas e fechadas</p>
+                  </div>
+                  <div className="info-card">
+                    <h4>Análise</h4>
+                    <p className="info-highlight">Estatística descritiva</p>
+                    <p>Identificação de personas</p>
+                  </div>
+                </div>
+
+                <div className="questionnaire-preview">
+                  <h4>Principais Áreas de Investigação:</h4>
+                  <ul>
+                    <li>Hábitos atuais de lazer e hobbies</li>
+                    <li>Barreiras encontradas na descoberta de atividades</li>
+                    <li>Preferências de comunicação e engajamento</li>
+                    <li>Disponibilidade de tempo e investimento</li>
+                    <li>Motivações e expectativas</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Interviews Section */}
+      <section className="research-section section-interviews">
+        <div className="container">
+          <div className="section-content">
+            <div className="section-header">
+              <span className="section-number">05</span>
+              <h2 className="section-title">
+                <span className="section-icon">🎤</span>
+                Entrevistas
+              </h2>
+              <span className="section-status status-planned">Planejado</span>
+            </div>
+
+            <div className="section-body">
+              <div className="section-description">
+                <h3>Entrevistas em Profundidade com Usuários</h3>
+                <p className="lead-text">
+                  Conversas estruturadas para compreender necessidades,
+                  motivações, frustrações e expectativas dos usuários em relação
+                  a hobbies e atividades locais.
+                </p>
+              </div>
+
+              <div className="interviews-plan">
+                <div className="plan-overview">
+                  <div className="plan-item">
+                    <span className="plan-icon">🎯</span>
+                    <span className="plan-label">
+                      Entrevistas em profundidade
+                    </span>
+                  </div>
+                  <div className="plan-item">
+                    <span className="plan-icon">⏱️</span>
+                    <span className="plan-label">Sessões detalhadas</span>
+                  </div>
+                  <div className="plan-item">
+                    <span className="plan-icon">👥</span>
+                    <span className="plan-label">Perfis diversificados</span>
+                  </div>
+                </div>
+
+                <div className="interview-structure">
+                  <h4>Estrutura da Entrevista:</h4>
+                  <div className="structure-timeline">
+                    <div className="timeline-item">
+                      <div className="timeline-card">
+                        <span className="timeline-time">3 min</span>
+                        <div className="timeline-content">
+                          Aquecimento e contexto
+                        </div>
+                      </div>
+                      <div className="timeline-dot"></div>
+                    </div>
+                    <div className="timeline-item">
+                      <div className="timeline-card">
+                        <span className="timeline-time">7 min</span>
+                        <div className="timeline-content">
+                          Experiências atuais com hobbies
+                        </div>
+                      </div>
+                      <div className="timeline-dot"></div>
+                    </div>
+                    <div className="timeline-item">
+                      <div className="timeline-card">
+                        <span className="timeline-time">6 min</span>
+                        <div className="timeline-content">
+                          Desafios e frustrações
+                        </div>
+                      </div>
+                      <div className="timeline-dot"></div>
+                    </div>
+                    <div className="timeline-item">
+                      <div className="timeline-card">
+                        <span className="timeline-time">4 min</span>
+                        <div className="timeline-content">
+                          Ideação e expectativas
+                        </div>
+                      </div>
+                      <div className="timeline-dot"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Interview Documents Section */}
+      <section className="research-section section-documents">
+        <div className="container">
+          <div className="section-content">
+            <div className="section-header">
+              <span className="section-number">06</span>
+              <h2 className="section-title">
+                <span className="section-icon">📄</span>
+                Documentos da Entrevista
+              </h2>
+              <span className="section-status status-planned">Planejado</span>
+            </div>
+
+            <div className="section-body">
+              <div className="section-description">
+                <h3>Roteiros, Transcrições e Análises das Entrevistas</h3>
+                <p className="lead-text">
+                  Documentação completa do processo de entrevistas, garantindo
+                  transparência, ética e rigor metodológico na pesquisa.
+                </p>
+              </div>
+
+              <div className="documents-grid">
+                <div className="document-card">
+                  <div className="document-icon">📝</div>
+                  <h4>Termo de Consentimento</h4>
+                  <p>
+                    Documento TCLE seguindo normas éticas de pesquisa acadêmica
+                  </p>
+                  <button className="document-btn" disabled>
+                    Em Breve
+                  </button>
+                </div>
+
+                <div className="document-card">
+                  <div className="document-icon">📋</div>
+                  <h4>Roteiro de Perguntas</h4>
+                  <p>
+                    Script validado para condução das entrevistas
+                    semi-estruturadas
+                  </p>
+                  <button className="document-btn" disabled>
+                    Em Breve
+                  </button>
+                </div>
+
+                <div className="document-card">
+                  <div className="document-icon">💬</div>
+                  <h4>Transcrições</h4>
+                  <p>
+                    Registro completo das conversas com participantes
+                    anonimizados
+                  </p>
+                  <button className="document-btn" disabled>
+                    Em Breve
+                  </button>
+                </div>
+
+                <div className="document-card">
+                  <div className="document-icon">📊</div>
+                  <h4>Análise Temática</h4>
+                  <p>Síntese dos principais insights e padrões identificados</p>
+                  <button className="document-btn" disabled>
+                    Em Breve
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Problem;

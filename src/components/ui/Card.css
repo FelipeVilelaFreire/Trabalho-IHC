@@ -1,0 +1,110 @@
+.card {
+  background-color: var(--white);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-hero);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-hoverable {
+  cursor: pointer;
+}
+
+.card-hoverable:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+.card-hoverable:hover::before {
+  opacity: 1;
+}
+
+.card-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  font-size: var(--text-2xl);
+}
+
+.card-title {
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+  color: var(--gray-900);
+  margin-bottom: 0.75rem;
+}
+
+.card-description {
+  color: var(--gray-600);
+  line-height: var(--leading-relaxed);
+  margin-bottom: 1rem;
+}
+
+.card-content {
+  margin-top: 1rem;
+}
+
+/* Color variants */
+.card-default .card-icon {
+  background-color: var(--primary-50);
+  color: var(--primary);
+}
+
+.card-primary .card-icon {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.card-secondary .card-icon {
+  background-color: var(--secondary);
+  color: var(--white);
+}
+
+.card-accent .card-icon {
+  background-color: var(--accent);
+  color: var(--white);
+}
+
+.card-success .card-icon {
+  background-color: var(--success);
+  color: var(--white);
+}
+
+.card-gradient {
+  background: linear-gradient(135deg, var(--primary-50) 0%, var(--secondary) 100%);
+  color: var(--white);
+}
+
+.card-gradient .card-title,
+.card-gradient .card-description {
+  color: var(--white);
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 1.5rem;
+  }
+  
+  .card-icon {
+    width: 50px;
+    height: 50px;
+    font-size: var(--text-xl);
+  }
+}

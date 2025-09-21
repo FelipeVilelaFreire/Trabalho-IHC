@@ -1,0 +1,103 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-primary);
+  font-weight: var(--font-medium);
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Removed overlay effect for simpler hover */
+
+/* Variants */
+.button-primary {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.button-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.button-secondary {
+  background-color: var(--secondary);
+  color: var(--white);
+}
+
+.button-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(118, 75, 162, 0.3);
+  background-color: var(--secondary);
+  color: var(--white);
+}
+
+.button-outline {
+  background-color: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.button-outline:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+  border-width: 3px;
+  color: var(--primary);
+  background-color: transparent;
+}
+
+.button-ghost {
+  background-color: transparent;
+  color: var(--gray-700);
+}
+
+.button-ghost:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  color: var(--gray-700);
+  background-color: transparent;
+}
+
+/* Sizes */
+.button-small {
+  padding: 0.5rem 1rem;
+  font-size: var(--text-sm);
+}
+
+.button-medium {
+  padding: 0.75rem 1.5rem;
+  font-size: var(--text-base);
+}
+
+.button-large {
+  padding: 1rem 2rem;
+  font-size: var(--text-lg);
+}
+
+/* States */
+.button-fullWidth {
+  width: 100%;
+}
+
+.button-disabled,
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .button-large {
+    padding: 0.875rem 1.75rem;
+    font-size: var(--text-base);
+  }
+}
