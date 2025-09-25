@@ -54,6 +54,8 @@ const Footer = () => {
             <p className="footer-info">
               Disciplina: Interação Humano-Computador
               <br />
+              Prof.ª Daniela Gorski Trevisan
+              <br />
               Período: 2025.2
               <br />
               Instituição: Universidade Federal Fluminense

@@ -33,7 +33,7 @@ const Home = () => {
       title: 'Imersão no Problema',
       description: 'Análise etnográfica e identificação dos desafios na descoberta de atividades locais.',
       icon: '🔍',
-      link: '/problema',
+      link: '/imersao',
       color: 'primary'
     },
     {

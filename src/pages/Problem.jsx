@@ -2,6 +2,7 @@ import { useState } from "react";
 import Hero from "../components/sections/Hero";
 import TCLEModal from "../components/ui/TCLEModal";
 import InterviewModal from "../components/ui/InterviewModal";
+import Button from "../components/ui/Button";
 import "./Problem.css";
 
 const Problem = () => {
@@ -46,7 +47,7 @@ const Problem = () => {
 
             <div className="section-body">
               <div className="section-description">
-                <p className="lead-text">
+                <p className="lead-text" style={{fontSize: '1.15rem', fontWeight: '500'}}>
                   Como podemos criar uma solução que centralize informações
                   sobre hobbies e atividades locais, tornando mais fácil para as
                   pessoas descobrirem, escolherem e se engajarem em novas
@@ -76,6 +77,13 @@ const Problem = () => {
                     <p>
                       Como conectar pessoas com interesses similares de forma
                       significativa?
+                    </p>
+                  </div>
+                  <div className="insight-item">
+                    <span className="insight-icon">📍</span>
+                    <p>
+                      Como promover atividades locais e fortalecer o senso de
+                      comunidade?
                     </p>
                   </div>
                 </div>
@@ -257,6 +265,17 @@ const Problem = () => {
                     <li>Disponibilidade de tempo e investimento</li>
                     <li>Motivações e expectativas</li>
                   </ul>
+                </div>
+                
+                <div className="questionnaire-cta">
+                  <p>É possível acessar o formulário no link a seguir:</p>
+                  <Button 
+                    href="https://docs.google.com/forms/d/e/1FAIpQLScKRJPdGVNJoN0y6bxGGXiJXwQUCr5xXnRTPiQGj6k9hT-Z_w/viewform"
+                    variant="primary"
+                    size="medium"
+                  >
+                    Acessar Formulário
+                  </Button>
                 </div>
               </div>
             </div>
