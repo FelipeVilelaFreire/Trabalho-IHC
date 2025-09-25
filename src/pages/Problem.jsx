@@ -103,45 +103,112 @@ const Problem = () => {
                 <span className="section-icon">📚</span>
                 Desk Research
               </h2>
-              <span className="section-status status-progress">
-                Em Andamento
+              <span className="section-status status-completed">
+                Concluído
               </span>
             </div>
 
             <div className="section-body">
               <div className="section-description">
-                <h3>Análise de Dados Secundários e Literatura Existente</h3>
-                <p className="lead-text">
-                  Investigação aprofundada sobre o mercado de lazer e hobbies,
-                  comportamento do consumidor e tendências de socialização
-                  urbana através de fontes confiáveis e estudos acadêmicos.
+                <h3 style={{fontSize: '1.5rem', fontWeight: '600', marginBottom: '1rem'}}>Matriz CSD - Certezas, Suposições e Dúvidas</h3>
+                <p className="lead-text" style={{textAlign: 'center', maxWidth: '800px', margin: '0 auto 2rem'}}>
+                  A matriz CSD é uma ferramenta de síntese e análise utilizada em processos de design thinking e pesquisa de UX. 
+                  Ela nos permite organizar sistematicamente os insights coletados em três categorias fundamentais.
                 </p>
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  gap: '2rem',
+                  marginBottom: '2.5rem',
+                  flexWrap: 'wrap'
+                }}>
+                  <div style={{
+                    flex: '1',
+                    minWidth: '200px',
+                    maxWidth: '250px',
+                    textAlign: 'center',
+                    padding: '1.5rem',
+                    backgroundColor: 'rgba(74, 144, 226, 0.08)',
+                    borderRadius: '8px',
+                    border: '2px solid rgba(74, 144, 226, 0.2)'
+                  }}>
+                    <h4 style={{fontSize: '1.1rem', fontWeight: '600', color: '#4A90E2', marginBottom: '0.5rem'}}>Certezas</h4>
+                    <p style={{fontSize: '0.9rem', color: '#666', margin: 0}}>
+                      Fatos comprovados e informações validadas através da pesquisa
+                    </p>
+                  </div>
+                  <div style={{
+                    flex: '1',
+                    minWidth: '200px',
+                    maxWidth: '250px',
+                    textAlign: 'center',
+                    padding: '1.5rem',
+                    backgroundColor: 'rgba(255, 159, 64, 0.08)',
+                    borderRadius: '8px',
+                    border: '2px solid rgba(255, 159, 64, 0.2)'
+                  }}>
+                    <h4 style={{fontSize: '1.1rem', fontWeight: '600', color: '#FF9F40', marginBottom: '0.5rem'}}>Suposições</h4>
+                    <p style={{fontSize: '0.9rem', color: '#666', margin: 0}}>
+                      Hipóteses baseadas em indícios que precisam de validação
+                    </p>
+                  </div>
+                  <div style={{
+                    flex: '1',
+                    minWidth: '200px',
+                    maxWidth: '250px',
+                    textAlign: 'center',
+                    padding: '1.5rem',
+                    backgroundColor: 'rgba(139, 69, 19, 0.08)',
+                    borderRadius: '8px',
+                    border: '2px solid rgba(139, 69, 19, 0.2)'
+                  }}>
+                    <h4 style={{fontSize: '1.1rem', fontWeight: '600', color: '#8B4513', marginBottom: '0.5rem'}}>Dúvidas</h4>
+                    <p style={{fontSize: '0.9rem', color: '#666', margin: 0}}>
+                      Questões em aberto que direcionam próximas investigações
+                    </p>
+                  </div>
+                </div>
               </div>
 
-              <div className="research-findings">
-                <div className="finding-card">
-                  <div className="finding-icon">📈</div>
-                  <h4>Tendência de Crescimento</h4>
-                  <p>
-                    Aumento na busca por atividades locais e experiências
-                    presenciais
-                  </p>
+              <div className="csd-matrix-container" style={{
+                maxWidth: '1200px',
+                margin: '0 auto'
+              }}>
+                <h4 style={{
+                  fontSize: '1.3rem',
+                  fontWeight: '600',
+                  textAlign: 'center',
+                  marginBottom: '1.5rem',
+                  marginTop: '2rem'
+                }}>Nossa Matriz CSD:</h4>
+                <div style={{
+                  position: 'relative',
+                  width: '100%',
+                  paddingBottom: '80%',
+                  height: 0,
+                  overflow: 'hidden',
+                  borderRadius: '12px',
+                  boxShadow: '0 6px 12px rgba(0, 0, 0, 0.15)',
+                  backgroundColor: '#f5f5f5'
+                }}>
+                  <iframe 
+                    src="https://miro.com/app/live-embed/uXjVJJzSn-o=/?embedMode=view_only_without_ui&moveToViewport=8480,283,9070,4464&embedId=111805068315"
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      border: 0
+                    }}
+                    scrolling="no"
+                    allow="fullscreen; clipboard-read; clipboard-write"
+                    allowFullScreen
+                  />
                 </div>
-                <div className="finding-card">
-                  <div className="finding-icon">🎯</div>
-                  <h4>Necessidade de Centralização</h4>
-                  <p>
-                    Demanda por uma plataforma unificada de descoberta de
-                    hobbies
-                  </p>
-                </div>
-                <div className="finding-card">
-                  <div className="finding-icon">🤝</div>
-                  <h4>Componente Social</h4>
-                  <p>
-                    Importância das conexões humanas nas atividades de lazer
-                  </p>
-                </div>
+                <p style={{marginTop: '1.2rem', fontSize: '0.9rem', color: '#888', textAlign: 'center', fontStyle: 'italic'}}>
+                  Visualização interativa da análise estruturada dos insights coletados durante a pesquisa
+                </p>
               </div>
             </div>
           </div>
