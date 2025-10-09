@@ -154,9 +154,9 @@ const Home = () => {
               Este estudo faz parte de um projeto de Interação Humano-Computador da UFF. 
               Sua participação é voluntária e anônima, contribuindo para o avanço científico na área.
             </p>
-            <Button 
-              href="https://docs.google.com/document/d/1_4nttxDmjnHOAS4TnH5jiCjaZc4iv0lcnCACcAbHblo/edit?usp=sharing" 
-              size="large" 
+            <Button
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdcJsfhgdCOWDCbIlXJ0CVo-ryip9Tfv1PP2wQkX6xq720KHQ/viewform"
+              size="large"
               variant="primary"
             >
               Participar do Estudo

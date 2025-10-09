@@ -21,10 +21,13 @@ const Button = ({
   ].filter(Boolean).join(' ');
 
   if (href) {
+    const isExternal = href.startsWith('http');
     return (
-      <a 
-        href={href} 
+      <a
+        href={href}
         className={classes}
+        target={isExternal ? '_blank' : undefined}
+        rel={isExternal ? 'noopener noreferrer' : undefined}
         {...props}
       >
         {children}

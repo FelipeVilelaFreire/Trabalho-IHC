@@ -143,19 +143,12 @@ const Research = () => {
           </p>
           
           <div className="participate-buttons">
-            <Button 
-              href="https://forms.gle/p49MsdVMNVSBPv7m8" 
-              size="large" 
+            <Button
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdcJsfhgdCOWDCbIlXJ0CVo-ryip9Tfv1PP2wQkX6xq720KHQ/viewform"
+              size="large"
               variant="primary"
             >
               Responder Questionário
-            </Button>
-            <Button 
-              href="#" 
-              size="large" 
-              variant="outline"
-            >
-              Ver Resultados Parciais
             </Button>
           </div>
         </div>
