@@ -90,7 +90,7 @@ export const RESEARCH_METHODS = [
 export const TEAM_MEMBERS = [
   {
     name: 'Felipe Vilela',
-    avatar: '👤'
+    avatar: '/team/Felipe.png'
   },
   {
     name: 'Ruan Nascimento',

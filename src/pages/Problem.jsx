@@ -444,53 +444,42 @@ const Problem = () => {
                     <h4 className="insights-section-title">Principais Insights</h4>
                     <p className="insights-section-intro">Abaixo, destacamos alguns dos principais insights obtidos a partir das respostas:</p>
 
-                    <div className="insights-grid">
-                      <div className="insight-card">
-                        <div className="insight-icon-wrapper">
-                          <span className="insight-icon">👥</span>
-                        </div>
-                        <div className="insight-content">
-                          <h5 className="insight-title">Personalidade e Interação Social</h5>
-                          <p className="insight-description">
-                            Extrovertidos tendem a preferir atividades que possuem interação social. Introvertidos tendem a não querer hobbies que envolvam outras pessoas.
-                          </p>
-                        </div>
+                    <div className="insights-list">
+                      <div className="insight-item-detailed">
+                        <h5 className="insight-title-detailed">1. Perfil Introvertido vs. Extrovertido: Preferências e Barreiras Distintas</h5>
+                        <p className="insight-description-detailed">
+                          Existe uma correlação clara entre o tipo de personalidade e as preferências de hobbies e as dificuldades enfrentadas.
+                        </p>
+                        <ul className="insight-list">
+                          <li>
+                            <strong>Extrovertidos:</strong> Tendem a preferir hobbies que promovem interação social e atividade física (como aulas de dança, esportes e grupos de trilha). Curiosamente, uma das barreiras que citam é a "falta de companhia/grupo para praticar". Isso sugere que para eles, o fator social não é apenas um bônus, mas um componente essencial para a adesão.
+                          </li>
+                          <li>
+                            <strong>Introvertidos:</strong> Mostram uma preferência maior por hobbies que oferecem relaxamento, entretenimento individual ou desenvolvimento de novas habilidades práticas (como leitura, marcenaria ou programação). A principal barreira para eles é a "falta de tempo", indicando que suas atividades são mais flexíveis em termos de companhia, mas competem diretamente com outras responsabilidades.
+                          </li>
+                        </ul>
                       </div>
 
-                      <div className="insight-card">
-                        <div className="insight-icon-wrapper">
-                          <span className="insight-icon">✨</span>
-                        </div>
-                        <div className="insight-content">
-                          <h5 className="insight-title">Identidade e Autenticidade</h5>
-                          <p className="insight-description">
-                            Muitos entrevistados relataram que o hobby precisa refletir quem são e estar alinhado à personalidade.
-                          </p>
-                        </div>
+                      <div className="insight-item-detailed">
+                        <h5 className="insight-title-detailed">2. Barreiras Universais vs. Barreiras de Renda</h5>
+                        <p className="insight-description-detailed">
+                          Ao cruzar a renda mensal com as barreiras para manter um hobby, dois grupos de problemas emergem:
+                        </p>
+                        <ul className="insight-list">
+                          <li>
+                            <strong>Barreiras Universais:</strong> "Falta de tempo" e "Logística (deslocamento, horários)" são as dores mais citadas em quase todas as faixas de renda e idade. Isso indica que a conveniência é um fator crítico para a manutenção de um hobby a longo prazo.
+                          </li>
+                          <li>
+                            <strong>Barreira Financeira:</strong> A "Falta de dinheiro" aparece como um obstáculo significativo principalmente para os respondentes na faixa de "Até 1 salário mínimo". Enquanto outros grupos se preocupam com tempo, este grupo tem uma barreira de acesso primária.
+                          </li>
+                        </ul>
                       </div>
 
-                      <div className="insight-card">
-                        <div className="insight-icon-wrapper">
-                          <span className="insight-icon">🚧</span>
-                        </div>
-                        <div className="insight-content">
-                          <h5 className="insight-title">Barreiras de Acesso</h5>
-                          <p className="insight-description">
-                            As maiores dificuldades relatadas foram falta de tempo, distância e preço — reforçando a importância da acessibilidade geográfica e econômica.
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="insight-card">
-                        <div className="insight-icon-wrapper">
-                          <span className="insight-icon">💚</span>
-                        </div>
-                        <div className="insight-content">
-                          <h5 className="insight-title">Bem-Estar e Saúde Mental</h5>
-                          <p className="insight-description">
-                            Hobbies são percebidos como válvula de escape da rotina e um fator de saúde emocional.
-                          </p>
-                        </div>
+                      <div className="insight-item-detailed">
+                        <h5 className="insight-title-detailed">3. Descoberta Online vs. Preferência Offline</h5>
+                        <p className="insight-description-detailed">
+                          Muitos respondentes, especialmente na faixa de 26-39 anos, usam o Instagram e pesquisas no Google para descobrir novos hobbies. No entanto, um cruzamento interessante mostra que, apesar da descoberta ser digital, a grande maioria ainda prioriza atividades presenciais e locais.
+                        </p>
                       </div>
                     </div>
                   </div>

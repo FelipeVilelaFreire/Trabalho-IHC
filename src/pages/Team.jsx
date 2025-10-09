@@ -18,7 +18,13 @@ const Team = () => {
           <div className="team-grid">
             {TEAM_MEMBERS.map((member, index) => (
               <div key={index} className="team-member-card">
-                <div className="member-avatar">{member.avatar}</div>
+                <div className="member-avatar">
+                  {member.avatar.startsWith('/') ? (
+                    <img src={member.avatar} alt={member.name} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
+                  ) : (
+                    member.avatar
+                  )}
+                </div>
                 <h3 className="member-name">{member.name}</h3>
               </div>
             ))}
