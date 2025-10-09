@@ -433,8 +433,18 @@ const Problem = () => {
                       style={{
                         width: '100%',
                         height: 'auto',
-                        borderRadius: '12px',
-                        boxShadow: '0 6px 20px rgba(0, 0, 0, 0.1)'
+                        display: 'block',
+                        margin: 0
+                      }}
+                    />
+                    <img
+                      src="/docs/graficos-resultados2.png"
+                      alt="Gráficos dos Resultados do Questionário - Parte 2 mostrando mais análises e cruzamentos de dados"
+                      style={{
+                        width: '100%',
+                        height: 'auto',
+                        display: 'block',
+                        margin: 0
                       }}
                     />
                   </div>
@@ -480,6 +490,21 @@ const Problem = () => {
                         <p className="insight-description-detailed">
                           Muitos respondentes, especialmente na faixa de 26-39 anos, usam o Instagram e pesquisas no Google para descobrir novos hobbies. No entanto, um cruzamento interessante mostra que, apesar da descoberta ser digital, a grande maioria ainda prioriza atividades presenciais e locais.
                         </p>
+                      </div>
+
+                      <div className="insight-item-detailed">
+                        <h5 className="insight-title-detailed">4. A Importância Crítica da Segurança</h5>
+                        <p className="insight-description-detailed">
+                          Este foi um dos contrastes mais fortes que os dados revelaram. Ao avaliar a importância da "segurança do local ou da atividade" em uma escala de 1 a 5:
+                        </p>
+                        <ul className="insight-list">
+                          <li>
+                            <strong>Gênero Feminino:</strong> Quase unanimemente, as respondentes marcaram essa questão com nota 5 (totalmente essencial). A segurança não é um diferencial, é um pré-requisito absoluto.
+                          </li>
+                          <li>
+                            <strong>Gênero Masculino:</strong> A segurança também é importante, mas as notas são mais distribuídas, variando entre 3, 4 e 5. Para eles, parece ser um fator a ser considerado, mas não com o mesmo nível de criticidade inflexível.
+                          </li>
+                        </ul>
                       </div>
                     </div>
                   </div>
