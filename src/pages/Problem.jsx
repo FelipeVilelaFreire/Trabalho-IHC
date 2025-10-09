@@ -2,12 +2,14 @@ import { useState } from "react";
 import Hero from "../components/sections/Hero";
 import TCLEModal from "../components/ui/TCLEModal";
 import InterviewModal from "../components/ui/InterviewModal";
+import TranscriptionModal from "../components/ui/TranscriptionModal";
 import Button from "../components/ui/Button";
 import "./Problem.css";
 
 const Problem = () => {
   const [isTCLEModalOpen, setIsTCLEModalOpen] = useState(false);
   const [isInterviewModalOpen, setIsInterviewModalOpen] = useState(false);
+  const [isTranscriptionModalOpen, setIsTranscriptionModalOpen] = useState(false);
 
   const handleOpenTCLE = () => {
     setIsTCLEModalOpen(true);
@@ -23,6 +25,14 @@ const Problem = () => {
 
   const handleCloseInterview = () => {
     setIsInterviewModalOpen(false);
+  };
+
+  const handleOpenTranscription = () => {
+    setIsTranscriptionModalOpen(true);
+  };
+
+  const handleCloseTranscription = () => {
+    setIsTranscriptionModalOpen(false);
   };
   return (
     <div className="problem-page">
@@ -225,8 +235,8 @@ const Problem = () => {
                 <span className="section-icon">🔍</span>
                 Análise Competitiva
               </h2>
-              <span className="section-status status-progress">
-                Em Andamento
+              <span className="section-status status-completed">
+                Concluído
               </span>
             </div>
 
@@ -240,41 +250,115 @@ const Problem = () => {
                 </p>
               </div>
 
-              <div className="competitors-analysis">
-                <div className="competitor-card">
-                  <h4>Meetup</h4>
-                  <div className="competitor-pros">
-                    <p>✓ Grande base de usuários</p>
-                    <p>✓ Interface conhecida</p>
-                  </div>
-                  <div className="competitor-cons">
-                    <p>✗ Foco em eventos únicos</p>
-                    <p>✗ Não suporta hobbies contínuos</p>
-                  </div>
+              <div className="competitive-tables">
+                <h4 className="table-category-title">Competidores Diretos</h4>
+                <div className="table-responsive">
+                  <table className="competitive-table">
+                    <thead>
+                      <tr>
+                        <th>Serviço</th>
+                        <th>Breve Descrição</th>
+                        <th>Pontos Positivos</th>
+                        <th>Pontos Negativos</th>
+                        <th>Recursos Oferecidos</th>
+                        <th>Acessibilidade</th>
+                        <th>Opiniões dos Usuários</th>
+                        <th>Ideias a Aproveitar</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="service-name">Sympla</td>
+                        <td>Plataforma brasileira de ingressos e eventos locais</td>
+                        <td>Interface simples, grande variedade eventos, integração com redes sociais</td>
+                        <td>Pouca personalização de recomendações, foco maior em eventos pagos</td>
+                        <td>Busca por data, local, categoria; compra de ingressos online</td>
+                        <td>Layout responsivo, opções de contraste no navegador</td>
+                        <td>"Prático para comprar ingressos, mas falta descobrir eventos gratuitos ou pequenos"</td>
+                        <td>Facilidade de uso da plataforma, o grande alcance de público por ser um marketplace estabelecido e a gestão completa que oferece, incluindo antecipação de repasse e controle financeiro</td>
+                      </tr>
+                      <tr>
+                        <td className="service-name">Meetup</td>
+                        <td>Conecta pessoas a grupos de interesses e atividades locais</td>
+                        <td>Foco em comunidade, grupos variados, bom para networking</td>
+                        <td>Forte presença em cidades grandes. Baixa adesão em locais pequenos</td>
+                        <td>Criação de grupos de eventos recorrentes, chat entre membros</td>
+                        <td>Funciona com leitor de tela; tradução automática via navegador</td>
+                        <td>"Ótimo para conhecer pessoas, mas às vezes tem poucos grupos ativos na minha cidade."</td>
+                        <td>Forte construção de comunidade baseada em interesses, o que facilita o networking segmentado e gera autoridade para o organizador. É ideal para encontros informais, troca de conhecimento e visibilidade da marca perante um público engajado</td>
+                      </tr>
+                      <tr>
+                        <td className="service-name">Eventbrite</td>
+                        <td>Plataforma global de gerenciamento de eventos</td>
+                        <td>Diversidade de eventos, integração com calendários, tickets digitais</td>
+                        <td>Experiência confusa em mobile, taxas altas para organizadores</td>
+                        <td>Busca, filtros por preço/local, calendário integrado</td>
+                        <td>Suporte a leitores de tela; botões grandes</td>
+                        <td>"Bom para grandes eventos, mas falta personalização de acordo com meus interesses."</td>
+                        <td>Plataforma completa e fácil de usar, ideal para todos os tamanhos de eventos, oferecendo recursos como reserva de lugares, vendas com parcelamento no cartão e um aplicativo organizador robusto para credenciamento com QR Code</td>
+                      </tr>
+                      <tr>
+                        <td className="service-name">Get In</td>
+                        <td>App brasileiro focado em eventos culturais e sociais</td>
+                        <td>Design moderno, eventos segmentados, integração com WhatsApp</td>
+                        <td>Ainda pouco conhecido fora de capitais, catálogo limitado</td>
+                        <td>Filtros, compra integrada, notificações</td>
+                        <td>Funciona em Android/iOS com acessibilidade padrão</td>
+                        <td>"Aplicativo bonito, mas não encontro tantas opções na minha cidade."</td>
+                        <td>Oferece soluções de acesso e cashless (pagamento sem dinheiro) no local, além de integrações robustas com sistemas de controle de público e bilhetagem, garantindo maior eficiência operacional na porta</td>
+                      </tr>
+                      <tr>
+                        <td className="service-name">Culturadoria</td>
+                        <td>Guia cultural de eventos em algumas cidades brasileiras</td>
+                        <td>Conteúdo editorial, curadoria de qualidade</td>
+                        <td>Restrito a algumas regiões, foco mais cultural que esportivo</td>
+                        <td>Agenda cultural, matérias, resenhas</td>
+                        <td>Website responsivo</td>
+                        <td>"Bom para quem busca cultura, mas falta esporte e lazer."</td>
+                        <td>Proporciona visibilidade para eventos artísticos e de lazer. Possui um público-alvo engajado em cultura, o que facilita a divulgação para um nicho específico</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
 
-                <div className="competitor-card">
-                  <h4>Facebook Groups</h4>
-                  <div className="competitor-pros">
-                    <p>✓ Alcance massivo</p>
-                    <p>✓ Gratuito</p>
-                  </div>
-                  <div className="competitor-cons">
-                    <p>✗ Informação fragmentada</p>
-                    <p>✗ Difícil descoberta</p>
-                  </div>
-                </div>
-
-                <div className="competitor-card">
-                  <h4>Apps Locais</h4>
-                  <div className="competitor-pros">
-                    <p>✓ Foco regional</p>
-                    <p>✓ Conteúdo curado</p>
-                  </div>
-                  <div className="competitor-cons">
-                    <p>✗ Escopo limitado</p>
-                    <p>✗ Pouca integração</p>
-                  </div>
+                <h4 className="table-category-title" style={{marginTop: '3rem'}}>Competidores Indiretos</h4>
+                <div className="table-responsive">
+                  <table className="competitive-table">
+                    <thead>
+                      <tr>
+                        <th>Serviço</th>
+                        <th>Breve Descrição</th>
+                        <th>Pontos Positivos</th>
+                        <th>Pontos Negativos</th>
+                        <th>Recursos Oferecidos</th>
+                        <th>Acessibilidade</th>
+                        <th>Opiniões dos Usuários</th>
+                        <th>Ideias a Aproveitar</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="service-name">Tinder</td>
+                        <td>App de relacionamentos baseado em matching</td>
+                        <td>Algoritmo de match eficiente, gamificação</td>
+                        <td>Percepção superficial do swipe, uso fora do foco original</td>
+                        <td>Matching por perfil, geolocalização</td>
+                        <td>Acessível em mobiles com leitores de tela</td>
+                        <td>"Interface rápida, mas viciante e limitada."</td>
+                        <td>Oferece enorme base de usuários e reconhecimento global para a busca de conexões. Utiliza um sistema de matching simples e rápido (swipe) para facilitar a interação imediata</td>
+                      </tr>
+                      <tr>
+                        <td className="service-name">Spotify</td>
+                        <td>Streaming com recomendações personalizadas</td>
+                        <td>Sugestões inteligentes</td>
+                        <td>Publicidade na versão free, pode repetir sugestões</td>
+                        <td>Recomendação baseada em perfil e hábitos</td>
+                        <td>Ajustes de fonte, contraste, comandos por voz</td>
+                        <td>"As recomendações me fazem descobrir músicas novas sem esforço."</td>
+                        <td>Possui um vasto catálogo de músicas e podcasts e algoritmos de recomendação extremamente precisos. Oferece acesso offline e uma plataforma central para a descoberta de conteúdo</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
@@ -292,7 +376,7 @@ const Problem = () => {
                 <span className="section-icon">📋</span>
                 Questionário
               </h2>
-              <span className="section-status status-planned">Planejado</span>
+              <span className="section-status status-completed">Concluído</span>
             </div>
 
             <div className="section-body">
@@ -305,38 +389,116 @@ const Problem = () => {
               </div>
 
               <div className="questionnaire-info">
-                <div className="info-grid">
-                  <div className="info-card">
-                    <h4>Amostra</h4>
-                    <p className="info-highlight">Em definição</p>
-                    <p>Buscando diversidade demográfica</p>
-                  </div>
-                  <div className="info-card">
-                    <h4>Estrutura</h4>
-                    <p className="info-highlight">Questionário estruturado</p>
-                    <p>Perguntas abertas e fechadas</p>
-                  </div>
-                  <div className="info-card">
-                    <h4>Análise</h4>
-                    <p className="info-highlight">Estatística descritiva</p>
-                    <p>Identificação de personas</p>
+                <div className="info-section-wrapper">
+                  <div className="info-grid">
+                    <div className="info-card">
+                      <h4>Amostra</h4>
+                      <p className="info-highlight">38</p>
+                      <p>Respondentes</p>
+                    </div>
+                    <div className="info-card">
+                      <h4>Estrutura</h4>
+                      <p className="info-highlight">3 Seções</p>
+                      <p>Termo, Demográfico e Hobbies</p>
+                    </div>
+                    <div className="info-card">
+                      <h4>Análise</h4>
+                      <p className="info-highlight">Concluída</p>
+                      <p>Insights identificados</p>
+                    </div>
                   </div>
                 </div>
 
-                <div className="questionnaire-preview">
-                  <h4>Principais Áreas de Investigação:</h4>
-                  <ul>
-                    <li>Hábitos atuais de lazer e hobbies</li>
-                    <li>Barreiras encontradas na descoberta de atividades</li>
-                    <li>Preferências de comunicação e engajamento</li>
-                    <li>Disponibilidade de tempo e investimento</li>
-                    <li>Motivações e expectativas</li>
-                  </ul>
+                {/* Texto informativo */}
+                <div className="questionnaire-text">
+                  <p>1. <strong>Aceite dos Termos:</strong> Antes de prosseguir, todos os participantes precisaram ler e aceitar os termos de participação descritos.</p>
+                  <p>2. <strong>Coleta de Dados Demográficos:</strong> Nesta seção, coletamos informações básicas que consideramos relevantes para enriquecer a análise, como idade, gênero e frequência de busca por lazer.</p>
+                  <p>3. <strong>Perguntas sobre o Tema:</strong> Por último, apresentamos questões específicas relacionadas a preferências e motivações relacionadas a hobbies dos participantes.</p>
+                  <p>A pesquisa foi divulgada ao público-alvo, composto por pessoas que buscam por hobbies ou já possuem hobbies, e permaneceu aberta por 2 dias. Nesse período, conseguimos coletar 38 respostas, o que consideramos uma amostra significativa para a análise proposta.</p>
+                  <p>Os participantes foram divididos em um quesito: a forma como jovens adultos e adultos jovens lidam com hobbies. Comparamos dois grupos: um formado por jovens adultos que possuem hobbies e outro composto por adultos que possuem e buscam hobbies.</p>
+                  <p>A escolha desses perfis foi estratégica para investigar como cada grupo lida com o processo de busca e manutenção de seus hobbies.</p>
                 </div>
-                
+
+                <div className="questionnaire-results">
+                  <div className="results-intro-section">
+                    <div className="results-intro-icon">📊</div>
+                    <h4 className="results-intro-title">Dados Obtidos no Questionário</h4>
+                    <p className="results-intro-text">Temos aqui alguns dados obtidos no questionário:</p>
+                  </div>
+
+                  <div className="results-image-container">
+                    <img
+                      src="/docs/graficos-resultados.png"
+                      alt="Gráficos dos Resultados do Questionário - 38 respostas mostrando dados sobre conhecimento de hobbies, frequência de mudança, barreiras e preferências"
+                      style={{
+                        width: '100%',
+                        height: 'auto',
+                        borderRadius: '12px',
+                        boxShadow: '0 6px 20px rgba(0, 0, 0, 0.1)'
+                      }}
+                    />
+                  </div>
+
+                  {/* Insights */}
+                  <div className="questionnaire-insights-section">
+                    <h4 className="insights-section-title">Principais Insights</h4>
+                    <p className="insights-section-intro">Abaixo, destacamos alguns dos principais insights obtidos a partir das respostas:</p>
+
+                    <div className="insights-grid">
+                      <div className="insight-card">
+                        <div className="insight-icon-wrapper">
+                          <span className="insight-icon">👥</span>
+                        </div>
+                        <div className="insight-content">
+                          <h5 className="insight-title">Personalidade e Interação Social</h5>
+                          <p className="insight-description">
+                            Extrovertidos tendem a preferir atividades que possuem interação social. Introvertidos tendem a não querer hobbies que envolvam outras pessoas.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="insight-card">
+                        <div className="insight-icon-wrapper">
+                          <span className="insight-icon">✨</span>
+                        </div>
+                        <div className="insight-content">
+                          <h5 className="insight-title">Identidade e Autenticidade</h5>
+                          <p className="insight-description">
+                            Muitos entrevistados relataram que o hobby precisa refletir quem são e estar alinhado à personalidade.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="insight-card">
+                        <div className="insight-icon-wrapper">
+                          <span className="insight-icon">🚧</span>
+                        </div>
+                        <div className="insight-content">
+                          <h5 className="insight-title">Barreiras de Acesso</h5>
+                          <p className="insight-description">
+                            As maiores dificuldades relatadas foram falta de tempo, distância e preço — reforçando a importância da acessibilidade geográfica e econômica.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="insight-card">
+                        <div className="insight-icon-wrapper">
+                          <span className="insight-icon">💚</span>
+                        </div>
+                        <div className="insight-content">
+                          <h5 className="insight-title">Bem-Estar e Saúde Mental</h5>
+                          <p className="insight-description">
+                            Hobbies são percebidos como válvula de escape da rotina e um fator de saúde emocional.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <div className="questionnaire-cta">
                   <p>É possível acessar o formulário no link a seguir:</p>
-                  <Button 
+                  <Button
                     href="https://docs.google.com/forms/d/e/1FAIpQLScKRJPdGVNJoN0y6bxGGXiJXwQUCr5xXnRTPiQGj6k9hT-Z_w/viewform"
                     variant="primary"
                     size="medium"
@@ -360,7 +522,7 @@ const Problem = () => {
                 <span className="section-icon">🎤</span>
                 Entrevistas
               </h2>
-              <span className="section-status status-planned">Planejado</span>
+              <span className="section-status status-completed">Concluído</span>
             </div>
 
             <div className="section-body">
@@ -448,7 +610,7 @@ const Problem = () => {
                 <span className="section-icon">📄</span>
                 Documentos da Entrevista
               </h2>
-              <span className="section-status status-planned">Planejado</span>
+              <span className="section-status status-completed">Concluído</span>
             </div>
 
             <div className="section-body">
@@ -497,17 +659,11 @@ const Problem = () => {
                     Registro completo das conversas com participantes
                     anonimizados
                   </p>
-                  <button className="document-btn" disabled>
-                    Em Breve
-                  </button>
-                </div>
-
-                <div className="document-card">
-                  <div className="document-icon">📊</div>
-                  <h4>Análise Temática</h4>
-                  <p>Síntese dos principais insights e padrões identificados</p>
-                  <button className="document-btn" disabled>
-                    Em Breve
+                  <button
+                    className="document-btn document-btn-active"
+                    onClick={handleOpenTranscription}
+                  >
+                    Visualizar Transcrição
                   </button>
                 </div>
               </div>
@@ -518,9 +674,12 @@ const Problem = () => {
 
       {/* Modal do TCLE */}
       <TCLEModal isOpen={isTCLEModalOpen} onClose={handleCloseTCLE} />
-      
+
       {/* Modal do Roteiro de Entrevista */}
       <InterviewModal isOpen={isInterviewModalOpen} onClose={handleCloseInterview} />
+
+      {/* Modal das Transcrições */}
+      <TranscriptionModal isOpen={isTranscriptionModalOpen} onClose={handleCloseTranscription} />
     </div>
   );
 };

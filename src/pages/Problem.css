@@ -243,54 +243,99 @@
 }
 
 /* Competitive Analysis Section */
-.competitors-analysis {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+.competitive-tables {
   width: 100%;
-  max-width: 900px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
-.competitor-card {
-  background: white;
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  border: 2px solid #e9ecef;
-  transition: all 0.3s ease;
-}
-
-.competitor-card:hover {
-  border-color: #f093fb;
-  transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
-
-.competitor-card h4 {
+.table-category-title {
   font-size: 1.5rem;
-  margin-bottom: 1.5rem;
+  font-weight: 700;
   color: #212529;
   text-align: center;
+  margin-bottom: 2rem;
   padding-bottom: 1rem;
-  border-bottom: 2px solid #e9ecef;
+  border-bottom: 3px solid #e9ecef;
 }
 
-.competitor-pros,
-.competitor-cons {
-  margin: 1rem 0;
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  margin-bottom: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
-.competitor-pros p {
-  color: #28a745;
-  margin: 0.5rem 0;
+.competitive-table {
+  width: 100%;
+  border-collapse: collapse;
   font-size: 0.95rem;
 }
 
-.competitor-cons p {
-  color: #dc3545;
-  margin: 0.5rem 0;
-  font-size: 0.95rem;
+.competitive-table thead {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+}
+
+.competitive-table thead th {
+  padding: 1.2rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+.competitive-table tbody tr {
+  border-bottom: 1px solid #e9ecef;
+  transition: background-color 0.2s ease;
+}
+
+.competitive-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.competitive-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.competitive-table td {
+  padding: 1.2rem 1rem;
+  vertical-align: top;
+  color: #495057;
+  line-height: 1.6;
+}
+
+.competitive-table .service-name {
+  font-weight: 700;
+  color: #212529;
+  font-size: 1.05rem;
+  white-space: nowrap;
+  background: linear-gradient(135deg, rgba(240, 147, 251, 0.1), rgba(245, 87, 108, 0.1));
+}
+
+.competitive-table ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.competitive-table ul li {
+  padding: 0.4rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.competitive-table ul li::before {
+  content: "•";
+  position: absolute;
+  left: 0.5rem;
+  color: #f093fb;
+  font-weight: 700;
+  font-size: 1.2rem;
 }
 
 /* Questionnaire Section */
@@ -298,6 +343,11 @@
   display: flex;
   flex-direction: column;
   gap: 3rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.info-section-wrapper {
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
@@ -372,6 +422,320 @@
   left: 0;
   color: #f093fb;
   font-size: 0.8rem;
+}
+
+.questionnaire-cta {
+  text-align: center;
+  margin-top: 2.5rem;
+  padding: 2rem;
+}
+
+.questionnaire-cta p {
+  font-size: 1.1rem;
+  color: #495057;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+/* Questionnaire Text */
+.questionnaire-text {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(240, 147, 251, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.questionnaire-text::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
+}
+
+.questionnaire-text p {
+  font-size: 1.1rem;
+  color: #495057;
+  line-height: 2;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.questionnaire-text p:nth-child(1)::before,
+.questionnaire-text p:nth-child(2)::before,
+.questionnaire-text p:nth-child(3)::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6rem;
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  border-radius: 50%;
+}
+
+.questionnaire-text p:nth-child(4),
+.questionnaire-text p:nth-child(5),
+.questionnaire-text p:nth-child(6) {
+  padding-left: 0;
+  background: rgba(240, 147, 251, 0.03);
+  padding: 1.2rem;
+  border-radius: 12px;
+  border-left: 4px solid rgba(240, 147, 251, 0.3);
+}
+
+.questionnaire-text p:last-child {
+  margin-bottom: 0;
+}
+
+.questionnaire-text strong {
+  color: #212529;
+  font-weight: 700;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Questionnaire Results */
+.questionnaire-results {
+  width: 100%;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.results-intro-section {
+  text-align: center;
+  margin: 4rem auto 3rem;
+}
+
+.results-intro-icon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.results-intro-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #212529;
+  margin-bottom: 0.5rem;
+}
+
+.results-intro-text {
+  font-size: 1.1rem;
+  color: #6c757d;
+  margin: 0;
+  font-weight: 400;
+}
+
+.results-image-container {
+  width: 100%;
+  margin: 0 auto;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.results-image-container img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Questionnaire Insights Section */
+.questionnaire-insights-section {
+  width: 100%;
+  max-width: 1400px;
+  margin: 3rem auto 0;
+  padding: 3rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(240, 147, 251, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.questionnaire-insights-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
+}
+
+.insights-section-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #212529;
+  text-align: center;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.insights-section-intro {
+  font-size: 1.1rem;
+  color: #495057;
+  text-align: center;
+  margin-bottom: 3rem;
+  font-weight: 500;
+}
+
+.insights-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.insight-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s ease;
+  border: 2px solid transparent;
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.insight-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(240, 147, 251, 0.2);
+  border-color: rgba(240, 147, 251, 0.3);
+}
+
+.insight-icon-wrapper {
+  flex-shrink: 0;
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(240, 147, 251, 0.3);
+  transition: all 0.3s ease;
+}
+
+.insight-card:hover .insight-icon-wrapper {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.insight-icon {
+  font-size: 2rem;
+}
+
+.insight-content {
+  flex: 1;
+}
+
+.insight-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #212529;
+  margin-bottom: 0.8rem;
+  line-height: 1.4;
+}
+
+.insight-description {
+  font-size: 1rem;
+  color: #495057;
+  line-height: 1.7;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .questionnaire-results {
+    padding: 0 1rem;
+  }
+
+  .results-intro-section {
+    margin: 3rem auto 2rem;
+  }
+
+  .results-intro-icon {
+    font-size: 2.5rem;
+  }
+
+  .results-intro-title {
+    font-size: 1.4rem;
+  }
+
+  .results-intro-text {
+    font-size: 0.95rem;
+  }
+
+  .questionnaire-text,
+  .questionnaire-insights-section {
+    padding: 2rem 1.5rem;
+  }
+
+  .questionnaire-text p {
+    font-size: 0.95rem;
+    padding-left: 1.2rem;
+  }
+
+  .questionnaire-text p:nth-child(4),
+  .questionnaire-text p:nth-child(5),
+  .questionnaire-text p:nth-child(6) {
+    padding: 1rem;
+  }
+
+  .insights-section-title {
+    font-size: 1.4rem;
+  }
+
+  .insights-section-intro {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .insights-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .insight-card {
+    padding: 1.5rem;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .insight-icon-wrapper {
+    width: 60px;
+    height: 60px;
+  }
+
+  .insight-icon {
+    font-size: 1.8rem;
+  }
+
+  .insight-title {
+    font-size: 1.1rem;
+  }
+
+  .insight-description {
+    font-size: 0.95rem;
+  }
 }
 
 /* Interviews Section */
@@ -601,10 +965,10 @@
 /* Documents Section */
 .documents-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   width: 100%;
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -679,7 +1043,6 @@
 
 @media (max-width: 1024px) {
   .research-findings,
-  .competitors-analysis,
   .info-grid,
   .plan-overview {
     grid-template-columns: repeat(2, 1fr);
@@ -687,13 +1050,30 @@
   }
 
   .documents-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
-  
+
+  .table-category-title {
+    font-size: 1.3rem;
+  }
+
+  .competitive-table {
+    font-size: 0.9rem;
+  }
+
+  .competitive-table thead th {
+    padding: 1rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .competitive-table td {
+    padding: 1rem 0.8rem;
+  }
+
   .section-title {
     font-size: 2rem;
   }
-  
+
   .lead-text {
     font-size: 1.5rem;
   }
@@ -762,13 +1142,41 @@
 
   .insights-grid,
   .research-findings,
-  .competitors-analysis,
   .info-grid,
-  .plan-overview {
+  .plan-overview,
+  .documents-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
-  
+
+  .table-category-title {
+    font-size: 1.1rem;
+  }
+
+  .competitive-table {
+    font-size: 0.85rem;
+  }
+
+  .competitive-table thead th {
+    padding: 0.8rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .competitive-table td {
+    padding: 0.8rem 0.6rem;
+  }
+
+  .competitive-table .service-name {
+    font-size: 0.95rem;
+    white-space: normal;
+  }
+
+  .competitive-table ul li {
+    padding: 0.3rem 0;
+    padding-left: 1.2rem;
+    font-size: 0.85rem;
+  }
+
   .insight-item {
     padding: 1.2rem;
   }
