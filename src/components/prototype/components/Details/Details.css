@@ -485,6 +485,15 @@
   transform: translateY(0);
 }
 
+.btn-confirm.confirmed {
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+}
+
+.btn-confirm.confirmed:hover {
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
 .btn-price {
   background: rgba(255, 255, 255, 0.2);
   padding: 6px 12px;

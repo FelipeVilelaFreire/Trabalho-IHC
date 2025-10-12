@@ -30,7 +30,8 @@ const Details = ({
   favorites,
   toggleFavorite,
   handleConfirm,
-  setCurrentScreen
+  setCurrentScreen,
+  isConfirmed = false
 }) => {
   // Handle case when no activity is selected
   if (!selectedActivity) return null;
@@ -107,8 +108,11 @@ const Details = ({
 
         {/* Confirmation Button */}
         <div className="details-confirm-section">
-          <button className="btn-confirm" onClick={handleConfirm}>
-            <span>Confirmar Participação</span>
+          <button
+            className={`btn-confirm ${isConfirmed ? 'confirmed' : ''}`}
+            onClick={handleConfirm}
+          >
+            <span>{isConfirmed ? '✓ Confirmado' : 'Confirmar Participação'}</span>
             <span className="btn-price">{selectedActivity.price}</span>
           </button>
         </div>

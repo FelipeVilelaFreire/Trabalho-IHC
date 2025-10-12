@@ -82,22 +82,22 @@ const Home = ({
       </div>
 
       {/* Location Bar */}
-      <div className="location-bar">
-        <div
-          className="location-info"
-          onMouseEnter={() => setShowLocationTooltip(true)}
-          onMouseLeave={() => setShowLocationTooltip(false)}
-          style={{ position: 'relative', cursor: 'pointer' }}
-        >
+      <div
+        className="location-bar"
+        onMouseEnter={() => setShowLocationTooltip(true)}
+        onMouseLeave={() => setShowLocationTooltip(false)}
+        style={{ position: 'relative' }}
+      >
+        <div className="location-info">
           <span className="location-icon">📍</span>
           <span className="location-text">Icaraí - Niterói</span>
-          {showLocationTooltip && (
-            <div className="location-tooltip-home">
-              Localização filtrada para o protótipo
-            </div>
-          )}
         </div>
         <button className="change-location">Mudar</button>
+        {showLocationTooltip && (
+          <div className="location-tooltip-home">
+            Localização filtrada para o protótipo
+          </div>
+        )}
       </div>
 
       {/* Categories */}

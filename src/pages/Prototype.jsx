@@ -13,7 +13,7 @@ import SignupScreen from '../components/prototype/components/Simule/SignupScreen
 import HobbySelection from '../components/prototype/components/Simule/HobbySelection';
 import { activities } from '../data/activitiesData';
 import { categories, getRecommendedCategories } from '../data/categoriesData';
-import { defaultUserHobbies, loadUserData, saveUserData, addScheduledEvent, saveSimulationUser, loadFavorites, saveFavorites } from '../data/userData';
+import { defaultUserHobbies, loadUserData, saveUserData, addScheduledEvent, saveSimulationUser, loadFavorites, saveFavorites, loadScheduledEventsForMode } from '../data/userData';
 import { convertHobbyIdsToObjects } from '../data/hobbiesData';
 import './Prototype.css';
 
@@ -113,6 +113,16 @@ const Prototype = () => {
 
   const handleConfirm = () => {
     if (!selectedActivity) return;
+
+    // Verifica se a atividade já está confirmada
+    const scheduledEvents = loadScheduledEventsForMode();
+    const alreadyConfirmed = scheduledEvents.some(event => event.activityId === selectedActivity.id);
+
+    if (alreadyConfirmed) {
+      // Se já confirmado, apenas vai para a tela de confirmação sem adicionar duplicata
+      setCurrentScreen('confirmation');
+      return;
+    }
 
     // Parse do horário para extrair informações
     const scheduleText = selectedActivity.schedule;
@@ -257,6 +267,9 @@ const Prototype = () => {
         );
 
       case 'details':
+        const scheduledEvents = loadScheduledEventsForMode();
+        const isConfirmed = scheduledEvents.some(event => event.activityId === selectedActivity?.id);
+
         return (
           <Details
             selectedActivity={selectedActivity}
@@ -264,6 +277,7 @@ const Prototype = () => {
             toggleFavorite={toggleFavorite}
             handleConfirm={handleConfirm}
             setCurrentScreen={setCurrentScreen}
+            isConfirmed={isConfirmed}
           />
         );
 
