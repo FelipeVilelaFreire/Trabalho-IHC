@@ -1,0 +1,135 @@
+/* Prototype Page Container */
+.prototype-page {
+  padding-top: 70px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Intro Section */
+.prototype-intro {
+  text-align: center;
+  padding: 60px 20px 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.prototype-intro h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.prototype-intro p {
+  font-size: 1.25rem;
+  color: #6c757d;
+  margin-bottom: 3rem;
+}
+
+/* Simulate Section */
+.simulate-section {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.simulate-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 32px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.125rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+  font-family: inherit;
+}
+
+.simulate-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(102, 126, 234, 0.5);
+}
+
+.simulate-btn:active {
+  transform: translateY(-2px);
+}
+
+/* Features Section */
+.prototype-features {
+  padding: 60px 20px 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.prototype-features h2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 3rem;
+}
+
+.features-grid-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.feature-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.feature-card .feature-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.feature-card h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #212529;
+  margin: 0 0 0.75rem 0;
+}
+
+.feature-card p {
+  font-size: 0.95rem;
+  color: #6c757d;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .prototype-intro h1 {
+    font-size: 2rem;
+  }
+
+  .features-grid-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .prototype-intro h1 {
+    font-size: 1.75rem;
+  }
+
+  .prototype-intro p {
+    font-size: 1rem;
+  }
+}

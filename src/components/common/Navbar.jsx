@@ -20,6 +20,7 @@ const Navbar = () => {
     { path: '/', label: 'Home' },
     { path: '/imersao', label: 'Imersão' },
     { path: '/solucao', label: 'Solução' },
+    { path: '/prototipo', label: 'Protótipo' },
     { path: '/pesquisa', label: 'Pesquisa' },
     { path: '/equipe', label: 'Equipe' }
   ];

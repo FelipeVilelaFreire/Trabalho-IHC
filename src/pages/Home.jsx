@@ -101,7 +101,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="section features-section animate-on-scroll">
+      <section className="section features-section">
         <div className="container">
           <h2 className="section-title gradient-text">Metodologia do Projeto</h2>
           <div className="features-grid">

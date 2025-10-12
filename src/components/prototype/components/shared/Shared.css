@@ -1,0 +1,107 @@
+/* Shared Styles - Used across multiple components */
+
+/* App Screen Base */
+.app-screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #f8f9fa;
+  overflow-y: auto;
+  position: relative;
+}
+
+.app-screen::-webkit-scrollbar {
+  width: 4px;
+}
+
+.app-screen::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 4px;
+}
+
+/* App Header */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: white;
+  border-bottom: 1px solid #e9ecef;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.app-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #667eea;
+  margin: 0;
+}
+
+.logo-icon {
+  font-size: 24px;
+}
+
+.header-icons {
+  display: flex;
+  gap: 12px;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  position: relative;
+  padding: 6px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.icon-btn:hover {
+  background: #f8f9fa;
+}
+
+.icon-btn.notification .badge-dot {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 8px;
+  height: 8px;
+  background: #ef4444;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+/* Back Button */
+.back-btn {
+  background: none;
+  border: none;
+  color: #667eea;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.back-btn:hover {
+  background: #f8f9fa;
+}
+
+/* App Header Title */
+.app-header h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #212529;
+  margin: 0;
+  flex: 1;
+  text-align: center;
+  margin-right: 60px;
+}

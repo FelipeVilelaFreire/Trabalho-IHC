@@ -185,7 +185,7 @@
     transparent 1px
   );
   background-size: 50px 50px;
-  animation: moveBackground 20s linear infinite;
+  /* animation: moveBackground 20s linear infinite; */
 }
 
 @keyframes moveBackground {
@@ -206,7 +206,7 @@
   font-weight: var(--font-bold);
   text-align: center !important;
   margin-bottom: 3rem;
-  animation: shimmer 3s ease-in-out infinite;
+  /* animation: shimmer 3s ease-in-out infinite; */
   display: block;
   width: 100%;
 }

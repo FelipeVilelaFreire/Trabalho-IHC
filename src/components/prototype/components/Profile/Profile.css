@@ -1,0 +1,527 @@
+/* Profile Screen */
+.profile-screen {
+  background: #f8f9fa;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 16px 20px;
+  background: white;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.profile-header .back-btn {
+  position: absolute;
+  left: 20px;
+  background: none;
+  border: none;
+  color: #667eea;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.profile-header h2 {
+  text-align: center;
+  margin: 0;
+  color: #212529;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.profile-content {
+  padding: 20px 16px 80px;
+}
+
+.profile-user-card {
+  background: white;
+  padding: 32px 24px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 16px;
+}
+
+.user-avatar-large {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.user-avatar-large img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  font-size: 40px;
+}
+
+.profile-user-card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #212529;
+  margin: 0 0 4px 0;
+}
+
+.user-email {
+  font-size: 14px;
+  color: #6c757d;
+  margin: 0;
+}
+
+.profile-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.profile-stat {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.stat-value {
+  display: block;
+  font-size: 28px;
+  font-weight: 700;
+  color: #667eea;
+  margin-bottom: 4px;
+}
+
+.stat-name {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6c757d;
+}
+
+/* Hobbies Section */
+.profile-hobbies {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 16px;
+}
+
+.profile-hobbies h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #212529;
+  margin: 0 0 16px 0;
+}
+
+.hobbies-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 100%;
+}
+
+.hobby-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: rgba(102, 126, 234, 0.08);
+  border: 2px solid var(--hobby-color, #667eea);
+  border-radius: 20px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.hobby-chip:hover {
+  background: var(--hobby-color, #667eea);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hobby-chip:hover .hobby-name {
+  color: white;
+}
+
+.hobby-chip:active {
+  transform: translateY(0);
+}
+
+.hobby-emoji {
+  font-size: 20px;
+}
+
+.hobby-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #495057;
+  transition: color 0.2s ease;
+}
+
+.profile-menu {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.profile-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background: white;
+  border: none;
+  border-bottom: 1px solid #f1f3f5;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+
+.profile-menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.menu-text {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 600;
+  color: #495057;
+}
+
+.menu-arrow {
+  color: #adb5bd;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.profile-menu-item.logout .menu-text {
+  color: #ef4444;
+}
+
+.profile-menu-item.logout .menu-icon {
+  color: #ef4444;
+}
+
+/* Hobby Delete Modal */
+.hobby-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.hobby-modal {
+  background: white;
+  border-radius: 20px;
+  padding: 32px 24px;
+  max-width: 320px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.hobby-modal-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  background: var(--hobby-color, #667eea);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.hobby-modal h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #212529;
+  margin: 0 0 12px 0;
+}
+
+.hobby-modal p {
+  font-size: 15px;
+  color: #6c757d;
+  margin: 0 0 24px 0;
+  line-height: 1.5;
+}
+
+.hobby-modal-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.hobby-cancel-btn,
+.hobby-delete-btn {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hobby-cancel-btn {
+  background: #f8f9fa;
+  color: #495057;
+}
+
+.hobby-cancel-btn:hover {
+  background: #e9ecef;
+}
+
+.hobby-cancel-btn:active {
+  transform: scale(0.95);
+}
+
+.hobby-delete-btn {
+  background: #ef4444;
+  color: white;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.hobby-delete-btn:hover {
+  background: #dc2626;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
+}
+
+.hobby-delete-btn:active {
+  transform: translateY(0);
+}
+
+/* Add Hobby Button */
+.add-hobby-btn {
+  background: rgba(102, 126, 234, 0.1) !important;
+  border-color: #667eea !important;
+  border-style: dashed !important;
+  cursor: pointer;
+  min-width: 60px;
+  justify-content: center;
+}
+
+.add-hobby-btn .hobby-emoji {
+  font-size: 24px;
+}
+
+.add-hobby-btn:hover {
+  background: #667eea !important;
+  border-style: solid !important;
+}
+
+/* Add Hobby Modal */
+.add-hobby-modal {
+  background: white;
+  border-radius: 20px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.add-hobby-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.add-hobby-header h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #212529;
+  margin: 0;
+}
+
+.close-modal-btn {
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  color: #6c757d;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.close-modal-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: #212529;
+}
+
+/* Category Filter */
+.category-filter-scroll {
+  display: flex;
+  gap: 8px;
+  padding: 16px 24px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border-bottom: 1px solid #e9ecef;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  user-select: none;
+  cursor: grab;
+}
+
+.category-filter-scroll:active {
+  cursor: grabbing;
+}
+
+.category-filter-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.category-filter-chip {
+  padding: 8px 16px;
+  background: #f8f9fa;
+  border: 2px solid #e9ecef;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #495057;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.category-filter-chip:hover {
+  border-color: #667eea;
+  background: rgba(102, 126, 234, 0.05);
+}
+
+.category-filter-chip.active {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border-color: transparent;
+}
+
+/* Available Hobbies Grid */
+.available-hobbies-grid {
+  padding: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+  overflow-y: auto;
+  max-height: 400px;
+}
+
+.available-hobby-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 12px;
+  background: rgba(102, 126, 234, 0.08);
+  border: 2px solid var(--hobby-color, #667eea);
+  border-radius: 16px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.available-hobby-chip:hover {
+  background: var(--hobby-color, #667eea);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.available-hobby-chip:hover .hobby-name {
+  color: white;
+}
+
+.available-hobby-chip:active {
+  transform: translateY(0);
+}
+
+.available-hobby-chip .hobby-emoji {
+  font-size: 32px;
+}
+
+.available-hobby-chip .hobby-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #495057;
+  transition: color 0.2s ease;
+  text-align: center;
+}
+
+/* No Hobbies Message */
+.no-hobbies-message {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px 20px;
+  color: #6c757d;
+}
+
+.no-hobbies-message p {
+  margin: 0;
+  font-size: 14px;
+}

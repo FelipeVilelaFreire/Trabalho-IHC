@@ -1,0 +1,40 @@
+/* Bottom Navigation */
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0 22px;
+  background: white;
+  border-top: 1px solid #e9ecef;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+}
+
+.nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 12px;
+  color: #6c757d;
+  transition: all 0.2s ease;
+}
+
+.nav-btn.active {
+  background: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+}
+
+.nav-icon {
+  font-size: 22px;
+}
+
+.nav-label {
+  font-size: 10px;
+  font-weight: 600;
+}
