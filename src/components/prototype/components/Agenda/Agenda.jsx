@@ -18,39 +18,57 @@ const Agenda = ({ activities, setCurrentScreen, onRemoveEvent }) => {
   const [selectedEventId, setSelectedEventId] = useState(null);
   const [activeTab, setActiveTab] = useState('upcoming');
 
-  // Atividades passadas (concluídas)
-  const pastActivities = [
-    {
-      id: 'past-1',
-      title: 'Yoga na Praia',
-      image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&q=80',
-      location: 'Praia de Icaraí',
-      date: 'Sex, 4 Out',
-      time: '07:00',
-      status: 'completed',
-      emoji: '🧘'
-    },
-    {
-      id: 'past-2',
-      title: 'Futebol no Parque',
-      image: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=80',
-      location: 'Parque da Cidade - Niterói',
-      date: 'Dom, 6 Out',
-      time: '09:00',
-      status: 'completed',
-      emoji: '⚽'
-    },
-    {
-      id: 'past-3',
-      title: 'Aula de Violão',
-      image: 'https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=800&q=80',
-      location: 'Escola de Música - Centro',
-      date: 'Ter, 8 Out',
-      time: '18:00',
-      status: 'completed',
-      emoji: '🎸'
-    }
-  ];
+  // Função para formatar data
+  const formatDate = (date) => {
+    const days = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+    const months = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+
+    const dayName = days[date.getDay()];
+    const day = date.getDate();
+    const month = months[date.getMonth()];
+
+    return `${dayName}, ${day} ${month}`;
+  };
+
+  // Gera atividades passadas dinamicamente baseadas na data atual
+  const generatePastActivities = () => {
+    const today = new Date();
+
+    return [
+      {
+        id: 'past-1',
+        title: 'Yoga na Praia',
+        image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&q=80',
+        location: 'Praia de Icaraí',
+        date: formatDate(new Date(today.getTime() - 3 * 24 * 60 * 60 * 1000)), // 3 dias atrás
+        time: '07:00',
+        status: 'completed',
+        emoji: '🧘'
+      },
+      {
+        id: 'past-2',
+        title: 'Futebol no Parque',
+        image: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=80',
+        location: 'Parque da Cidade - Niterói',
+        date: formatDate(new Date(today.getTime() - 5 * 24 * 60 * 60 * 1000)), // 5 dias atrás
+        time: '09:00',
+        status: 'completed',
+        emoji: '⚽'
+      },
+      {
+        id: 'past-3',
+        title: 'Aula de Violão',
+        image: 'https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=800&q=80',
+        location: 'Escola de Música - Centro',
+        date: formatDate(new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000)), // 7 dias atrás
+        time: '18:00',
+        status: 'completed',
+        emoji: '🎸'
+      }
+    ];
+  };
+
+  const pastActivities = generatePastActivities();
 
   // Carrega eventos agendados do localStorage quando o componente monta
   useEffect(() => {

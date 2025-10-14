@@ -1,7 +1,9 @@
 import Hero from "../components/sections/Hero";
 import Card from "../components/ui/Card";
 import Button from "../components/ui/Button";
+import PersonaCard from "../components/ui/solution/PersonaCard";
 import { SOLUTION_FEATURES } from "../utils/constants";
+import { PERSONAS } from "../data/personas";
 import "./Solution.css";
 
 const Solution = () => {
@@ -36,27 +38,16 @@ const Solution = () => {
         showScrollIndicator={true}
       />
 
-      <section className="section features-section">
+      {/* <section className="section personas-section">
         <div className="container">
-          <h2 className="section-title">Funcionalidades Principais</h2>
+          <h2 className="section-title">Personas</h2>
           <p className="section-subtitle">
-            Recursos pensados para facilitar a descoberta e participação em
-            atividades
+            Perfis baseados em pesquisa real com usuários para entender melhor as necessidades e desafios
           </p>
 
-          <div className="features-grid">
-            {SOLUTION_FEATURES.map((feature, index) => (
-              <Card
-                key={index}
-                icon={<span className="feature-icon">{feature.icon}</span>}
-                title={feature.title}
-                description={feature.description}
-                color={index < 3 ? "primary" : "secondary"}
-              />
-            ))}
-          </div>
+          <PersonaCard persona={PERSONAS[0]} />
         </div>
-      </section>
+      </section> */}
 
       <section className="section prototype-cta-section">
         <div className="container">

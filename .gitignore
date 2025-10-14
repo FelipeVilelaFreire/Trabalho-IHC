@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 .vercel
+
+# Project notes and documentation
+*.txt

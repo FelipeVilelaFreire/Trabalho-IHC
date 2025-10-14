@@ -1254,3 +1254,138 @@
     font-size: 0.95rem;
   }
 }
+
+/* How Might We - Lead Text Enhanced */
+.hmw-lead-text {
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+/* CSD Matrix Section */
+.csd-intro-text {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 2rem;
+}
+
+.csd-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.csd-categories-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.csd-category-card {
+  flex: 1;
+  min-width: 200px;
+  max-width: 250px;
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.csd-category-card.certainties {
+  background-color: rgba(74, 144, 226, 0.08);
+  border: 2px solid rgba(74, 144, 226, 0.2);
+}
+
+.csd-category-card.assumptions {
+  background-color: rgba(255, 159, 64, 0.08);
+  border: 2px solid rgba(255, 159, 64, 0.2);
+}
+
+.csd-category-card.doubts {
+  background-color: rgba(139, 69, 19, 0.08);
+  border: 2px solid rgba(139, 69, 19, 0.2);
+}
+
+.csd-category-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.csd-category-title.certainties-color {
+  color: #4A90E2;
+}
+
+.csd-category-title.assumptions-color {
+  color: #FF9F40;
+}
+
+.csd-category-title.doubts-color {
+  color: #8B4513;
+}
+
+.csd-category-description {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+}
+
+.csd-matrix-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.csd-matrix-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  margin-top: 2rem;
+}
+
+.csd-iframe-wrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 80%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  background-color: #f5f5f5;
+}
+
+.csd-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.csd-iframe-caption {
+  margin-top: 1.2rem;
+  font-size: 0.9rem;
+  color: #888;
+  text-align: center;
+  font-style: italic;
+}
+
+/* Questionnaire Images */
+.results-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0;
+}
+
+/* TranscriptionModal iframe */
+.transcription-iframe {
+  width: 100%;
+  height: 100%;
+}
+
+/* Competitive Analysis - Indirect competitors spacing */
+.table-category-title-spaced {
+  margin-top: 3rem;
+}

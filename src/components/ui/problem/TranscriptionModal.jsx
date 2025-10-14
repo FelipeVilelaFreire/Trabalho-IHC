@@ -50,7 +50,7 @@ const TranscriptionModal = ({ isOpen, onClose }) => {
 
         <iframe
           src="/docs/Transcricoes.pdf"
-          style={{width: '100%', height: '100%'}}
+          className="transcription-iframe"
           title="Transcrições das Entrevistas"
         />
       </div>

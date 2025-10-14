@@ -1,5 +1,5 @@
 import Hero from '../components/sections/Hero';
-import TimelineResearch from '../components/ui/TimelineResearch';
+import TimelineResearch from '../components/ui/research/TimelineResearch';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import { RESEARCH_METHODS } from '../utils/constants';

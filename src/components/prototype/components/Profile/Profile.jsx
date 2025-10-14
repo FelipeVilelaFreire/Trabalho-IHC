@@ -40,11 +40,25 @@ const Profile = ({ setCurrentScreen, userHobbies, setUserHobbies }) => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('Todos');
 
+  // State for edit profile modal
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editFormData, setEditFormData] = useState({
+    name: userData.name,
+    email: userData.email,
+    avatar: userData.avatar
+  });
+
+  // Ref for drag scroll
+  const scrollRef = React.useRef(null);
+  const [isDragging, setIsDragging] = React.useState(false);
+  const [startX, setStartX] = React.useState(0);
+  const [scrollLeft, setScrollLeft] = React.useState(0);
+
   // Block scroll when modal is open
   useEffect(() => {
     const phoneContent = document.querySelector('.phone-content');
     if (phoneContent) {
-      if (selectedHobby || showAddModal) {
+      if (selectedHobby || showAddModal || showEditModal) {
         phoneContent.style.overflow = 'hidden';
       } else {
         phoneContent.style.overflow = 'auto';
@@ -57,7 +71,7 @@ const Profile = ({ setCurrentScreen, userHobbies, setUserHobbies }) => {
         phoneContent.style.overflow = 'auto';
       }
     };
-  }, [selectedHobby, showAddModal]);
+  }, [selectedHobby, showAddModal, showEditModal]);
 
   // Handle hobby click (for delete)
   const handleHobbyClick = (hobby) => {
@@ -106,6 +120,60 @@ const Profile = ({ setCurrentScreen, userHobbies, setUserHobbies }) => {
 
   const categories = ['Todos', ...getCategories()];
 
+  // Handle edit profile
+  const handleEditProfile = () => {
+    setEditFormData({
+      name: userData.name,
+      email: userData.email,
+      avatar: userData.avatar
+    });
+    setShowEditModal(true);
+  };
+
+  // Handle save profile
+  const handleSaveProfile = () => {
+    // Aqui você salvaria no localStorage ou enviaria para um backend
+    // Por enquanto, apenas fechamos o modal
+    // Em uma implementação real, você atualizaria o userData
+    console.log('Salvando perfil:', editFormData);
+    setShowEditModal(false);
+    // Note: Como userData é derivado de defaultUser ou simulationUser,
+    // você precisaria implementar a lógica de persistência real aqui
+  };
+
+  // Handle input change
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  // Drag to scroll handlers
+  const handleMouseDown = (e) => {
+    if (!scrollRef.current) return;
+    setIsDragging(true);
+    setStartX(e.pageX - scrollRef.current.offsetLeft);
+    setScrollLeft(scrollRef.current.scrollLeft);
+  };
+
+  const handleMouseLeave = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging || !scrollRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX) * 2;
+    scrollRef.current.scrollLeft = scrollLeft - walk;
+  };
+
   return (
     <div className="app-screen profile-screen">
       {/* Header with back button */}
@@ -128,6 +196,9 @@ const Profile = ({ setCurrentScreen, userHobbies, setUserHobbies }) => {
           </div>
           <h3>{userData.name}</h3>
           <p className="user-email">{userData.email}</p>
+          <button className="edit-profile-btn" onClick={handleEditProfile}>
+            ✏️ Editar Perfil
+          </button>
         </div>
 
         {/* Statistics grid */}
@@ -206,7 +277,14 @@ const Profile = ({ setCurrentScreen, userHobbies, setUserHobbies }) => {
             </div>
 
             {/* Category Filter */}
-            <div className="category-filter-scroll">
+            <div
+              className={`category-filter-scroll ${isDragging ? 'dragging' : ''}`}
+              ref={scrollRef}
+              onMouseDown={handleMouseDown}
+              onMouseLeave={handleMouseLeave}
+              onMouseUp={handleMouseUp}
+              onMouseMove={handleMouseMove}
+            >
               {categories.map((cat) => (
                 <button
                   key={cat}
@@ -237,6 +315,76 @@ const Profile = ({ setCurrentScreen, userHobbies, setUserHobbies }) => {
                   <p>Nenhum hobby disponível nesta categoria</p>
                 </div>
               )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Profile Modal */}
+      {showEditModal && (
+        <div className="hobby-modal-overlay" onClick={() => setShowEditModal(false)}>
+          <div className="edit-profile-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="edit-profile-header">
+              <h3>Editar Perfil</h3>
+              <button
+                className="close-modal-btn"
+                onClick={() => setShowEditModal(false)}
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="edit-profile-form">
+              <div className="form-group">
+                <label htmlFor="name">Nome</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={editFormData.name}
+                  onChange={handleInputChange}
+                  placeholder="Digite seu nome"
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="email">E-mail</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={editFormData.email}
+                  onChange={handleInputChange}
+                  placeholder="Digite seu e-mail"
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="avatar">URL da Foto de Perfil</label>
+                <input
+                  type="text"
+                  id="avatar"
+                  name="avatar"
+                  value={editFormData.avatar || ''}
+                  onChange={handleInputChange}
+                  placeholder="https://exemplo.com/foto.jpg"
+                />
+              </div>
+
+              <div className="edit-profile-actions">
+                <button
+                  className="cancel-edit-btn"
+                  onClick={() => setShowEditModal(false)}
+                >
+                  Cancelar
+                </button>
+                <button
+                  className="save-edit-btn"
+                  onClick={handleSaveProfile}
+                >
+                  Salvar Alterações
+                </button>
+              </div>
             </div>
           </div>
         </div>

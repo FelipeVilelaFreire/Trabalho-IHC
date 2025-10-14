@@ -78,10 +78,24 @@ const Details = ({
           <div className="rating-section">
             <span className="rating-big">⭐ {selectedActivity.rating}</span>
             <span className="reviews-count">({selectedActivity.reviews} avaliações)</span>
+            {selectedActivity.comments && selectedActivity.comments.length > 0 && (
+              <button
+                className="comments-icon-btn"
+                onClick={() => {
+                  const commentsSection = document.getElementById('comments-section');
+                  if (commentsSection) {
+                    commentsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }}
+                title="Ver comentários"
+              >
+                💬 {selectedActivity.comments.length}
+              </button>
+            )}
           </div>
         </div>
 
-        {/* Quick Info Section: Location, Time, Price */}
+        {/* Quick Info Section: Location, Time, Price, Link, Phone */}
         <div className="details-quick-info">
           <div className="quick-info-item">
             <span className="icon">📍</span>
@@ -104,6 +118,40 @@ const Details = ({
               <p>Por pessoa</p>
             </div>
           </div>
+          {selectedActivity.link && (
+            <div className="quick-info-item">
+              <span className="icon">🔗</span>
+              <div>
+                <strong>Site</strong>
+                <p>
+                  <a
+                    href={`https://${selectedActivity.link}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: '#667eea', textDecoration: 'none', fontSize: '11px' }}
+                  >
+                    {selectedActivity.link}
+                  </a>
+                </p>
+              </div>
+            </div>
+          )}
+          {selectedActivity.phone && (
+            <div className="quick-info-item">
+              <span className="icon">📞</span>
+              <div>
+                <strong>Telefone</strong>
+                <p>
+                  <a
+                    href={`tel:${selectedActivity.phone.replace(/\D/g, '')}`}
+                    style={{ color: '#667eea', textDecoration: 'none' }}
+                  >
+                    {selectedActivity.phone}
+                  </a>
+                </p>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Confirmation Button */}
@@ -178,6 +226,31 @@ const Details = ({
             ))}
           </ul>
         </div>
+
+        {/* Comments Section */}
+        {selectedActivity.comments && selectedActivity.comments.length > 0 && (
+          <div className="details-section comments-section" id="comments-section">
+            <h3>Comentários dos usuários</h3>
+            <div className="comments-list">
+              {selectedActivity.comments.map((comment) => (
+                <div key={comment.id} className="comment-item">
+                  <div className="comment-header">
+                    <img
+                      src={comment.userPhoto}
+                      alt={comment.userName}
+                      className="comment-user-photo"
+                    />
+                    <div className="comment-user-info">
+                      <strong className="comment-user-name">{comment.userName}</strong>
+                      <span className="comment-date">{comment.date}</span>
+                    </div>
+                  </div>
+                  <p className="comment-text">{comment.comment}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

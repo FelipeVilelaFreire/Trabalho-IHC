@@ -122,10 +122,18 @@
   animation: fadeInUp 0.6s ease forwards;
 }
 
-.differential-item:nth-child(1) { animation-delay: 0.1s; }
-.differential-item:nth-child(2) { animation-delay: 0.2s; }
-.differential-item:nth-child(3) { animation-delay: 0.3s; }
-.differential-item:nth-child(4) { animation-delay: 0.4s; }
+.differential-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.differential-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.differential-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.differential-item:nth-child(4) {
+  animation-delay: 0.4s;
+}
 
 @keyframes fadeInUp {
   to {
@@ -160,20 +168,28 @@
 }
 
 .prototype-section::before {
-  content: '';
+  content: "";
   position: absolute;
   width: 200%;
   height: 200%;
   top: -50%;
   left: -50%;
-  background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 1px,
+    transparent 1px
+  );
   background-size: 50px 50px;
   animation: drift 30s linear infinite;
 }
 
 @keyframes drift {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .prototype-section .section-title,
@@ -208,5 +224,60 @@
 
   .differentials-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Personas Section */
+.personas-section {
+  background: #f5f7fa;
+  padding: 45px 0;
+}
+
+.personas-section .section-title {
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 0.4rem;
+}
+
+.personas-section .section-subtitle {
+  font-size: 0.95rem;
+  color: #6c757d;
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.5;
+}
+
+/* Responsive adjustments for personas section */
+@media (max-width: 768px) {
+  .personas-section {
+    padding: 40px 0;
+  }
+
+  .personas-section .section-title {
+    font-size: 1.75rem;
+  }
+
+  .personas-section .section-subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .personas-section {
+    padding: 30px 0;
+  }
+
+  .personas-section .section-title {
+    font-size: 1.5rem;
+  }
+
+  .personas-section .section-subtitle {
+    font-size: 0.88rem;
+    margin-bottom: 1.5rem;
+    padding: 0 10px;
   }
 }

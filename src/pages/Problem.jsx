@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Hero from "../components/sections/Hero";
-import TCLEModal from "../components/ui/TCLEModal";
-import InterviewModal from "../components/ui/InterviewModal";
-import TranscriptionModal from "../components/ui/TranscriptionModal";
+import TCLEModal from "../components/ui/problem/TCLEModal";
+import InterviewModal from "../components/ui/problem/InterviewModal";
+import TranscriptionModal from "../components/ui/problem/TranscriptionModal";
 import Button from "../components/ui/Button";
 import "./Problem.css";
 
@@ -57,7 +57,7 @@ const Problem = () => {
 
             <div className="section-body">
               <div className="section-description">
-                <p className="lead-text" style={{fontSize: '1.15rem', fontWeight: '500'}}>
+                <p className="lead-text hmw-lead-text">
                   Como podemos criar uma solução que centralize informações
                   sobre hobbies e atividades locais, tornando mais fácil para as
                   pessoas descobrirem, escolherem e se engajarem em novas
@@ -120,103 +120,45 @@ const Problem = () => {
 
             <div className="section-body">
               <div className="section-description">
-                <h3 style={{fontSize: '1.5rem', fontWeight: '600', marginBottom: '1rem'}}>Matriz CSD - Certezas, Suposições e Dúvidas</h3>
-                <p className="lead-text" style={{textAlign: 'center', maxWidth: '800px', margin: '0 auto 2rem'}}>
-                  A matriz CSD é uma ferramenta de síntese e análise utilizada em processos de design thinking e pesquisa de UX. 
+                <h3 className="csd-title">Matriz CSD - Certezas, Suposições e Dúvidas</h3>
+                <p className="lead-text csd-intro-text">
+                  A matriz CSD é uma ferramenta de síntese e análise utilizada em processos de design thinking e pesquisa de UX.
                   Ela nos permite organizar sistematicamente os insights coletados em três categorias fundamentais.
                 </p>
-                <div style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  gap: '2rem',
-                  marginBottom: '2.5rem',
-                  flexWrap: 'wrap'
-                }}>
-                  <div style={{
-                    flex: '1',
-                    minWidth: '200px',
-                    maxWidth: '250px',
-                    textAlign: 'center',
-                    padding: '1.5rem',
-                    backgroundColor: 'rgba(74, 144, 226, 0.08)',
-                    borderRadius: '8px',
-                    border: '2px solid rgba(74, 144, 226, 0.2)'
-                  }}>
-                    <h4 style={{fontSize: '1.1rem', fontWeight: '600', color: '#4A90E2', marginBottom: '0.5rem'}}>Certezas</h4>
-                    <p style={{fontSize: '0.9rem', color: '#666', margin: 0}}>
+                <div className="csd-categories-container">
+                  <div className="csd-category-card certainties">
+                    <h4 className="csd-category-title certainties-color">Certezas</h4>
+                    <p className="csd-category-description">
                       Fatos comprovados e informações validadas através da pesquisa
                     </p>
                   </div>
-                  <div style={{
-                    flex: '1',
-                    minWidth: '200px',
-                    maxWidth: '250px',
-                    textAlign: 'center',
-                    padding: '1.5rem',
-                    backgroundColor: 'rgba(255, 159, 64, 0.08)',
-                    borderRadius: '8px',
-                    border: '2px solid rgba(255, 159, 64, 0.2)'
-                  }}>
-                    <h4 style={{fontSize: '1.1rem', fontWeight: '600', color: '#FF9F40', marginBottom: '0.5rem'}}>Suposições</h4>
-                    <p style={{fontSize: '0.9rem', color: '#666', margin: 0}}>
+                  <div className="csd-category-card assumptions">
+                    <h4 className="csd-category-title assumptions-color">Suposições</h4>
+                    <p className="csd-category-description">
                       Hipóteses baseadas em indícios que precisam de validação
                     </p>
                   </div>
-                  <div style={{
-                    flex: '1',
-                    minWidth: '200px',
-                    maxWidth: '250px',
-                    textAlign: 'center',
-                    padding: '1.5rem',
-                    backgroundColor: 'rgba(139, 69, 19, 0.08)',
-                    borderRadius: '8px',
-                    border: '2px solid rgba(139, 69, 19, 0.2)'
-                  }}>
-                    <h4 style={{fontSize: '1.1rem', fontWeight: '600', color: '#8B4513', marginBottom: '0.5rem'}}>Dúvidas</h4>
-                    <p style={{fontSize: '0.9rem', color: '#666', margin: 0}}>
+                  <div className="csd-category-card doubts">
+                    <h4 className="csd-category-title doubts-color">Dúvidas</h4>
+                    <p className="csd-category-description">
                       Questões em aberto que direcionam próximas investigações
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="csd-matrix-container" style={{
-                maxWidth: '1200px',
-                margin: '0 auto'
-              }}>
-                <h4 style={{
-                  fontSize: '1.3rem',
-                  fontWeight: '600',
-                  textAlign: 'center',
-                  marginBottom: '1.5rem',
-                  marginTop: '2rem'
-                }}>Nossa Matriz CSD:</h4>
-                <div style={{
-                  position: 'relative',
-                  width: '100%',
-                  paddingBottom: '80%',
-                  height: 0,
-                  overflow: 'hidden',
-                  borderRadius: '12px',
-                  boxShadow: '0 6px 12px rgba(0, 0, 0, 0.15)',
-                  backgroundColor: '#f5f5f5'
-                }}>
-                  <iframe 
+              <div className="csd-matrix-container">
+                <h4 className="csd-matrix-title">Nossa Matriz CSD:</h4>
+                <div className="csd-iframe-wrapper">
+                  <iframe
                     src="https://miro.com/app/live-embed/uXjVJJzSn-o=/?embedMode=view_only_without_ui&moveToViewport=8480,283,9070,4464&embedId=111805068315"
-                    style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: '100%',
-                      height: '100%',
-                      border: 0
-                    }}
+                    className="csd-iframe"
                     scrolling="no"
                     allow="fullscreen; clipboard-read; clipboard-write"
                     allowFullScreen
                   />
                 </div>
-                <p style={{marginTop: '1.2rem', fontSize: '0.9rem', color: '#888', textAlign: 'center', fontStyle: 'italic'}}>
+                <p className="csd-iframe-caption">
                   Visualização interativa da análise estruturada dos insights coletados durante a pesquisa
                 </p>
               </div>
@@ -321,7 +263,7 @@ const Problem = () => {
                   </table>
                 </div>
 
-                <h4 className="table-category-title" style={{marginTop: '3rem'}}>Competidores Indiretos</h4>
+                <h4 className="table-category-title table-category-title-spaced">Competidores Indiretos</h4>
                 <div className="table-responsive">
                   <table className="competitive-table">
                     <thead>
@@ -430,22 +372,12 @@ const Problem = () => {
                     <img
                       src="/docs/graficos-resultados.png"
                       alt="Gráficos dos Resultados do Questionário - 38 respostas mostrando dados sobre conhecimento de hobbies, frequência de mudança, barreiras e preferências"
-                      style={{
-                        width: '100%',
-                        height: 'auto',
-                        display: 'block',
-                        margin: 0
-                      }}
+                      className="results-image"
                     />
                     <img
                       src="/docs/graficos-resultados2.png"
                       alt="Gráficos dos Resultados do Questionário - Parte 2 mostrando mais análises e cruzamentos de dados"
-                      style={{
-                        width: '100%',
-                        height: 'auto',
-                        display: 'block',
-                        margin: 0
-                      }}
+                      className="results-image"
                     />
                   </div>
 
