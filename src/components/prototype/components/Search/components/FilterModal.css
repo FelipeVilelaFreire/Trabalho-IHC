@@ -1,0 +1,366 @@
+/* Filter Modal Container (Overlay) */
+.filter-modal-container-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.3s ease;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.filter-modal-container-content {
+  background: white;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  margin: auto;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Header do container */
+.filter-modal-container-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #e9ecef;
+  position: sticky;
+  top: 0;
+  background: white;
+  border-radius: 20px 20px 0 0;
+  z-index: 10;
+}
+
+.filter-modal-container-header h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #212529;
+  margin: 0;
+}
+
+.filter-modal-close-btn {
+  background: #f8f9fa;
+  border: none;
+  color: #6c757d;
+  font-size: 24px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.filter-modal-close-btn:hover {
+  background: #e9ecef;
+  color: #495057;
+  transform: scale(1.1);
+}
+
+/* Filtros dentro do container */
+.filter-modal-filters {
+  padding: 20px;
+}
+
+.filter-modal-filters h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #212529;
+  margin: 0 0 12px 0;
+}
+
+/* Botão Filtrar */
+.filter-modal-apply-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  margin-top: 20px;
+}
+
+.filter-modal-apply-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+}
+
+.filter-modal-apply-btn:active {
+  transform: translateY(0);
+}
+
+/* Category chips */
+.filter-modal-chips {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0;
+  margin-bottom: 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  user-select: none;
+}
+
+.filter-modal-chips::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-modal-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  background: white;
+  border: 2px solid #e9ecef;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  color: #495057;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  height: 44px;
+}
+
+.filter-modal-chip:hover {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+  border-color: #667eea;
+}
+
+.filter-modal-chip.active {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+}
+
+/* Filter Options - Inline */
+.filter-modal-options {
+  display: flex;
+  gap: 8px;
+  padding: 12px 0;
+}
+
+.filter-modal-option {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 6px;
+  background: #f8f9fa;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  font-size: 12px;
+  cursor: pointer;
+  color: #495057;
+  transition: all 0.2s ease;
+  min-height: 70px;
+}
+
+.filter-modal-option:hover {
+  background: #e9ecef;
+  border-color: #667eea;
+}
+
+.filter-modal-label {
+  font-weight: 600;
+  font-size: 10px;
+  color: #6c757d;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.filter-modal-value {
+  font-weight: 700;
+  font-size: 12px;
+  color: #667eea;
+  text-align: center;
+  word-break: break-word;
+  line-height: 1.2;
+}
+
+/* Detail Modals (Preço, Distância, Data) */
+.filter-detail-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  animation: fadeIn 0.2s ease;
+}
+
+.filter-detail-modal {
+  background: white;
+  border-radius: 20px;
+  padding: 24px;
+  max-width: 320px;
+  width: 90%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.filter-detail-modal h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #212529;
+  margin: 0 0 20px 0;
+  text-align: center;
+}
+
+.filter-detail-range {
+  margin-bottom: 20px;
+}
+
+.filter-detail-range label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 10px;
+}
+
+.filter-detail-range input[type="range"] {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: #e9ecef;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.filter-detail-range input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+}
+
+.filter-detail-range input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+}
+
+.filter-detail-apply-btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.filter-detail-apply-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+}
+
+/* Date Filter Options */
+.filter-detail-date-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.filter-detail-date-option {
+  padding: 12px;
+  background: #f8f9fa;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #495057;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-detail-date-option:hover {
+  background: #e9ecef;
+  border-color: #667eea;
+}
+
+.filter-detail-date-option.active {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border-color: transparent;
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+  .filter-modal-container-overlay {
+    padding: 10px;
+  }
+
+  .filter-modal-container-content {
+    max-height: 95vh;
+  }
+}

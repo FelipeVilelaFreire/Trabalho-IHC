@@ -3,6 +3,11 @@
   background: #f8f9fa;
 }
 
+/* Desabilita scroll quando modal está aberto */
+.profile-screen.no-scroll {
+  overflow: hidden !important;
+}
+
 .profile-header {
   display: flex;
   align-items: center;
@@ -665,4 +670,120 @@
 
 .save-edit-btn:active {
   transform: translateY(0);
+}
+
+/* Gamification Section */
+.gamification-section {
+  background: white;
+  padding: 24px 20px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 16px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative background pattern */
+.gamification-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(102, 126, 234, 0.03) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.level-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--level-badge-bg);
+  border-radius: 24px;
+  box-shadow: var(--level-badge-shadow);
+  margin-bottom: 16px;
+  position: relative;
+  animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.level-icon {
+  font-size: 20px;
+}
+
+.level-text {
+  font-size: 16px;
+  font-weight: 800;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.5px;
+}
+
+.xp-info {
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.xp-current {
+  font-size: 14px;
+  color: var(--xp-text-color);
+  margin: 0;
+  font-weight: 500;
+}
+
+.xp-current strong {
+  color: var(--level-color);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.xp-remaining {
+  font-size: 13px;
+  color: var(--xp-text-color);
+  margin: 12px 0 0 0;
+  font-weight: 500;
+  position: relative;
+}
+
+.xp-remaining strong {
+  color: var(--level-color);
+  font-weight: 700;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .gamification-section {
+    padding: 20px 16px;
+  }
+
+  .level-badge {
+    padding: 8px 16px;
+  }
+
+  .level-text {
+    font-size: 14px;
+  }
+
+  .xp-current {
+    font-size: 13px;
+  }
+
+  .xp-current strong {
+    font-size: 15px;
+  }
+
+  .xp-remaining {
+    font-size: 12px;
+  }
 }

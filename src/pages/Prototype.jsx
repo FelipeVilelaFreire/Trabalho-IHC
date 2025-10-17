@@ -1,21 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import PhoneMockup from '../components/prototype/PhoneMockup';
-import Home from '../components/prototype/components/Home/Home';
-import Search from '../components/prototype/components/Search/Search';
-import Details from '../components/prototype/components/Details/Details';
-import Confirmation from '../components/prototype/components/Confirmation/Confirmation';
-import Map from '../components/prototype/components/Map/Map';
-import Agenda from '../components/prototype/components/Agenda/Agenda';
-import Profile from '../components/prototype/components/Profile/Profile';
-import Favorites from '../components/prototype/components/Favorites/Favorites';
-import Notifications from '../components/prototype/components/Notifications/Notifications';
-import SignupScreen from '../components/prototype/components/Simule/SignupScreen';
-import HobbySelection from '../components/prototype/components/Simule/HobbySelection';
-import { activities } from '../data/activitiesData';
-import { categories, getRecommendedCategories } from '../data/categoriesData';
-import { defaultUserHobbies, loadUserData, saveUserData, addScheduledEvent, saveSimulationUser, loadFavorites, saveFavorites, loadScheduledEventsForMode } from '../data/userData';
-import { convertHobbyIdsToObjects } from '../data/hobbiesData';
-import './Prototype.css';
+import React, { useState, useEffect } from "react";
+import PhoneMockup from "../components/prototype/PhoneMockup";
+import Home from "../components/prototype/components/Home/Home";
+import Search from "../components/prototype/components/Search/Search";
+import Details from "../components/prototype/components/Details/Details";
+import Confirmation from "../components/prototype/components/Confirmation/Confirmation";
+import Map from "../components/prototype/components/Map/Map";
+import Agenda from "../components/prototype/components/Agenda/Agenda";
+import Profile from "../components/prototype/components/Profile/Profile";
+import Favorites from "../components/prototype/components/Favorites/Favorites";
+import Notifications from "../components/prototype/components/Notifications/Notifications";
+import Cupons from "../components/prototype/components/Cupons/Cupons";
+import Comunidade from "../components/prototype/components/Comunidade/Comunidade";
+import Upload from "../components/prototype/components/Upload/Upload";
+import SignupScreen from "../components/prototype/components/Simule/SignupScreen";
+import HobbySelection from "../components/prototype/components/Simule/HobbySelection";
+import { activities } from "../data/activitiesData";
+import { categories, getRecommendedCategories } from "../data/categoriesData";
+import {
+  defaultUserHobbies,
+  loadUserData,
+  saveUserData,
+  addScheduledEvent,
+  saveSimulationUser,
+  loadFavorites,
+  saveFavorites,
+  loadScheduledEventsForMode,
+} from "../data/userData";
+import { convertHobbyIdsToObjects } from "../data/hobbiesData";
+import "./Prototype.css";
 
 /**
  * Prototype - Página principal do protótipo HobbyLocal
@@ -23,9 +35,9 @@ import './Prototype.css';
  */
 const Prototype = () => {
   // Estado global da aplicação
-  const [currentScreen, setCurrentScreen] = useState('home');
+  const [currentScreen, setCurrentScreen] = useState("home");
   const [selectedActivity, setSelectedActivity] = useState(null);
-  const [activeCategories, setActiveCategories] = useState(['Recomendados']);
+  const [activeCategories, setActiveCategories] = useState(["Recomendados"]);
 
   // Estado para fluxo "Simule você aqui"
   const [simulationUserData, setSimulationUserData] = useState(null);
@@ -35,14 +47,14 @@ const Prototype = () => {
 
   // Carrega hobbies do usuário do localStorage na inicialização
   const [userHobbies, setUserHobbies] = useState(() =>
-    loadUserData('hobbylocal-user-hobbies', defaultUserHobbies)
+    loadUserData("hobbylocal-user-hobbies", defaultUserHobbies)
   );
 
   // Estado para rastrear participantes dinâmicos por atividade
   const [activityParticipants, setActivityParticipants] = useState(() => {
     // Inicializa com os valores padrão das atividades
     const initialCounts = {};
-    activities.forEach(activity => {
+    activities.forEach((activity) => {
       initialCounts[activity.id] = activity.participants;
     });
     return initialCounts;
@@ -55,40 +67,41 @@ const Prototype = () => {
 
   // Salva hobbies no localStorage sempre que mudar
   useEffect(() => {
-    saveUserData('hobbylocal-user-hobbies', userHobbies);
+    saveUserData("hobbylocal-user-hobbies", userHobbies);
   }, [userHobbies]);
 
   // Categorias recomendadas baseadas nos hobbies do usuário
   const recommendedCategories = getRecommendedCategories(userHobbies);
 
   // Fallback: se não houver categorias recomendadas, usa categorias padrão populares
-  const safeRecommendedCategories = recommendedCategories.length > 0
-    ? recommendedCategories
-    : ['Esportes', 'Música', 'Arte', 'Bem-estar'];
+  const safeRecommendedCategories =
+    recommendedCategories.length > 0
+      ? recommendedCategories
+      : ["Esportes", "Música", "Arte", "Bem-estar"];
 
   // Atividades com contadores dinâmicos de participantes
-  const activitiesWithDynamicCounts = activities.map(activity => ({
+  const activitiesWithDynamicCounts = activities.map((activity) => ({
     ...activity,
-    participants: activityParticipants[activity.id] || activity.participants
+    participants: activityParticipants[activity.id] || activity.participants,
   }));
 
   // Função para toggle de categorias (seleção múltipla)
   const toggleCategory = (category) => {
     // Se clicar em "Recomendados" ou "Todos", substitui todas as seleções
-    if (category === 'Recomendados' || category === 'Todos') {
+    if (category === "Recomendados" || category === "Todos") {
       setActiveCategories([category]);
     } else {
       // Remove "Recomendados" e "Todos" se estiverem presentes
       let newCategories = activeCategories.filter(
-        cat => cat !== 'Recomendados' && cat !== 'Todos'
+        (cat) => cat !== "Recomendados" && cat !== "Todos"
       );
 
       // Toggle a categoria
       if (newCategories.includes(category)) {
-        newCategories = newCategories.filter(cat => cat !== category);
+        newCategories = newCategories.filter((cat) => cat !== category);
         // Se ficar vazio, volta para "Recomendados"
         if (newCategories.length === 0) {
-          newCategories = ['Recomendados'];
+          newCategories = ["Recomendados"];
         }
       } else {
         newCategories.push(category);
@@ -99,16 +112,20 @@ const Prototype = () => {
   };
 
   // Filtra atividades por categorias selecionadas
-  const filteredActivities = activeCategories.includes('Todos')
+  const filteredActivities = activeCategories.includes("Todos")
     ? activitiesWithDynamicCounts
-    : activeCategories.includes('Recomendados')
-    ? activitiesWithDynamicCounts.filter(act => safeRecommendedCategories.includes(act.category))
-    : activitiesWithDynamicCounts.filter(act => activeCategories.includes(act.category));
+    : activeCategories.includes("Recomendados")
+    ? activitiesWithDynamicCounts.filter((act) =>
+        safeRecommendedCategories.includes(act.category)
+      )
+    : activitiesWithDynamicCounts.filter((act) =>
+        activeCategories.includes(act.category)
+      );
 
   // Handlers
   const handleActivityClick = (activity) => {
     setSelectedActivity(activity);
-    setCurrentScreen('details');
+    setCurrentScreen("details");
   };
 
   const handleConfirm = () => {
@@ -116,11 +133,13 @@ const Prototype = () => {
 
     // Verifica se a atividade já está confirmada
     const scheduledEvents = loadScheduledEventsForMode();
-    const alreadyConfirmed = scheduledEvents.some(event => event.activityId === selectedActivity.id);
+    const alreadyConfirmed = scheduledEvents.some(
+      (event) => event.activityId === selectedActivity.id
+    );
 
     if (alreadyConfirmed) {
       // Se já confirmado, apenas vai para a tela de confirmação sem adicionar duplicata
-      setCurrentScreen('confirmation');
+      setCurrentScreen("confirmation");
       return;
     }
 
@@ -129,12 +148,17 @@ const Prototype = () => {
 
     // Extrai o horário de início (ex: "15:00" de "Sábado, 15:00 - 17:00")
     const timeMatch = scheduleText.match(/(\d{1,2}):(\d{2})/);
-    const time = timeMatch ? `${timeMatch[1]}:${timeMatch[2]}` : '10:00';
+    const time = timeMatch ? `${timeMatch[1]}:${timeMatch[2]}` : "10:00";
 
     // Extrai o dia da semana e cria uma data aproximada
     const daysMap = {
-      'Segunda': 1, 'Terça': 2, 'Quarta': 3,
-      'Quinta': 4, 'Sexta': 5, 'Sábado': 6, 'Domingo': 0
+      Segunda: 1,
+      Terça: 2,
+      Quarta: 3,
+      Quinta: 4,
+      Sexta: 5,
+      Sábado: 6,
+      Domingo: 0,
     };
 
     const now = new Date();
@@ -154,9 +178,24 @@ const Prototype = () => {
     eventDate.setDate(now.getDate() + daysUntilTarget);
 
     // Formata a data para exibição (ex: "Sáb, 12 Out")
-    const monthNames = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
-    const dayNames = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
-    const formattedDate = `${dayNames[eventDate.getDay()]}, ${eventDate.getDate()} ${monthNames[eventDate.getMonth()]}`;
+    const monthNames = [
+      "Jan",
+      "Fev",
+      "Mar",
+      "Abr",
+      "Mai",
+      "Jun",
+      "Jul",
+      "Ago",
+      "Set",
+      "Out",
+      "Nov",
+      "Dez",
+    ];
+    const dayNames = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+    const formattedDate = `${
+      dayNames[eventDate.getDay()]
+    }, ${eventDate.getDate()} ${monthNames[eventDate.getMonth()]}`;
 
     // Cria o evento com todas as informações necessárias
     const event = {
@@ -169,46 +208,46 @@ const Prototype = () => {
       time: time,
       price: selectedActivity.price,
       emoji: selectedActivity.emoji,
-      category: selectedActivity.category
+      category: selectedActivity.category,
     };
 
     // Adiciona o evento à agenda automaticamente
     addScheduledEvent(event);
 
     // Incrementa o contador de participantes
-    setActivityParticipants(prev => ({
+    setActivityParticipants((prev) => ({
       ...prev,
       [selectedActivity.id]: Math.min(
         prev[selectedActivity.id] + 1,
         selectedActivity.maxParticipants
-      )
+      ),
     }));
 
     // Vai para tela de confirmação
-    setCurrentScreen('confirmation');
+    setCurrentScreen("confirmation");
   };
 
   const toggleFavorite = (id) => {
-    setFavorites(prev =>
-      prev.includes(id) ? prev.filter(fav => fav !== id) : [...prev, id]
+    setFavorites((prev) =>
+      prev.includes(id) ? prev.filter((fav) => fav !== id) : [...prev, id]
     );
   };
 
   // Handler para decrementar participantes quando remove da agenda
   const handleRemoveFromAgenda = (activityId) => {
-    setActivityParticipants(prev => ({
+    setActivityParticipants((prev) => ({
       ...prev,
       [activityId]: Math.max(
         prev[activityId] - 1,
-        activities.find(a => a.id === activityId)?.participants || 0
-      )
+        activities.find((a) => a.id === activityId)?.participants || 0
+      ),
     }));
   };
 
   // Handlers para fluxo "Simule você aqui"
   const handleSignupSubmit = (userData) => {
     setSimulationUserData(userData);
-    setCurrentScreen('hobbySelection');
+    setCurrentScreen("hobbySelection");
   };
 
   const handleHobbySelectionComplete = (completeUserData) => {
@@ -224,21 +263,21 @@ const Prototype = () => {
     if (simulationUserData) {
       saveSimulationUser({
         name: simulationUserData.name,
-        email: simulationUserData.email
+        email: simulationUserData.email,
       });
     }
 
     // Atualiza as categorias ativas para refletir as escolhas
-    setActiveCategories(['Recomendados']);
+    setActiveCategories(["Recomendados"]);
 
     // Volta para a tela home com os filtros aplicados
-    setCurrentScreen('home');
+    setCurrentScreen("home");
   };
 
   // Renderiza a tela correta baseado no estado
   const renderScreen = () => {
     switch (currentScreen) {
-      case 'home':
+      case "home":
         return (
           <Home
             categories={categories}
@@ -252,7 +291,7 @@ const Prototype = () => {
           />
         );
 
-      case 'search':
+      case "search":
         return (
           <Search
             categories={categories}
@@ -263,12 +302,15 @@ const Prototype = () => {
             setCurrentScreen={setCurrentScreen}
             favorites={favorites}
             toggleFavorite={toggleFavorite}
+            userHobbies={userHobbies}
           />
         );
 
-      case 'details':
+      case "details":
         const scheduledEvents = loadScheduledEventsForMode();
-        const isConfirmed = scheduledEvents.some(event => event.activityId === selectedActivity?.id);
+        const isConfirmed = scheduledEvents.some(
+          (event) => event.activityId === selectedActivity?.id
+        );
 
         return (
           <Details
@@ -281,7 +323,7 @@ const Prototype = () => {
           />
         );
 
-      case 'confirmation':
+      case "confirmation":
         return (
           <Confirmation
             selectedActivity={selectedActivity}
@@ -289,7 +331,7 @@ const Prototype = () => {
           />
         );
 
-      case 'map':
+      case "map":
         return (
           <Map
             activities={activitiesWithDynamicCounts}
@@ -299,7 +341,7 @@ const Prototype = () => {
           />
         );
 
-      case 'agenda':
+      case "agenda":
         return (
           <Agenda
             activities={activitiesWithDynamicCounts}
@@ -308,7 +350,7 @@ const Prototype = () => {
           />
         );
 
-      case 'profile':
+      case "profile":
         return (
           <Profile
             setCurrentScreen={setCurrentScreen}
@@ -317,7 +359,7 @@ const Prototype = () => {
           />
         );
 
-      case 'favorites':
+      case "favorites":
         return (
           <Favorites
             activities={activitiesWithDynamicCounts}
@@ -328,14 +370,19 @@ const Prototype = () => {
           />
         );
 
-      case 'notifications':
-        return (
-          <Notifications
-            setCurrentScreen={setCurrentScreen}
-          />
-        );
+      case "notifications":
+        return <Notifications setCurrentScreen={setCurrentScreen} />;
 
-      case 'signup':
+      case "cupons":
+        return <Cupons setCurrentScreen={setCurrentScreen} />;
+
+      case "comunidade":
+        return <Comunidade setCurrentScreen={setCurrentScreen} />;
+
+      case "upload":
+        return <Upload setCurrentScreen={setCurrentScreen} />;
+
+      case "signup":
         return (
           <SignupScreen
             setCurrentScreen={setCurrentScreen}
@@ -343,7 +390,7 @@ const Prototype = () => {
           />
         );
 
-      case 'hobbySelection':
+      case "hobbySelection":
         return (
           <HobbySelection
             userData={simulationUserData}
@@ -377,13 +424,14 @@ const Prototype = () => {
       </div>
 
       {/* Mockup do telefone com a tela renderizada */}
-      <PhoneMockup>
-        {renderScreen()}
-      </PhoneMockup>
+      <PhoneMockup>{renderScreen()}</PhoneMockup>
 
       {/* Botão Simule Você Aqui */}
       <div className="simulate-section">
-        <button className="simulate-btn" onClick={() => setCurrentScreen('signup')}>
+        <button
+          className="simulate-btn"
+          onClick={() => setCurrentScreen("signup")}
+        >
           ✨ Simule você aqui
         </button>
       </div>
@@ -395,7 +443,10 @@ const Prototype = () => {
           <div className="feature-card">
             <span className="feature-icon">🎯</span>
             <h3>Descoberta Inteligente</h3>
-            <p>Encontre atividades próximas baseadas em sua localização e preferências</p>
+            <p>
+              Encontre atividades próximas baseadas em sua localização e
+              preferências
+            </p>
           </div>
           <div className="feature-card">
             <span className="feature-icon">🔍</span>
@@ -405,7 +456,10 @@ const Prototype = () => {
           <div className="feature-card">
             <span className="feature-icon">📋</span>
             <h3>Informações Completas</h3>
-            <p>Veja todos os detalhes: instrutor, nível, o que trazer e muito mais</p>
+            <p>
+              Veja todos os detalhes: instrutor, nível, o que trazer e muito
+              mais
+            </p>
           </div>
           <div className="feature-card">
             <span className="feature-icon">✨</span>

@@ -98,7 +98,7 @@ export const TEAM_MEMBERS = [
   },
   {
     name: 'Guilherme',
-    avatar: '👤'
+    avatar: '/team/Guilherme.jpg'
   },
   {
     name: 'João Moraes',

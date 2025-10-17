@@ -1,5 +1,7 @@
 import React, { useState, useRef } from 'react';
 import BottomNav from '../shared/BottomNav';
+import SearchMap from './components/SearchMap';
+import FilterModal from './components/FilterModal';
 import '../shared/Shared.css';
 import './Search.css';
 
@@ -24,7 +26,8 @@ const Search = ({
   handleActivityClick,
   setCurrentScreen,
   favorites,
-  toggleFavorite
+  toggleFavorite,
+  userHobbies
 }) => {
   // State for draggable scroll
   const [isDown, setIsDown] = useState(false);
@@ -44,6 +47,12 @@ const Search = ({
   const [showPriceModal, setShowPriceModal] = useState(false);
   const [showDistanceModal, setShowDistanceModal] = useState(false);
   const [showDateModal, setShowDateModal] = useState(false);
+
+  // Filter container state (com mapa)
+  const [showFilterContainer, setShowFilterContainer] = useState(false);
+
+  // Estado para expandir o mapa
+  const [isMapExpanded, setIsMapExpanded] = useState(false);
 
   // Draggable scroll handlers
   const handleMouseDown = (e) => {
@@ -162,76 +171,75 @@ const Search = ({
   };
 
   return (
-    <div className="app-screen search-screen">
+    <div className={`app-screen search-screen ${isMapExpanded || showFilterContainer ? 'no-scroll' : ''}`}>
       {/* Header */}
       <div className="app-header">
-        <button className="back-btn" onClick={() => setCurrentScreen('home')}>
-          ← Voltar
-        </button>
+        <div style={{ width: '40px' }}></div> {/* Spacer */}
         <h2>Buscar</h2>
+        <div style={{ width: '40px' }}></div> {/* Spacer */}
       </div>
 
-      {/* Search Bar */}
+      {/* Search Bar com ícone de filtro */}
       <div className="search-bar-container active">
-        <div className="search-bar focused">
-          <span className="search-icon">🔍</span>
-          <input
-            type="text"
-            placeholder="Digite o que você procura..."
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-            autoFocus
-          />
-          {searchText && (
-            <button className="clear-btn" onClick={handleClearSearch}>
+        <div className="search-bar-wrapper">
+          <div className="search-bar focused">
+            <span className="search-icon">🔍</span>
+            <input
+              type="text"
+              placeholder="Digite o que você procura..."
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+              autoFocus
+            />
+            {searchText && (
+              <button className="clear-btn" onClick={handleClearSearch}>
+                ✕
+              </button>
+            )}
+          </div>
+          <button
+            className="filter-icon-btn"
+            onClick={() => setShowFilterContainer(true)}
+            aria-label="Abrir filtros e mapa"
+          >
+            <i className="fa-solid fa-filter"></i>
+          </button>
+        </div>
+      </div>
+
+      {/* Mapa integrado diretamente na tela de busca */}
+      <div className={`map-section-in-search ${isMapExpanded ? 'expanded' : ''}`}>
+        {isMapExpanded && (
+          <div className="map-expanded-header">
+            <h3>Mapa de Atividades</h3>
+            <button className="map-close-btn" onClick={() => setIsMapExpanded(false)}>
               ✕
+            </button>
+          </div>
+        )}
+        <div className="map-header-with-expand">
+          {!isMapExpanded && <h3>Mapa de Atividades</h3>}
+          {!isMapExpanded && (
+            <button
+              className="map-expand-btn"
+              onClick={() => setIsMapExpanded(true)}
+              aria-label="Expandir mapa"
+            >
+              <i className="fa-solid fa-expand"></i>
             </button>
           )}
         </div>
-      </div>
-
-      {/* Filters Section */}
-      <div className="filters-section">
-        <h3>Filtros</h3>
-
-        {/* Category Filters */}
         <div
-          className="filter-chips"
-          ref={scrollRef}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp}
-          onTouchStart={handleMouseDown}
-          onTouchMove={handleMouseMove}
-          onTouchEnd={handleMouseUp}
-          style={{ cursor: isDown ? 'grabbing' : 'grab' }}
+          style={{
+            padding: isMapExpanded ? '16px' : '0',
+            height: isMapExpanded ? 'calc(100% - 68px)' : 'auto'
+          }}
         >
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              className={`filter-chip ${activeCategories.includes(cat) ? 'active' : ''}`}
-              onClick={() => toggleCategory(cat)}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        {/* Filter Options - Inline */}
-        <div className="filter-options-inline">
-          <button className="filter-option-inline" onClick={() => setShowPriceModal(true)}>
-            <span className="filter-label">💰 Preço:</span>
-            <span className="filter-value">{getPriceDisplay()}</span>
-          </button>
-          <button className="filter-option-inline" onClick={() => setShowDistanceModal(true)}>
-            <span className="filter-label">📏 Distância:</span>
-            <span className="filter-value">{getDistanceDisplay()}</span>
-          </button>
-          <button className="filter-option-inline" onClick={() => setShowDateModal(true)}>
-            <span className="filter-label">📅 Data:</span>
-            <span className="filter-value">{selectedDate}</span>
-          </button>
+          <SearchMap
+            activities={finalFilteredActivities}
+            handleActivityClick={handleActivityClick}
+            isExpanded={isMapExpanded}
+          />
         </div>
       </div>
 
@@ -319,7 +327,6 @@ const Search = ({
             <span>Buscando por: <strong>"{searchText}"</strong></span>
           </div>
         )}
-        <h3>{finalFilteredActivities.length} atividades encontradas</h3>
         {finalFilteredActivities.length === 0 ? (
           <div className="no-results">
             <div className="no-results-icon">🔍</div>
@@ -362,6 +369,29 @@ const Search = ({
           ))
         )}
       </div>
+
+      {/* Filter Modal Component */}
+      <FilterModal
+        isOpen={showFilterContainer}
+        onClose={() => setShowFilterContainer(false)}
+        categories={categories}
+        activeCategories={activeCategories}
+        toggleCategory={toggleCategory}
+        priceRange={priceRange}
+        setPriceRange={setPriceRange}
+        maxDistance={maxDistance}
+        setMaxDistance={setMaxDistance}
+        selectedDate={selectedDate}
+        setSelectedDate={setSelectedDate}
+        showPriceModal={showPriceModal}
+        setShowPriceModal={setShowPriceModal}
+        showDistanceModal={showDistanceModal}
+        setShowDistanceModal={setShowDistanceModal}
+        showDateModal={showDateModal}
+        setShowDateModal={setShowDateModal}
+        getPriceDisplay={getPriceDisplay}
+        getDistanceDisplay={getDistanceDisplay}
+      />
 
       {/* Bottom Navigation */}
       <BottomNav activeScreen="search" onNavigate={setCurrentScreen} />

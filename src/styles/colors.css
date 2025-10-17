@@ -38,7 +38,15 @@
   /* Gradientes */
   --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --gradient-card: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  
+
+  /* Gamificação - Barra de Progresso */
+  --progress-bg: #E5E7EB;
+  --progress-fill: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  --level-color: #4F46E5;
+  --xp-text-color: #6B7280;
+  --level-badge-bg: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  --level-badge-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+
   /* Sombras */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);

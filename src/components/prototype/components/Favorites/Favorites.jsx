@@ -29,19 +29,11 @@ const Favorites = ({
     <div className="app-screen favorites-screen">
       {/* Header */}
       <div className="app-header">
-        <h1 className="app-logo">
-          <span className="logo-icon">❤️</span>
-          Favoritos
-        </h1>
-        <div className="header-icons">
-          <button className="icon-btn notification" onClick={() => setCurrentScreen('notifications')}>
-            <span className="badge-dot"></span>
-            🔔
-          </button>
-          <button className="icon-btn profile" onClick={() => setCurrentScreen('profile')}>
-            👤
-          </button>
-        </div>
+        <button className="back-btn" onClick={() => setCurrentScreen('home')}>
+          ←
+        </button>
+        <h2>Favoritos</h2>
+        <div style={{ width: '40px' }}></div> {/* Spacer */}
       </div>
 
       {/* Content */}

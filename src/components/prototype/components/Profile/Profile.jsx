@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import BottomNav from '../shared/BottomNav';
+import ProgressBar from '../../../ProgressBar';
 import '../shared/Shared.css';
 import './Profile.css';
 import { availableHobbies, getCategories } from '../../../../data/hobbiesData';
@@ -32,6 +33,29 @@ const Profile = ({ setCurrentScreen, userHobbies, setUserHobbies }) => {
         }
       }
     : defaultUser;
+
+  // Gamification data - Different values based on user type
+  const getGamificationData = () => {
+    // defaultUser (Felipe Silva) - valores arbitrários maiores
+    if (userData.name === "Felipe Silva") {
+      return {
+        level: userData.level || 3,
+        currentXP: userData.currentXP || 450,
+        nextLevelXP: userData.nextLevelXP || 600
+      };
+    }
+
+    // Outros usuários (incluindo modo simulação "Felipe da Silva") - tudo zerado
+    return {
+      level: 1,
+      currentXP: 0,
+      nextLevelXP: 100
+    };
+  };
+
+  const gamificationData = getGamificationData();
+  const xpRemaining = gamificationData.nextLevelXP - gamificationData.currentXP;
+  const progressPercentage = (gamificationData.currentXP / gamificationData.nextLevelXP) * 100;
 
   // State for delete modal
   const [selectedHobby, setSelectedHobby] = useState(null);
@@ -73,9 +97,29 @@ const Profile = ({ setCurrentScreen, userHobbies, setUserHobbies }) => {
     };
   }, [selectedHobby, showAddModal, showEditModal]);
 
+  // Helper function to scroll to top and then execute callback
+  const scrollToTopThen = (callback) => {
+    // O elemento que tem overflow-y: auto é o .app-screen (profile-screen)
+    const profileScreen = document.querySelector('.profile-screen');
+
+    if (profileScreen) {
+      // Força o scroll para o topo
+      profileScreen.scrollTop = 0;
+      profileScreen.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Aguarda o scroll completar antes de abrir o modal
+    setTimeout(callback, 10);
+  };
+
   // Handle hobby click (for delete)
   const handleHobbyClick = (hobby) => {
-    setSelectedHobby(hobby);
+    scrollToTopThen(() => setSelectedHobby(hobby));
+  };
+
+  // Handle add hobby button click
+  const handleAddHobbyClick = () => {
+    scrollToTopThen(() => setShowAddModal(true));
   };
 
   // Handle delete hobby
@@ -175,7 +219,7 @@ const Profile = ({ setCurrentScreen, userHobbies, setUserHobbies }) => {
   };
 
   return (
-    <div className="app-screen profile-screen">
+    <div className={`app-screen profile-screen ${selectedHobby || showAddModal || showEditModal ? 'no-scroll' : ''}`}>
       {/* Header with back button */}
       <div className="profile-header">
         <button className="back-btn" onClick={() => setCurrentScreen('home')}>
@@ -199,6 +243,30 @@ const Profile = ({ setCurrentScreen, userHobbies, setUserHobbies }) => {
           <button className="edit-profile-btn" onClick={handleEditProfile}>
             ✏️ Editar Perfil
           </button>
+        </div>
+
+        {/* Gamification Section */}
+        <div className="gamification-section">
+          <div className="level-badge">
+            <span className="level-icon">⭐</span>
+            <span className="level-text">Nível {gamificationData.level}</span>
+          </div>
+
+          <div className="xp-info">
+            <p className="xp-current">
+              <strong>{gamificationData.currentXP} XP</strong> / {gamificationData.nextLevelXP} XP
+            </p>
+          </div>
+
+          <ProgressBar
+            currentValue={gamificationData.currentXP}
+            maxValue={gamificationData.nextLevelXP}
+            showPercentage={true}
+          />
+
+          <p className="xp-remaining">
+            Faltam <strong>{xpRemaining} XP</strong> para o próximo nível!
+          </p>
         </div>
 
         {/* Statistics grid */}
@@ -233,7 +301,7 @@ const Profile = ({ setCurrentScreen, userHobbies, setUserHobbies }) => {
             {/* Add Hobby Button */}
             <button
               className="hobby-chip add-hobby-btn"
-              onClick={() => setShowAddModal(true)}
+              onClick={handleAddHobbyClick}
             >
               <span className="hobby-emoji">➕</span>
             </button>

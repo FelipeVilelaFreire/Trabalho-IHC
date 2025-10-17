@@ -90,6 +90,39 @@ const Agenda = ({ activities, setCurrentScreen, onRemoveEvent }) => {
     return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
   }, []);
 
+  // Block scroll when modal is open
+  useEffect(() => {
+    const agendaScreen = document.querySelector('.agenda-screen');
+    if (agendaScreen) {
+      if (selectedEventId) {
+        agendaScreen.style.overflow = 'hidden';
+      } else {
+        agendaScreen.style.overflow = 'auto';
+      }
+    }
+
+    return () => {
+      if (agendaScreen) {
+        agendaScreen.style.overflow = 'auto';
+      }
+    };
+  }, [selectedEventId]);
+
+  // Helper function to scroll to top and then execute callback
+  const scrollToTopThen = (callback) => {
+    const agendaScreen = document.querySelector('.agenda-screen');
+    if (agendaScreen) {
+      agendaScreen.scrollTop = 0;
+      agendaScreen.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    setTimeout(callback, 10);
+  };
+
+  // Handle options click (three dots) with scroll to top
+  const handleOptionsClick = (eventId) => {
+    scrollToTopThen(() => setSelectedEventId(eventId));
+  };
+
   // Função para remover evento
   const handleRemoveEvent = (eventId) => {
     // Encontra o evento que está sendo removido
@@ -117,9 +150,10 @@ const Agenda = ({ activities, setCurrentScreen, onRemoveEvent }) => {
   const totalHours = isSimulationMode() ? 0 : 5;
 
   return (
-    <div className="app-screen agenda-screen">
+    <div className={`app-screen agenda-screen ${selectedEventId ? 'no-scroll' : ''}`}>
       {/* Header */}
       <div className="app-header">
+        <div style={{ width: '40px' }}></div> {/* Spacer */}
         <h2>Minha Agenda</h2>
         <button className="icon-btn">📅</button>
       </div>
@@ -188,7 +222,7 @@ const Agenda = ({ activities, setCurrentScreen, onRemoveEvent }) => {
                 {activeTab === 'upcoming' && (
                   <button
                     className="agenda-options"
-                    onClick={() => setSelectedEventId(activity.id)}
+                    onClick={() => handleOptionsClick(activity.id)}
                   >
                     ⋮
                   </button>

@@ -9,7 +9,8 @@
       "Bash(timeout 10 npm run dev:*)",
       "Bash(npm run dev:*)",
       "WebFetch(domain:sites.google.com)",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "Bash(git restore:*)"
     ],
     "deny": [],
     "ask": []

@@ -1,0 +1,81 @@
+/* Progress Bar Component */
+.progress-bar-component {
+  width: 100%;
+}
+
+.progress-bar-label {
+  font-size: 12px;
+  color: var(--xp-text-color);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.progress-bar-container {
+  background-color: var(--progress-bg);
+  border-radius: 12px;
+  height: 24px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.progress-bar-fill {
+  background: var(--progress-fill);
+  height: 100%;
+  border-radius: 12px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 8px;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shimmer animation effect */
+.progress-bar-fill::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.progress-percentage {
+  font-size: 11px;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 1;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .progress-bar-container {
+    height: 20px;
+  }
+
+  .progress-percentage {
+    font-size: 10px;
+  }
+}

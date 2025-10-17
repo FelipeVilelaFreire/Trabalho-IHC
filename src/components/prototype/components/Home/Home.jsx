@@ -1,5 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import BottomNav from "../shared/BottomNav";
+import SideMenu from "../shared/SideMenu";
 import "../shared/Shared.css";
 import "./Home.css";
 
@@ -35,6 +36,37 @@ const Home = ({
   // State for location tooltip
   const [showLocationTooltip, setShowLocationTooltip] = useState(false);
 
+  // State for side menu
+  const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+
+  // Block scroll when side menu is open
+  useEffect(() => {
+    const homeScreen = document.querySelector('.app-screen');
+    if (homeScreen) {
+      if (isSideMenuOpen) {
+        homeScreen.style.overflow = 'hidden';
+      } else {
+        homeScreen.style.overflow = 'auto';
+      }
+    }
+
+    return () => {
+      if (homeScreen) {
+        homeScreen.style.overflow = 'auto';
+      }
+    };
+  }, [isSideMenuOpen]);
+
+  // Handle menu click with scroll to top
+  const handleMenuClick = () => {
+    const homeScreen = document.querySelector('.app-screen');
+    if (homeScreen) {
+      homeScreen.scrollTop = 0;
+      homeScreen.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    setTimeout(() => setIsSideMenuOpen(true), 10);
+  };
+
   // Draggable scroll handlers
   const handleMouseDown = (e) => {
     setIsDown(true);
@@ -58,25 +90,37 @@ const Home = ({
 
   return (
     <div className="app-screen">
+      {/* Side Menu */}
+      <SideMenu
+        isOpen={isSideMenuOpen}
+        onClose={() => setIsSideMenuOpen(false)}
+        onNavigate={setCurrentScreen}
+      />
+
       {/* Header */}
       <div className="app-header">
+        {/* Botão de menu (hamburger) */}
+        <i
+          className="fa-solid fa-bars"
+          onClick={handleMenuClick}
+          style={{ cursor: 'pointer', fontSize: '24px', marginRight: '16px' }}
+          aria-label="Abrir menu"
+        ></i>
+
+        {/* Logo centralizado */}
         <h1 className="app-logo">
-          <span className="logo-icon">🎯</span>
           HobbyLocal
         </h1>
+
+        {/* Ícones à direita */}
         <div className="header-icons">
           <button
             className="icon-btn notification"
             onClick={() => setCurrentScreen("notifications")}
+            aria-label="Notificações"
           >
-            <span className="badge-dot"></span>
             🔔
-          </button>
-          <button
-            className="icon-btn profile"
-            onClick={() => setCurrentScreen("profile")}
-          >
-            👤
+            <span className="badge-dot"></span>
           </button>
         </div>
       </div>

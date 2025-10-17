@@ -97,3 +97,44 @@
 .settings-btn:hover {
   background: #f8f9fa;
 }
+
+/* Menu Button (Hamburger) */
+.menu-btn {
+  all: unset;
+  cursor: pointer;
+  padding: 4px;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.menu-btn:hover {
+  opacity: 0.7;
+}
+
+.menu-btn:active {
+  opacity: 0.5;
+}
+
+/* Estilos para ícones Font Awesome dentro do menu button */
+.menu-btn .fa-solid {
+  font-size: 24px;
+  color: #667eea;
+  line-height: 1;
+  pointer-events: none;
+  background: none !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+}
+
+.menu-btn .fa-solid::before,
+.menu-btn .fa-solid::after {
+  background: none !important;
+  border: none !important;
+}

@@ -1,0 +1,127 @@
+/* Overlay - fundo escuro atrás do menu */
+.side-menu-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 998;
+  border-radius: 0;
+}
+
+.side-menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Menu lateral */
+.side-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: 100%;
+  background-color: #ffffff;
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 999;
+  overflow-y: auto;
+}
+
+.side-menu.open {
+  transform: translateX(0);
+}
+
+/* Header do menu */
+.side-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid #e9ecef;
+  background-color: #ffffff;
+}
+
+.side-menu-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #212529;
+  margin: 0;
+}
+
+.side-menu-close-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #6c757d;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.side-menu-close-btn:hover {
+  background: #f8f9fa;
+  color: #212529;
+}
+
+/* Navegação do menu */
+.side-menu-nav {
+  padding: 12px 0;
+}
+
+/* Item do menu */
+.side-menu-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  color: #212529;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  text-align: left;
+}
+
+.side-menu-item:hover {
+  background-color: #f8f9fa;
+  color: #667eea;
+}
+
+.side-menu-item:active {
+  background-color: #e9ecef;
+}
+
+/* Ícone do item */
+.side-menu-icon {
+  font-size: 20px;
+  transition: transform 0.2s ease;
+}
+
+.side-menu-item:hover .side-menu-icon {
+  transform: scale(1.1);
+}
+
+/* Label do item */
+.side-menu-label {
+  font-weight: 500;
+}
+
+/* Acessibilidade */
+.side-menu-close-btn:focus-visible,
+.side-menu-item:focus-visible {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
