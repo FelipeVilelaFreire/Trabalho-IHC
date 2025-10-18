@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import BottomNav from '../shared/BottomNav';
 import '../shared/Shared.css';
 import './Comunidade.css';
-import { comunidadePosts, formatarTempoPostagem } from '../../../../data/comunidadeData';
-import { defaultUser, loadSimulationUser } from '../../../../data/userData';
+import { getAllPosts, formatarTempoPostagem, loadUserPosts, saveUserPosts } from '../../../../data/comunidadeData';
+import { defaultUser, loadSimulationUser, loadUserProfile } from '../../../../data/userData';
 
 /**
  * Comunidade Component
@@ -14,12 +14,21 @@ import { defaultUser, loadSimulationUser } from '../../../../data/userData';
  * @param {Function} props.setCurrentScreen - Function to navigate between screens
  */
 const Comunidade = ({ setCurrentScreen }) => {
-  // Carrega dados do usuário (simulação ou padrão)
+  // Carrega dados do usuário (com perfil atualizado)
   const simulationUser = loadSimulationUser();
-  const userData = simulationUser || defaultUser;
+  const savedProfile = loadUserProfile();
 
-  // State para posts (permite curtir)
-  const [posts, setPosts] = useState(comunidadePosts);
+  const userData = simulationUser
+    ? { ...defaultUser, ...simulationUser }
+    : { ...defaultUser, ...(savedProfile || {}) };
+
+  // State para posts (carrega todos: usuário + comunidade)
+  const [posts, setPosts] = useState([]);
+
+  // Carrega posts quando o componente monta
+  useEffect(() => {
+    setPosts(getAllPosts());
+  }, []);
 
   // State para controlar comentários expandidos
   const [comentariosExpandidos, setComentariosExpandidos] = useState({});
@@ -30,10 +39,31 @@ const Comunidade = ({ setCurrentScreen }) => {
   // State para location tooltip
   const [showLocationTooltip, setShowLocationTooltip] = useState(false);
 
+  // State para modal de confirmação de delete
+  const [postToDelete, setPostToDelete] = useState(null);
+
+  // Bloqueia scroll quando modal está aberto
+  useEffect(() => {
+    const comunidadeScreen = document.querySelector('.comunidade-screen');
+    if (comunidadeScreen) {
+      if (postToDelete) {
+        comunidadeScreen.style.overflow = 'hidden';
+      } else {
+        comunidadeScreen.style.overflow = 'auto';
+      }
+    }
+
+    return () => {
+      if (comunidadeScreen) {
+        comunidadeScreen.style.overflow = 'auto';
+      }
+    };
+  }, [postToDelete]);
+
   // Handler para curtir/descurtir post
   const handleCurtir = (postId) => {
-    setPosts(prevPosts =>
-      prevPosts.map(post =>
+    setPosts(prevPosts => {
+      const updatedPosts = prevPosts.map(post =>
         post.id === postId
           ? {
               ...post,
@@ -41,8 +71,16 @@ const Comunidade = ({ setCurrentScreen }) => {
               curtidas: post.curti ? post.curtidas - 1 : post.curtidas + 1
             }
           : post
-      )
-    );
+      );
+
+      // Salva alterações dos posts do usuário no localStorage
+      const userPosts = updatedPosts.filter(p => p.id.toString().startsWith('user-'));
+      if (userPosts.length > 0) {
+        saveUserPosts(userPosts);
+      }
+
+      return updatedPosts;
+    });
   };
 
   // Handler para expandir/recolher comentários
@@ -72,8 +110,8 @@ const Comunidade = ({ setCurrentScreen }) => {
     const nomeUsuario = 'Você';
 
     // Simula adicionar comentário
-    setPosts(prevPosts =>
-      prevPosts.map(post =>
+    setPosts(prevPosts => {
+      const updatedPosts = prevPosts.map(post =>
         post.id === postId
           ? {
               ...post,
@@ -89,8 +127,16 @@ const Comunidade = ({ setCurrentScreen }) => {
               ]
             }
           : post
-      )
-    );
+      );
+
+      // Salva alterações dos posts do usuário no localStorage
+      const userPosts = updatedPosts.filter(p => p.id.toString().startsWith('user-'));
+      if (userPosts.length > 0) {
+        saveUserPosts(userPosts);
+      }
+
+      return updatedPosts;
+    });
 
     // Limpa o input
     setNovoComentario(prev => ({
@@ -102,6 +148,49 @@ const Comunidade = ({ setCurrentScreen }) => {
     if (!comentariosExpandidos[postId]) {
       toggleComentarios(postId);
     }
+  };
+
+  // Função para rolar para o topo e executar callback
+  const scrollToTopThen = (callback) => {
+    const comunidadeScreen = document.querySelector('.comunidade-screen');
+
+    if (comunidadeScreen) {
+      // Força o scroll para o topo
+      comunidadeScreen.scrollTop = 0;
+      comunidadeScreen.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Aguarda o scroll completar antes de abrir o modal
+    setTimeout(callback, 10);
+  };
+
+  // Handler para abrir modal de confirmação
+  const handleOpenDeleteModal = (postId) => {
+    scrollToTopThen(() => setPostToDelete(postId));
+  };
+
+  // Handler para cancelar deleção
+  const handleCancelDelete = () => {
+    setPostToDelete(null);
+  };
+
+  // Handler para confirmar deleção do post
+  const handleConfirmDelete = () => {
+    if (!postToDelete) return;
+
+    setPosts(prevPosts => {
+      // Remove o post
+      const updatedPosts = prevPosts.filter(p => p.id !== postToDelete);
+
+      // Atualiza localStorage apenas com posts do usuário
+      const userPosts = updatedPosts.filter(p => p.id.toString().startsWith('user-'));
+      saveUserPosts(userPosts);
+
+      return updatedPosts;
+    });
+
+    // Fecha o modal
+    setPostToDelete(null);
   };
 
   return (
@@ -153,23 +242,44 @@ const Comunidade = ({ setCurrentScreen }) => {
 
         {/* Posts Feed */}
         <div className="posts-feed">
-          {posts.map((post) => (
-            <div key={post.id} className="post-card">
-              {/* Post Header - Usuário */}
-              <div className="post-header">
-                <img
-                  src={post.usuario.avatarUrl}
-                  alt={post.usuario.nome}
-                  className="post-user-avatar"
-                />
-                <div className="post-user-info">
-                  <div className="post-user-name-row">
-                    <strong className="post-user-name">{post.usuario.nome}</strong>
-                    <span className="post-user-nivel">Nível {post.usuario.nivel}</span>
+          {posts.map((post) => {
+            const isUserPost = post.id.toString().startsWith('user-');
+            return (
+              <div key={post.id} className={`post-card ${isUserPost ? 'user-post' : ''}`}>
+                {/* Post Header - Usuário */}
+                <div className="post-header">
+                  {post.usuario.avatarUrl ? (
+                    <img
+                      src={post.usuario.avatarUrl}
+                      alt={post.usuario.nome}
+                      className="post-user-avatar"
+                    />
+                  ) : (
+                    <div className="post-user-avatar post-avatar-placeholder">
+                      👤
+                    </div>
+                  )}
+                  <div className="post-user-info">
+                    <div className="post-user-name-row">
+                      <strong className="post-user-name">
+                        {post.usuario.nome}
+                        {isUserPost && <span className="user-badge">Você</span>}
+                      </strong>
+                      <span className="post-user-nivel">Nível {post.usuario.nivel}</span>
+                    </div>
+                    <span className="post-time">{formatarTempoPostagem(post.dataPostagem)}</span>
                   </div>
-                  <span className="post-time">{formatarTempoPostagem(post.dataPostagem)}</span>
+                  {/* Botão de deletar - apenas para posts do usuário */}
+                  {isUserPost && (
+                    <button
+                      className="delete-post-btn"
+                      onClick={() => handleOpenDeleteModal(post.id)}
+                      aria-label="Deletar post"
+                    >
+                      🗑️
+                    </button>
+                  )}
                 </div>
-              </div>
 
               {/* Post Descrição */}
               <p className="post-descricao">{post.descricao}</p>
@@ -259,8 +369,9 @@ const Comunidade = ({ setCurrentScreen }) => {
                   </div>
                 </div>
               )}
-            </div>
-          ))}
+              </div>
+            );
+          })}
         </div>
 
         {/* Info Banner */}
@@ -271,6 +382,25 @@ const Comunidade = ({ setCurrentScreen }) => {
           </p>
         </div>
       </div>
+
+      {/* Modal de Confirmação de Delete */}
+      {postToDelete && (
+        <div className="delete-modal-overlay" onClick={handleCancelDelete}>
+          <div className="delete-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="delete-modal-icon">🗑️</div>
+            <h3>Deletar Post</h3>
+            <p>Tem certeza que deseja deletar este post? Esta ação não pode ser desfeita.</p>
+            <div className="delete-modal-actions">
+              <button className="delete-cancel-btn" onClick={handleCancelDelete}>
+                Cancelar
+              </button>
+              <button className="delete-confirm-btn" onClick={handleConfirmDelete}>
+                Deletar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Bottom Navigation */}
       <BottomNav activeScreen="" onNavigate={setCurrentScreen} />

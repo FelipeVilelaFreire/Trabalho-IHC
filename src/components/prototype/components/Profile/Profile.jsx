@@ -4,7 +4,8 @@ import ProgressBar from '../../../ProgressBar';
 import '../shared/Shared.css';
 import './Profile.css';
 import { availableHobbies, getCategories } from '../../../../data/hobbiesData';
-import { defaultUser, loadSimulationUser } from '../../../../data/userData';
+import { defaultUser, loadSimulationUser, updateUserProfile, loadUserProfile } from '../../../../data/userData';
+import { loadUserPosts, saveUserPosts } from '../../../../data/comunidadeData';
 
 /**
  * Profile Component
@@ -20,19 +21,30 @@ const Profile = ({ setCurrentScreen, userHobbies, setUserHobbies }) => {
   const simulationUser = loadSimulationUser();
   const isSimulation = simulationUser !== null;
 
-  // Usa dados da simulação se existirem, caso contrário usa dados padrão
-  const userData = simulationUser
-    ? {
+  // Carrega perfil salvo
+  const savedProfile = loadUserProfile();
+
+  // State para dados do usuário (permite atualização em tempo real)
+  const [userData, setUserData] = useState(() => {
+    if (simulationUser) {
+      return {
         ...defaultUser,
-        name: simulationUser.name,
-        email: simulationUser.email,
-        avatar: null,  // Sem avatar no modo simulação
+        name: simulationUser.name || defaultUser.name,
+        email: simulationUser.email || defaultUser.email,
+        avatar: simulationUser.avatar || null,
         stats: {
-          activities: 0,  // Usuário simulado começa com 0 atividades
-          hours: 0        // e 0 horas
+          activities: 0,
+          hours: 0
         }
-      }
-    : defaultUser;
+      };
+    } else {
+      // Usuário padrão com possíveis alterações salvas
+      return {
+        ...defaultUser,
+        ...(savedProfile || {})
+      };
+    }
+  });
 
   // Gamification data - Different values based on user type
   const getGamificationData = () => {
@@ -176,13 +188,37 @@ const Profile = ({ setCurrentScreen, userHobbies, setUserHobbies }) => {
 
   // Handle save profile
   const handleSaveProfile = () => {
-    // Aqui você salvaria no localStorage ou enviaria para um backend
-    // Por enquanto, apenas fechamos o modal
-    // Em uma implementação real, você atualizaria o userData
-    console.log('Salvando perfil:', editFormData);
+    // Salva os dados no localStorage
+    updateUserProfile({
+      name: editFormData.name,
+      email: editFormData.email,
+      avatar: editFormData.avatar
+    });
+
+    // Atualiza os posts do usuário com o novo nome e avatar
+    const userPosts = loadUserPosts();
+    if (userPosts.length > 0) {
+      const updatedPosts = userPosts.map(post => ({
+        ...post,
+        usuario: {
+          ...post.usuario,
+          nome: editFormData.name,
+          avatarUrl: editFormData.avatar
+        }
+      }));
+      saveUserPosts(updatedPosts);
+    }
+
+    // Atualiza o estado local para refletir as mudanças imediatamente
+    setUserData(prev => ({
+      ...prev,
+      name: editFormData.name,
+      email: editFormData.email,
+      avatar: editFormData.avatar
+    }));
+
+    // Fecha o modal
     setShowEditModal(false);
-    // Note: Como userData é derivado de defaultUser ou simulationUser,
-    // você precisaria implementar a lógica de persistência real aqui
   };
 
   // Handle input change

@@ -377,10 +377,18 @@ const Prototype = () => {
         return <Cupons setCurrentScreen={setCurrentScreen} />;
 
       case "comunidade":
-        return <Comunidade setCurrentScreen={setCurrentScreen} />;
+        return (
+          <Comunidade
+            setCurrentScreen={setCurrentScreen}
+          />
+        );
 
       case "upload":
-        return <Upload setCurrentScreen={setCurrentScreen} />;
+        return (
+          <Upload
+            setCurrentScreen={setCurrentScreen}
+          />
+        );
 
       case "signup":
         return (

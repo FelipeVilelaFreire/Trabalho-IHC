@@ -102,6 +102,6 @@ export const TEAM_MEMBERS = [
   },
   {
     name: 'João Moraes',
-    avatar: '👤'
+    avatar: '/team/Joao.jpg'
   }
 ];

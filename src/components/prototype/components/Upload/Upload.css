@@ -66,6 +66,75 @@
   font-weight: 600;
 }
 
+/* Upload Image Container */
+.upload-image-container {
+  display: block;
+  background: white;
+  border: 2px dashed #cbd5e0;
+  border-radius: 16px;
+  padding: 32px 20px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.upload-image-container:hover {
+  border-color: #667eea;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.03), rgba(118, 75, 162, 0.02));
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+.upload-image-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.upload-image-icon {
+  font-size: 48px;
+  opacity: 0.6;
+}
+
+.upload-image-text {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #6c757d;
+}
+
+.upload-image-container:hover .upload-image-text {
+  color: #667eea;
+}
+
+.upload-image-container.dragging {
+  border-color: #667eea;
+  border-style: solid;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.08), rgba(118, 75, 162, 0.05));
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.25);
+  transform: scale(1.02);
+}
+
+.upload-image-container.dragging .upload-image-text {
+  color: #667eea;
+  font-weight: 700;
+}
+
+.upload-image-container.dragging .upload-image-icon {
+  opacity: 1;
+  animation: bounce 0.5s ease infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
 /* Descrição */
 .upload-descricao-container {
   background: white;
@@ -82,10 +151,12 @@
   outline: none;
   resize: none;
   font-size: 15px;
-  line-height: 1.6;
+  line-height: 1.5;
   color: #212529;
   font-family: inherit;
-  min-height: 120px;
+  min-height: 32px;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 .upload-descricao-input::placeholder {
@@ -110,17 +181,52 @@
   border: 2px solid #e0f2fe;
 }
 
-.upload-templates h4 {
-  margin: 0 0 12px 0;
+.templates-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
   font-size: 14px;
   font-weight: 700;
   color: #0369a1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.templates-header:hover {
+  opacity: 0.8;
+}
+
+.templates-header span:first-child {
+  text-align: left;
+}
+
+.templates-arrow {
+  font-size: 12px;
+  transition: transform 0.3s ease;
 }
 
 .templates-list {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  margin-top: 12px;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .template-btn {
@@ -177,13 +283,14 @@
   border-radius: 16px;
   margin-bottom: 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 2px solid #cbd5e0;
 }
 
 .upload-image-preview {
   width: 100%;
   border-radius: 12px;
   display: block;
-  max-height: 400px;
+  max-height: 300px;
   object-fit: cover;
 }
 
@@ -211,46 +318,38 @@
   transform: scale(1.1);
 }
 
-/* Upload Actions */
-.upload-actions {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-.upload-image-btn,
-.upload-emoji-btn,
-.upload-location-btn {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  padding: 16px 12px;
-  background: white;
-  border: 2px solid #e9ecef;
+/* Location Bar (horizontal) */
+.upload-location-bar {
+  background: #f8f9fa;
+  padding: 12px 16px;
   border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-bottom: 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  cursor: not-allowed;
+  border: 2px solid #dee2e6;
+  transition: all 0.3s ease;
+  opacity: 0.7;
 }
 
-.upload-image-btn:hover,
-.upload-emoji-btn:hover,
-.upload-location-btn:hover {
-  border-color: #667eea;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+.upload-location-bar:hover {
+  border-color: #adb5bd;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.upload-action-icon {
-  font-size: 28px;
+.upload-location-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.upload-action-label {
-  font-size: 12px;
+.upload-location-icon {
+  font-size: 18px;
+}
+
+.upload-location-text {
+  font-size: 14px;
   font-weight: 700;
-  color: #495057;
+  color: #6c757d;
 }
 
 /* Publicar Button */
@@ -393,6 +492,51 @@
   margin-bottom: 0;
 }
 
+/* Location Tooltip */
+.location-tooltip-upload {
+  position: fixed;
+  bottom: auto;
+  top: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 80px;
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  z-index: 9999;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  animation: tooltipFadeIn 0.2s ease;
+  pointer-events: none;
+}
+
+.location-tooltip-upload::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid rgba(0, 0, 0, 0.85);
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
 /* Responsive Design */
 @media (max-width: 480px) {
   .upload-content {
@@ -408,25 +552,43 @@
     font-size: 15px;
   }
 
+  .upload-image-container {
+    padding: 24px 16px;
+  }
+
+  .upload-image-icon {
+    font-size: 40px;
+  }
+
+  .upload-image-text {
+    font-size: 13px;
+  }
+
   .upload-descricao-input {
     font-size: 14px;
-    min-height: 100px;
+    min-height: 30px;
   }
 
-  .upload-actions {
-    gap: 8px;
+  .upload-location-bar {
+    padding: 10px 14px;
   }
 
-  .upload-action-icon {
-    font-size: 24px;
+  .upload-location-icon {
+    font-size: 16px;
   }
 
-  .upload-action-label {
-    font-size: 11px;
+  .upload-location-text {
+    font-size: 13px;
   }
 
   .publicar-btn {
     font-size: 15px;
     padding: 14px;
+  }
+
+  /* Tooltip responsivo */
+  .location-tooltip-upload {
+    font-size: 10px;
+    padding: 6px 10px;
   }
 }

@@ -18,26 +18,48 @@ const Notifications = ({ setCurrentScreen }) => {
   const defaultNotifications = [
     {
       id: 1,
+      type: 'coupon',
+      icon: '🎁',
+      title: 'Novo cupom disponível!',
+      message: 'Você ganhou 35% de desconto! Cupom "EXPLORER35" por experimentar 5 categorias diferentes.',
+      time: '10 min atrás',
+      isRead: false,
+      color: '#10B981',
+      action: 'cupons'
+    },
+    {
+      id: 2,
       type: 'activity',
       icon: '🎨',
       title: 'Nova atividade disponível',
       message: 'Aula de Pintura em Aquarela está com vagas abertas!',
-      time: '5 min atrás',
+      time: '30 min atrás',
       isRead: false,
       color: '#EC4899'
     },
     {
-      id: 2,
+      id: 3,
+      type: 'coupon-expiring',
+      icon: '⚠️',
+      title: 'Cupom expirando em breve',
+      message: 'Seu cupom "FELIPEPRO25" (25% off) expira em 30/11. Use antes que expire!',
+      time: '1 hora atrás',
+      isRead: false,
+      color: '#F59E0B',
+      action: 'cupons'
+    },
+    {
+      id: 4,
       type: 'reminder',
       icon: '⏰',
       title: 'Lembrete de atividade',
       message: 'Sua aula de Futebol no Parque começa em 2 horas',
-      time: '1 hora atrás',
+      time: '2 horas atrás',
       isRead: false,
       color: '#F59E0B'
     },
     {
-      id: 3,
+      id: 5,
       type: 'success',
       icon: '✅',
       title: 'Confirmação de participação',
@@ -47,7 +69,18 @@ const Notifications = ({ setCurrentScreen }) => {
       color: '#10B981'
     },
     {
-      id: 4,
+      id: 6,
+      type: 'coupon-used',
+      icon: '💎',
+      title: 'Cupom utilizado com sucesso',
+      message: 'Cupom "ATIVIDADE10" (20% off) aplicado na sua última atividade. Economia de R$ 9,00!',
+      time: '4 horas atrás',
+      isRead: true,
+      color: '#8B5CF6',
+      action: 'cupons'
+    },
+    {
+      id: 7,
       type: 'social',
       icon: '👥',
       title: 'Novos participantes',
@@ -57,7 +90,18 @@ const Notifications = ({ setCurrentScreen }) => {
       color: '#6366F1'
     },
     {
-      id: 5,
+      id: 8,
+      type: 'coupon-earned',
+      icon: '🎊',
+      title: 'Cupom conquistado!',
+      message: 'Você ganhou 20% de desconto! Cupom "FIDELITY20" por completar 3 meses no HobbyLocal.',
+      time: '1 dia atrás',
+      isRead: true,
+      color: '#EC4899',
+      action: 'cupons'
+    },
+    {
+      id: 9,
       type: 'update',
       icon: '📝',
       title: 'Atualização de atividade',
@@ -67,7 +111,7 @@ const Notifications = ({ setCurrentScreen }) => {
       color: '#8B5CF6'
     },
     {
-      id: 6,
+      id: 10,
       type: 'achievement',
       icon: '🏆',
       title: 'Nova conquista desbloqueada',
@@ -75,11 +119,88 @@ const Notifications = ({ setCurrentScreen }) => {
       time: '2 dias atrás',
       isRead: true,
       color: '#F59E0B'
+    },
+    {
+      id: 11,
+      type: 'coupon-available',
+      icon: '🎯',
+      title: 'Cupom de boas-vindas ativo',
+      message: 'Use o cupom "FELIPEINIT15" (15% off) na sua próxima atividade!',
+      time: '3 dias atrás',
+      isRead: true,
+      color: '#10B981',
+      action: 'cupons'
     }
   ];
 
-  // No modo simulação, notificações começam vazias
-  const notifications = isSimulationMode() ? [] : defaultNotifications;
+  // Notificações do modo demo (simulação)
+  const demoNotifications = [
+    {
+      id: 1,
+      type: 'welcome',
+      icon: '🎉',
+      title: 'Bem-vindo ao HobbyLocal!',
+      message: 'Explore atividades incríveis perto de você e conecte-se com pessoas que compartilham seus interesses!',
+      time: '5 min atrás',
+      isRead: false,
+      color: '#667eea'
+    },
+    {
+      id: 2,
+      type: 'coupon',
+      icon: '🎁',
+      title: 'Cupom de boas-vindas liberado!',
+      message: 'Você ganhou 10% de desconto! Use o cupom "BEMVINDO10" na sua primeira atividade.',
+      time: '5 min atrás',
+      isRead: false,
+      color: '#10B981',
+      action: 'cupons'
+    },
+    {
+      id: 3,
+      type: 'coupon-first',
+      icon: '🎯',
+      title: 'Cupom especial disponível!',
+      message: 'Cupom "PRIMEIRA15" (15% off) pronto para usar! Válido para sua primeira atividade.',
+      time: '10 min atrás',
+      isRead: false,
+      color: '#F59E0B',
+      action: 'cupons'
+    },
+    {
+      id: 4,
+      type: 'tip',
+      icon: '💡',
+      title: 'Dica: Complete seu perfil',
+      message: 'Adicione seus hobbies favoritos no perfil para receber recomendações personalizadas!',
+      time: '15 min atrás',
+      isRead: false,
+      color: '#8B5CF6'
+    },
+    {
+      id: 5,
+      type: 'discovery',
+      icon: '🔍',
+      title: 'Descubra novas atividades',
+      message: 'Explore mais de 12 atividades diferentes em Niterói. Da arte ao esporte, tem para todos!',
+      time: '30 min atrás',
+      isRead: true,
+      color: '#EC4899'
+    },
+    {
+      id: 6,
+      type: 'community',
+      icon: '👥',
+      title: 'Junte-se à comunidade',
+      message: 'Compartilhe suas conquistas e experiências no feed da comunidade HobbyLocal!',
+      time: '1 hora atrás',
+      isRead: true,
+      color: '#06B6D4'
+    }
+  ];
+
+  // No modo simulação usa notificações demo, caso contrário usa notificações padrão
+  const notifications = isSimulationMode() ? demoNotifications : defaultNotifications;
 
   // Filter notifications based on active tab
   const filteredNotifications = activeTab === 'all'
@@ -87,6 +208,13 @@ const Notifications = ({ setCurrentScreen }) => {
     : notifications.filter(n => !n.isRead);
 
   const unreadCount = notifications.filter(n => !n.isRead).length;
+
+  // Handler para clicar em uma notificação
+  const handleNotificationClick = (notification) => {
+    if (notification.action) {
+      setCurrentScreen(notification.action);
+    }
+  };
 
   return (
     <div className="app-screen notifications-screen">
@@ -132,7 +260,9 @@ const Notifications = ({ setCurrentScreen }) => {
             {filteredNotifications.map((notification) => (
               <div
                 key={notification.id}
-                className={`notification-item ${notification.isRead ? 'read' : 'unread'}`}
+                className={`notification-item ${notification.isRead ? 'read' : 'unread'} ${notification.action ? 'clickable' : ''}`}
+                onClick={() => handleNotificationClick(notification)}
+                style={{ cursor: notification.action ? 'pointer' : 'default' }}
               >
                 <div
                   className="notification-icon"
@@ -148,6 +278,9 @@ const Notifications = ({ setCurrentScreen }) => {
                   <p className="notification-message">{notification.message}</p>
                   <span className="notification-time">{notification.time}</span>
                 </div>
+                {notification.action && (
+                  <div className="notification-action-arrow">→</div>
+                )}
               </div>
             ))}
           </div>

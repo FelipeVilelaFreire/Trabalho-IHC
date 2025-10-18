@@ -313,3 +313,63 @@ export const getPostsOrdenados = () => {
 export const getPostsPorUsuario = (nomeUsuario) => {
   return comunidadePosts.filter(post => post.usuario.nome === nomeUsuario);
 };
+
+/**
+ * Carrega posts criados pelo usuário do localStorage
+ * @returns {Array} Array de posts criados pelo usuário
+ */
+export const loadUserPosts = () => {
+  try {
+    const saved = localStorage.getItem('hobbylocal-user-posts');
+    return saved ? JSON.parse(saved) : [];
+  } catch (error) {
+    console.error('Erro ao carregar posts do usuário:', error);
+    return [];
+  }
+};
+
+/**
+ * Salva posts criados pelo usuário no localStorage
+ * @param {Array} posts - Array de posts
+ */
+export const saveUserPosts = (posts) => {
+  try {
+    localStorage.setItem('hobbylocal-user-posts', JSON.stringify(posts));
+  } catch (error) {
+    console.error('Erro ao salvar posts do usuário:', error);
+  }
+};
+
+/**
+ * Adiciona um novo post criado pelo usuário
+ * @param {Object} postData - Dados do post (descricao, imagemUrl, usuario)
+ * @returns {Object} Post criado
+ */
+export const addUserPost = (postData) => {
+  const currentPosts = loadUserPosts();
+
+  const newPost = {
+    id: `user-${Date.now()}`,
+    usuario: postData.usuario,
+    descricao: postData.descricao,
+    imagemUrl: postData.imagemUrl || null,
+    dataPostagem: new Date().toISOString(),
+    curtidas: 0,
+    curti: false,
+    comentarios: []
+  };
+
+  const updatedPosts = [newPost, ...currentPosts];
+  saveUserPosts(updatedPosts);
+
+  return newPost;
+};
+
+/**
+ * Obtém todos os posts (usuário + comunidade)
+ * @returns {Array} Array combinado de posts
+ */
+export const getAllPosts = () => {
+  const userPosts = loadUserPosts();
+  return [...userPosts, ...comunidadePosts];
+};

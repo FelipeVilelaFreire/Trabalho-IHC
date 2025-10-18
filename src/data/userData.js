@@ -229,3 +229,30 @@ export const saveScheduledEventsForMode = (events) => {
     : 'hobbylocal-scheduled-events';
   saveUserData(key, events);
 };
+
+/**
+ * Atualiza dados do perfil do usuário
+ * @param {Object} profileData - Dados do perfil (name, email, avatar)
+ */
+export const updateUserProfile = (profileData) => {
+  if (isSimulationMode()) {
+    // Atualiza dados do usuário simulado
+    const currentData = loadSimulationUser() || {};
+    const updatedData = {
+      ...currentData,
+      ...profileData
+    };
+    saveSimulationUser(updatedData);
+  } else {
+    // Atualiza dados do usuário padrão
+    saveUserData('hobbylocal-user-profile', profileData);
+  }
+};
+
+/**
+ * Carrega dados do perfil do usuário padrão
+ * @returns {Object|null} Dados do perfil ou null
+ */
+export const loadUserProfile = () => {
+  return loadUserData('hobbylocal-user-profile', null);
+};
