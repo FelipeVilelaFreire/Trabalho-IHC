@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import BottomNav from '../shared/BottomNav';
 import '../shared/Shared.css';
 import './Upload.css';
-import { defaultUser, loadSimulationUser, loadUserProfile } from '../../../../data/userData';
+import { defaultUser, loadSimulationUser, loadUserProfile, loadUserXP } from '../../../../data/userData';
 import { addUserPost } from '../../../../data/comunidadeData';
 
 /**
@@ -11,14 +11,20 @@ import { addUserPost } from '../../../../data/comunidadeData';
  *
  * @param {Object} props - Component props
  * @param {Function} props.setCurrentScreen - Function to navigate between screens
+ * @param {Function} props.onPostCreated - Callback after post is created
  */
-const Upload = ({ setCurrentScreen }) => {
+const Upload = ({ setCurrentScreen, onPostCreated }) => {
   // Carrega dados do usuário (com perfil atualizado)
   const simulationUser = loadSimulationUser();
   const savedProfile = loadUserProfile();
 
   const userData = simulationUser
-    ? { ...defaultUser, ...simulationUser }
+    ? {
+        ...defaultUser,
+        ...simulationUser,
+        // No modo simulação, se não tiver avatar explícito, força null (placeholder)
+        avatar: simulationUser.avatar || null
+      }
     : { ...defaultUser, ...(savedProfile || {}) };
 
   // State para o formulário
@@ -139,8 +145,9 @@ const Upload = ({ setCurrentScreen }) => {
       return;
     }
 
-    // Calcula o nível do usuário (simulado baseado em XP ou valor padrão)
-    const userLevel = userData.level || 3;
+    // Obtém o nível real do usuário do sistema de XP
+    const userXP = loadUserXP();
+    const userLevel = userXP.level;
 
     // Cria o post
     const postData = {
@@ -155,6 +162,13 @@ const Upload = ({ setCurrentScreen }) => {
 
     // Salva o post no localStorage
     addUserPost(postData);
+
+    // Verifica missões após criar post
+    if (onPostCreated) {
+      setTimeout(() => {
+        onPostCreated();
+      }, 300);
+    }
 
     // Mostra mensagem de sucesso
     setShowSuccess(true);

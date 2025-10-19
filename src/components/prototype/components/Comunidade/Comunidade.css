@@ -300,12 +300,14 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
+  padding-right: 40px; /* Espaço para o botão de delete */
 }
 
 .post-user-name-row {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-wrap: wrap; /* Permite quebra de linha se necessário */
 }
 
 .post-user-name {

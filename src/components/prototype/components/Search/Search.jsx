@@ -1,5 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import BottomNav from '../shared/BottomNav';
+import SideMenu from '../shared/SideMenu';
 import SearchMap from './components/SearchMap';
 import FilterModal from './components/FilterModal';
 import '../shared/Shared.css';
@@ -53,6 +54,37 @@ const Search = ({
 
   // Estado para expandir o mapa
   const [isMapExpanded, setIsMapExpanded] = useState(false);
+
+  // State for side menu
+  const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+
+  // Block scroll when side menu is open
+  useEffect(() => {
+    const searchScreen = document.querySelector('.app-screen');
+    if (searchScreen) {
+      if (isSideMenuOpen) {
+        searchScreen.style.overflow = 'hidden';
+      } else {
+        searchScreen.style.overflow = 'auto';
+      }
+    }
+
+    return () => {
+      if (searchScreen) {
+        searchScreen.style.overflow = 'auto';
+      }
+    };
+  }, [isSideMenuOpen]);
+
+  // Handle menu click with scroll to top
+  const handleMenuClick = () => {
+    const searchScreen = document.querySelector('.app-screen');
+    if (searchScreen) {
+      searchScreen.scrollTop = 0;
+      searchScreen.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    setTimeout(() => setIsSideMenuOpen(true), 10);
+  };
 
   // Draggable scroll handlers
   const handleMouseDown = (e) => {
@@ -172,9 +204,21 @@ const Search = ({
 
   return (
     <div className={`app-screen search-screen ${isMapExpanded || showFilterContainer ? 'no-scroll' : ''}`}>
+      {/* Side Menu */}
+      <SideMenu
+        isOpen={isSideMenuOpen}
+        onClose={() => setIsSideMenuOpen(false)}
+        onNavigate={setCurrentScreen}
+      />
+
       {/* Header */}
       <div className="app-header">
-        <div style={{ width: '40px' }}></div> {/* Spacer */}
+        <i
+          className="fa-solid fa-bars"
+          onClick={handleMenuClick}
+          style={{ cursor: 'pointer', fontSize: '24px' }}
+          aria-label="Abrir menu"
+        ></i>
         <h2>Buscar</h2>
         <div style={{ width: '40px' }}></div> {/* Spacer */}
       </div>

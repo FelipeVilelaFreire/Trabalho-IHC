@@ -10,7 +10,8 @@
       "Bash(npm run dev:*)",
       "WebFetch(domain:sites.google.com)",
       "Bash(mv:*)",
-      "Bash(git restore:*)"
+      "Bash(git restore:*)",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []

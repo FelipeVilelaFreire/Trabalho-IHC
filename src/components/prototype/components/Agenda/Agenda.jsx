@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import BottomNav from '../shared/BottomNav';
+import SideMenu from '../shared/SideMenu';
 import '../shared/Shared.css';
 import './Agenda.css';
 import { loadScheduledEventsForMode, removeScheduledEvent, isSimulationMode } from '../../../../data/userData';
@@ -17,6 +18,9 @@ const Agenda = ({ activities, setCurrentScreen, onRemoveEvent }) => {
   const [scheduledActivities, setScheduledActivities] = useState([]);
   const [selectedEventId, setSelectedEventId] = useState(null);
   const [activeTab, setActiveTab] = useState('upcoming');
+
+  // State for side menu
+  const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
   // Função para formatar data
   const formatDate = (date) => {
@@ -90,6 +94,34 @@ const Agenda = ({ activities, setCurrentScreen, onRemoveEvent }) => {
     return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
   }, []);
 
+  // Block scroll when side menu is open
+  useEffect(() => {
+    const agendaScreen = document.querySelector('.agenda-screen');
+    if (agendaScreen) {
+      if (isSideMenuOpen) {
+        agendaScreen.style.overflow = 'hidden';
+      } else if (!selectedEventId) {
+        agendaScreen.style.overflow = 'auto';
+      }
+    }
+
+    return () => {
+      if (agendaScreen) {
+        agendaScreen.style.overflow = 'auto';
+      }
+    };
+  }, [isSideMenuOpen, selectedEventId]);
+
+  // Handle menu click with scroll to top
+  const handleMenuClick = () => {
+    const agendaScreen = document.querySelector('.agenda-screen');
+    if (agendaScreen) {
+      agendaScreen.scrollTop = 0;
+      agendaScreen.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    setTimeout(() => setIsSideMenuOpen(true), 10);
+  };
+
   // Block scroll when modal is open
   useEffect(() => {
     const agendaScreen = document.querySelector('.agenda-screen');
@@ -151,9 +183,21 @@ const Agenda = ({ activities, setCurrentScreen, onRemoveEvent }) => {
 
   return (
     <div className={`app-screen agenda-screen ${selectedEventId ? 'no-scroll' : ''}`}>
+      {/* Side Menu */}
+      <SideMenu
+        isOpen={isSideMenuOpen}
+        onClose={() => setIsSideMenuOpen(false)}
+        onNavigate={setCurrentScreen}
+      />
+
       {/* Header */}
       <div className="app-header">
-        <div style={{ width: '40px' }}></div> {/* Spacer */}
+        <i
+          className="fa-solid fa-bars"
+          onClick={handleMenuClick}
+          style={{ cursor: 'pointer', fontSize: '24px' }}
+          aria-label="Abrir menu"
+        ></i>
         <h2>Minha Agenda</h2>
         <button className="icon-btn">📅</button>
       </div>

@@ -10,12 +10,14 @@ import './ProgressBar.css';
  * @param {number} props.maxValue - Maximum progress value
  * @param {string} props.label - Optional label for the progress bar
  * @param {boolean} props.showPercentage - Whether to show percentage text
+ * @param {boolean} props.whitePercentage - Makes percentage text white (for Profile)
  */
 const ProgressBar = ({
   currentValue,
   maxValue,
   label,
-  showPercentage = false
+  showPercentage = false,
+  whitePercentage = false
 }) => {
   // Calculate progress percentage
   const progress = Math.min((currentValue / maxValue) * 100, 100);
@@ -33,7 +35,9 @@ const ProgressBar = ({
           aria-valuemax={maxValue}
         >
           {showPercentage && (
-            <span className="progress-percentage">{Math.round(progress)}%</span>
+            <span className={`progress-percentage ${whitePercentage ? 'white-text' : ''}`}>
+              {Math.round(progress)}%
+            </span>
           )}
         </div>
       </div>

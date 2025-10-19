@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import BottomNav from '../shared/BottomNav';
+import SideMenu from '../shared/SideMenu';
 import ProgressBar from '../../../ProgressBar';
 import '../shared/Shared.css';
 import './Profile.css';
 import { availableHobbies, getCategories } from '../../../../data/hobbiesData';
-import { defaultUser, loadSimulationUser, updateUserProfile, loadUserProfile } from '../../../../data/userData';
+import { defaultUser, loadSimulationUser, updateUserProfile, loadUserProfile, loadUserXP, loadUserStreak, resetSimulationData } from '../../../../data/userData';
 import { loadUserPosts, saveUserPosts } from '../../../../data/comunidadeData';
 
 /**
@@ -46,26 +47,33 @@ const Profile = ({ setCurrentScreen, userHobbies, setUserHobbies }) => {
     }
   });
 
-  // Gamification data - Different values based on user type
-  const getGamificationData = () => {
-    // defaultUser (Felipe Silva) - valores arbitrários maiores
-    if (userData.name === "Felipe Silva") {
-      return {
-        level: userData.level || 3,
-        currentXP: userData.currentXP || 450,
-        nextLevelXP: userData.nextLevelXP || 600
-      };
-    }
+  // Carrega XP dinamicamente do localStorage
+  const [gamificationData, setGamificationData] = useState(() => loadUserXP());
 
-    // Outros usuários (incluindo modo simulação "Felipe da Silva") - tudo zerado
-    return {
-      level: 1,
-      currentXP: 0,
-      nextLevelXP: 100
+  // Carrega streak dinamicamente do localStorage
+  const [userStreak, setUserStreak] = useState(() => loadUserStreak());
+
+  // Atualiza XP e Streak quando a tela é focada (para refletir mudanças de outras telas)
+  useEffect(() => {
+    const updateData = () => {
+      setGamificationData(loadUserXP());
+      setUserStreak(loadUserStreak());
     };
-  };
 
-  const gamificationData = getGamificationData();
+    // Atualiza imediatamente
+    updateData();
+
+    // Adiciona listener para atualizar quando o localStorage mudar
+    window.addEventListener('storage', updateData);
+
+    // Atualiza periodicamente para garantir sincronização
+    const interval = setInterval(updateData, 1000);
+
+    return () => {
+      window.removeEventListener('storage', updateData);
+      clearInterval(interval);
+    };
+  }, []);
   const xpRemaining = gamificationData.nextLevelXP - gamificationData.currentXP;
   const progressPercentage = (gamificationData.currentXP / gamificationData.nextLevelXP) * 100;
 
@@ -84,6 +92,12 @@ const Profile = ({ setCurrentScreen, userHobbies, setUserHobbies }) => {
     avatar: userData.avatar
   });
 
+  // State for logout modal
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+
+  // State for side menu
+  const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+
   // Ref for drag scroll
   const scrollRef = React.useRef(null);
   const [isDragging, setIsDragging] = React.useState(false);
@@ -94,7 +108,7 @@ const Profile = ({ setCurrentScreen, userHobbies, setUserHobbies }) => {
   useEffect(() => {
     const phoneContent = document.querySelector('.phone-content');
     if (phoneContent) {
-      if (selectedHobby || showAddModal || showEditModal) {
+      if (selectedHobby || showAddModal || showEditModal || showLogoutModal || isSideMenuOpen) {
         phoneContent.style.overflow = 'hidden';
       } else {
         phoneContent.style.overflow = 'auto';
@@ -107,7 +121,7 @@ const Profile = ({ setCurrentScreen, userHobbies, setUserHobbies }) => {
         phoneContent.style.overflow = 'auto';
       }
     };
-  }, [selectedHobby, showAddModal, showEditModal]);
+  }, [selectedHobby, showAddModal, showEditModal, showLogoutModal, isSideMenuOpen]);
 
   // Helper function to scroll to top and then execute callback
   const scrollToTopThen = (callback) => {
@@ -254,13 +268,55 @@ const Profile = ({ setCurrentScreen, userHobbies, setUserHobbies }) => {
     scrollRef.current.scrollLeft = scrollLeft - walk;
   };
 
+  // Handle menu click with scroll to top
+  const handleMenuClick = () => {
+    const profileScreen = document.querySelector('.profile-screen');
+    if (profileScreen) {
+      profileScreen.scrollTop = 0;
+      profileScreen.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    setTimeout(() => setIsSideMenuOpen(true), 10);
+  };
+
+  // Handle logout button click
+  const handleLogoutClick = () => {
+    scrollToTopThen(() => setShowLogoutModal(true));
+  };
+
+  // Handle cancel logout
+  const handleCancelLogout = () => {
+    setShowLogoutModal(false);
+  };
+
+  // Handle confirm logout
+  const handleConfirmLogout = () => {
+    // Reset all simulation data
+    resetSimulationData();
+
+    // Close modal
+    setShowLogoutModal(false);
+
+    // Navigate to signup screen
+    setCurrentScreen('signup');
+  };
+
   return (
     <div className={`app-screen profile-screen ${selectedHobby || showAddModal || showEditModal ? 'no-scroll' : ''}`}>
-      {/* Header with back button */}
+      {/* Side Menu */}
+      <SideMenu
+        isOpen={isSideMenuOpen}
+        onClose={() => setIsSideMenuOpen(false)}
+        onNavigate={setCurrentScreen}
+      />
+
+      {/* Header */}
       <div className="profile-header">
-        <button className="back-btn" onClick={() => setCurrentScreen('home')}>
-          ←
-        </button>
+        <i
+          className="fa-solid fa-bars"
+          onClick={handleMenuClick}
+          style={{ cursor: 'pointer', fontSize: '24px', position: 'absolute', left: '20px' }}
+          aria-label="Abrir menu"
+        ></i>
         <h2>Perfil</h2>
       </div>
 
@@ -276,9 +332,14 @@ const Profile = ({ setCurrentScreen, userHobbies, setUserHobbies }) => {
           </div>
           <h3>{userData.name}</h3>
           <p className="user-email">{userData.email}</p>
-          <button className="edit-profile-btn" onClick={handleEditProfile}>
-            ✏️ Editar Perfil
-          </button>
+          <div className="profile-actions-buttons">
+            <button className="edit-profile-btn" onClick={handleEditProfile}>
+              ✏️ Editar Perfil
+            </button>
+            <button className="logout-btn" onClick={handleLogoutClick}>
+              🚪 Sair
+            </button>
+          </div>
         </div>
 
         {/* Gamification Section */}
@@ -298,12 +359,14 @@ const Profile = ({ setCurrentScreen, userHobbies, setUserHobbies }) => {
             currentValue={gamificationData.currentXP}
             maxValue={gamificationData.nextLevelXP}
             showPercentage={true}
+            whitePercentage={true}
           />
 
           <p className="xp-remaining">
             Faltam <strong>{xpRemaining} XP</strong> para o próximo nível!
           </p>
         </div>
+
 
         {/* Statistics grid */}
         <div className="profile-stats-grid">
@@ -489,6 +552,25 @@ const Profile = ({ setCurrentScreen, userHobbies, setUserHobbies }) => {
                   Salvar Alterações
                 </button>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Logout Confirmation Modal */}
+      {showLogoutModal && (
+        <div className="hobby-modal-overlay" onClick={handleCancelLogout}>
+          <div className="logout-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="logout-modal-icon">🚪</div>
+            <h3>Sair da conta</h3>
+            <p>Você deseja sair? Seus dados serão salvos e você poderá acessar novamente depois.</p>
+            <div className="logout-modal-actions">
+              <button className="logout-cancel-btn" onClick={handleCancelLogout}>
+                Cancelar
+              </button>
+              <button className="logout-confirm-btn" onClick={handleConfirmLogout}>
+                Sair
+              </button>
             </div>
           </div>
         </div>

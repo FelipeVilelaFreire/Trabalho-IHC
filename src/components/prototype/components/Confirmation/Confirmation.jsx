@@ -20,6 +20,11 @@ const Confirmation = ({ selectedActivity, setCurrentScreen }) => {
 
   return (
     <div className="app-screen confirmation-screen">
+      {/* Back Button */}
+      <button className="confirmation-back-btn" onClick={() => setCurrentScreen('home')}>
+        ←
+      </button>
+
       <div className="confirmation-content">
         {/* Success Animation Section */}
         <div className="success-animation">

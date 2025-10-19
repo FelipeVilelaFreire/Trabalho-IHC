@@ -137,6 +137,17 @@ const Notifications = ({ setCurrentScreen }) => {
   const demoNotifications = [
     {
       id: 1,
+      type: 'xp-challenge',
+      icon: '⭐',
+      title: 'Ganhe XP com sua primeira atividade!',
+      message: 'Confirme sua primeira atividade para ganhar 25 XP e evoluir no HobbyLocal. Acesse uma atividade e clique em "Confirmar Participação"!',
+      time: 'Agora',
+      isRead: false,
+      color: '#F59E0B',
+      action: 'home'
+    },
+    {
+      id: 2,
       type: 'welcome',
       icon: '🎉',
       title: 'Bem-vindo ao HobbyLocal!',
@@ -146,7 +157,7 @@ const Notifications = ({ setCurrentScreen }) => {
       color: '#667eea'
     },
     {
-      id: 2,
+      id: 3,
       type: 'coupon',
       icon: '🎁',
       title: 'Cupom de boas-vindas liberado!',
@@ -157,7 +168,7 @@ const Notifications = ({ setCurrentScreen }) => {
       action: 'cupons'
     },
     {
-      id: 3,
+      id: 4,
       type: 'coupon-first',
       icon: '🎯',
       title: 'Cupom especial disponível!',
@@ -168,7 +179,7 @@ const Notifications = ({ setCurrentScreen }) => {
       action: 'cupons'
     },
     {
-      id: 4,
+      id: 5,
       type: 'tip',
       icon: '💡',
       title: 'Dica: Complete seu perfil',
@@ -178,7 +189,7 @@ const Notifications = ({ setCurrentScreen }) => {
       color: '#8B5CF6'
     },
     {
-      id: 5,
+      id: 6,
       type: 'discovery',
       icon: '🔍',
       title: 'Descubra novas atividades',
@@ -188,7 +199,7 @@ const Notifications = ({ setCurrentScreen }) => {
       color: '#EC4899'
     },
     {
-      id: 6,
+      id: 7,
       type: 'community',
       icon: '👥',
       title: 'Junte-se à comunidade',
@@ -245,7 +256,12 @@ const Notifications = ({ setCurrentScreen }) => {
       {/* Notifications Content */}
       <div
         className="notifications-content"
-        style={filteredNotifications.length <= 4 ? { minHeight: '550px' } : {}}
+        style={
+          (activeTab === 'all' && filteredNotifications.length <= 4) ||
+          (activeTab === 'unread' && unreadCount <= 4)
+            ? { minHeight: '550px' }
+            : {}
+        }
       >
         {filteredNotifications.length === 0 ? (
           // Empty State

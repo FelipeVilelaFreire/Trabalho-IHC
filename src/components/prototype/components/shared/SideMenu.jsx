@@ -90,6 +90,15 @@ const SideMenu = ({ isOpen, onClose, onNavigate }) => {
             <span className="side-menu-icon">📤</span>
             <span className="side-menu-label">Criar Post</span>
           </button>
+
+          {/* Achievements */}
+          <button
+            className="side-menu-item"
+            onClick={() => handleNavigateAndClose('achievements')}
+          >
+            <span className="side-menu-icon">🏆</span>
+            <span className="side-menu-label">Conquistas & Missões</span>
+          </button>
         </nav>
       </div>
     </>

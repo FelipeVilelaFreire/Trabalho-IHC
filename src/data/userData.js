@@ -3,19 +3,20 @@
  * Dados iniciais e configurações do usuário padrão do protótipo
  */
 
-import { getHobbyById } from './hobbiesData';
+import { getHobbyById } from "./hobbiesData";
 
 /**
  * Dados do usuário padrão
  */
 export const defaultUser = {
-  name: 'Felipe Silva',
-  email: 'felipe.silva@email.com',
-  avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&q=80',
+  name: "Felipe Silva",
+  email: "felipe.silva@email.com",
+  avatar:
+    "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&q=80",
   stats: {
     activities: 12,
-    hours: 45
-  }
+    hours: 45,
+  },
 };
 
 /**
@@ -25,32 +26,32 @@ export const defaultUser = {
  */
 export const defaultUserHobbies = [
   // Esportes
-  getHobbyById('futebol'),
-  getHobbyById('natacao'),
-  getHobbyById('ciclismo'),
+  getHobbyById("futebol"),
+  getHobbyById("natacao"),
+  getHobbyById("ciclismo"),
 
   // Música
-  getHobbyById('musica'),
-  getHobbyById('violao'),
+  getHobbyById("musica"),
+  getHobbyById("violao"),
 
   // Arte
-  getHobbyById('arte'),
-  getHobbyById('fotografia'),
-  getHobbyById('danca'),
+  getHobbyById("arte"),
+  getHobbyById("fotografia"),
+  getHobbyById("danca"),
 
   // Bem-estar
-  getHobbyById('yoga')
-].filter(hobby => hobby !== undefined); // Remove valores undefined caso algum ID não seja encontrado
+  getHobbyById("yoga"),
+].filter((hobby) => hobby !== undefined); // Remove valores undefined caso algum ID não seja encontrado
 
 /**
  * Localização padrão do usuário
  */
 export const defaultLocation = {
-  name: 'Icaraí, Niterói',
+  name: "Icaraí, Niterói",
   coordinates: {
     lat: -22.9064,
-    lng: -43.1086
-  }
+    lng: -43.1086,
+  },
 };
 
 /**
@@ -59,7 +60,7 @@ export const defaultLocation = {
 export const defaultNotificationSettings = {
   newActivities: true,
   reminders: true,
-  messages: true
+  messages: true,
 };
 
 /**
@@ -95,18 +96,18 @@ export const saveUserData = (key, value) => {
  * Limpa todos os dados do usuário do localStorage
  */
 export const clearUserData = () => {
-  localStorage.removeItem('hobbylocal-favorites');
-  localStorage.removeItem('hobbylocal-user-hobbies');
-  console.log('Dados do usuário limpos com sucesso');
+  localStorage.removeItem("hobbylocal-favorites");
+  localStorage.removeItem("hobbylocal-user-hobbies");
+  console.log("Dados do usuário limpos com sucesso");
 };
 
 /**
  * Reseta os dados do usuário para os valores padrão
  */
 export const resetUserData = () => {
-  saveUserData('hobbylocal-favorites', []);
-  saveUserData('hobbylocal-user-hobbies', defaultUserHobbies);
-  console.log('Dados do usuário resetados para valores padrão');
+  saveUserData("hobbylocal-favorites", []);
+  saveUserData("hobbylocal-user-hobbies", defaultUserHobbies);
+  console.log("Dados do usuário resetados para valores padrão");
 };
 
 /**
@@ -114,7 +115,7 @@ export const resetUserData = () => {
  * @returns {Array} Array de eventos agendados
  */
 export const loadScheduledEvents = () => {
-  return loadUserData('hobbylocal-scheduled-events', []);
+  return loadUserData("hobbylocal-scheduled-events", []);
 };
 
 /**
@@ -122,7 +123,7 @@ export const loadScheduledEvents = () => {
  * @param {Array} events - Array de eventos agendados
  */
 export const saveScheduledEvents = (events) => {
-  saveUserData('hobbylocal-scheduled-events', events);
+  saveUserData("hobbylocal-scheduled-events", events);
 };
 
 /**
@@ -136,7 +137,7 @@ export const addScheduledEvent = (event) => {
     ...event,
     id: Date.now(), // ID único baseado em timestamp
     scheduledAt: new Date().toISOString(),
-    status: 'confirmed'
+    status: "confirmed",
   };
   const updatedEvents = [...currentEvents, newEvent];
   saveScheduledEventsForMode(updatedEvents);
@@ -150,7 +151,7 @@ export const addScheduledEvent = (event) => {
  */
 export const removeScheduledEvent = (eventId) => {
   const currentEvents = loadScheduledEventsForMode();
-  const updatedEvents = currentEvents.filter(event => event.id !== eventId);
+  const updatedEvents = currentEvents.filter((event) => event.id !== eventId);
   saveScheduledEventsForMode(updatedEvents);
   return updatedEvents;
 };
@@ -160,7 +161,7 @@ export const removeScheduledEvent = (eventId) => {
  * @param {Object} userData - Objeto com name e email do usuário
  */
 export const saveSimulationUser = (userData) => {
-  saveUserData('hobbylocal-simulation-user', userData);
+  saveUserData("hobbylocal-simulation-user", userData);
 };
 
 /**
@@ -168,14 +169,14 @@ export const saveSimulationUser = (userData) => {
  * @returns {Object|null} Dados do usuário simulado ou null
  */
 export const loadSimulationUser = () => {
-  return loadUserData('hobbylocal-simulation-user', null);
+  return loadUserData("hobbylocal-simulation-user", null);
 };
 
 /**
  * Remove dados da simulação (volta ao modo padrão)
  */
 export const clearSimulationUser = () => {
-  localStorage.removeItem('hobbylocal-simulation-user');
+  localStorage.removeItem("hobbylocal-simulation-user");
 };
 
 /**
@@ -192,8 +193,8 @@ export const isSimulationMode = () => {
  */
 export const loadFavorites = () => {
   const key = isSimulationMode()
-    ? 'hobbylocal-simulation-favorites'
-    : 'hobbylocal-favorites';
+    ? "hobbylocal-simulation-favorites"
+    : "hobbylocal-favorites";
   return loadUserData(key, []);
 };
 
@@ -203,8 +204,8 @@ export const loadFavorites = () => {
  */
 export const saveFavorites = (favorites) => {
   const key = isSimulationMode()
-    ? 'hobbylocal-simulation-favorites'
-    : 'hobbylocal-favorites';
+    ? "hobbylocal-simulation-favorites"
+    : "hobbylocal-favorites";
   saveUserData(key, favorites);
 };
 
@@ -214,8 +215,8 @@ export const saveFavorites = (favorites) => {
  */
 export const loadScheduledEventsForMode = () => {
   const key = isSimulationMode()
-    ? 'hobbylocal-simulation-scheduled-events'
-    : 'hobbylocal-scheduled-events';
+    ? "hobbylocal-simulation-scheduled-events"
+    : "hobbylocal-scheduled-events";
   return loadUserData(key, []);
 };
 
@@ -225,8 +226,8 @@ export const loadScheduledEventsForMode = () => {
  */
 export const saveScheduledEventsForMode = (events) => {
   const key = isSimulationMode()
-    ? 'hobbylocal-simulation-scheduled-events'
-    : 'hobbylocal-scheduled-events';
+    ? "hobbylocal-simulation-scheduled-events"
+    : "hobbylocal-scheduled-events";
   saveUserData(key, events);
 };
 
@@ -240,12 +241,12 @@ export const updateUserProfile = (profileData) => {
     const currentData = loadSimulationUser() || {};
     const updatedData = {
       ...currentData,
-      ...profileData
+      ...profileData,
     };
     saveSimulationUser(updatedData);
   } else {
     // Atualiza dados do usuário padrão
-    saveUserData('hobbylocal-user-profile', profileData);
+    saveUserData("hobbylocal-user-profile", profileData);
   }
 };
 
@@ -254,5 +255,287 @@ export const updateUserProfile = (profileData) => {
  * @returns {Object|null} Dados do perfil ou null
  */
 export const loadUserProfile = () => {
-  return loadUserData('hobbylocal-user-profile', null);
+  return loadUserData("hobbylocal-user-profile", null);
+};
+
+/**
+ * Carrega XP do usuário (modo simulação ou padrão)
+ * @returns {Object} Objeto com level, currentXP, nextLevelXP
+ */
+export const loadUserXP = () => {
+  const key = isSimulationMode()
+    ? "hobbylocal-simulation-xp"
+    : "hobbylocal-user-xp";
+
+  // Valores padrão diferentes para cada modo
+  const defaultXP = isSimulationMode()
+    ? { level: 1, currentXP: 0, nextLevelXP: 100 }
+    : { level: 3, currentXP: 450, nextLevelXP: 600 };
+
+  return loadUserData(key, defaultXP);
+};
+
+/**
+ * Salva XP do usuário (modo simulação ou padrão)
+ * @param {Object} xpData - Objeto com level, currentXP, nextLevelXP
+ */
+export const saveUserXP = (xpData) => {
+  const key = isSimulationMode()
+    ? "hobbylocal-simulation-xp"
+    : "hobbylocal-user-xp";
+  saveUserData(key, xpData);
+};
+
+/**
+ * Adiciona XP ao usuário e calcula nível automaticamente
+ * @param {number} amount - Quantidade de XP a adicionar
+ * @returns {Object} Objeto atualizado com level, currentXP, nextLevelXP
+ */
+export const addUserXP = (amount) => {
+  const currentXP = loadUserXP();
+  let newXP = currentXP.currentXP + amount;
+  let newLevel = currentXP.level;
+  let nextLevelXP = currentXP.nextLevelXP;
+
+  // Verifica se subiu de nível
+  while (newXP >= nextLevelXP) {
+    newXP -= nextLevelXP;
+    newLevel++;
+    nextLevelXP = newLevel * 100; // Cada nível requer 100 XP a mais
+  }
+
+  const updatedXP = {
+    level: newLevel,
+    currentXP: newXP,
+    nextLevelXP: nextLevelXP,
+  };
+
+  saveUserXP(updatedXP);
+  return updatedXP;
+};
+
+/**
+ * Verifica se é a primeira confirmação do usuário (modo simulação apenas)
+ * @returns {boolean} True se é a primeira confirmação
+ */
+export const isFirstConfirmation = () => {
+  if (!isSimulationMode()) return false;
+
+  // Verifica se a flag já foi marcada
+  const firstConfirmationDone = loadUserData(
+    "hobbylocal-simulation-first-confirmation",
+    false
+  );
+  return !firstConfirmationDone; // Retorna true apenas se AINDA NÃO confirmou pela primeira vez
+};
+
+/**
+ * Marca que o usuário já confirmou a primeira atividade
+ */
+export const markFirstConfirmationDone = () => {
+  if (isSimulationMode()) {
+    saveUserData("hobbylocal-simulation-first-confirmation", true);
+  }
+};
+
+/**
+ * Carrega streak do usuário (dias consecutivos)
+ * @returns {number} Número de dias consecutivos
+ */
+export const loadUserStreak = () => {
+  const key = isSimulationMode()
+    ? "hobbylocal-simulation-streak"
+    : "hobbylocal-user-streak";
+
+  // Valores padrão diferentes para cada modo
+  const defaultStreak = isSimulationMode() ? 0 : 15;
+
+  return loadUserData(key, defaultStreak);
+};
+
+/**
+ * Salva streak do usuário
+ * @param {number} streak - Número de dias consecutivos
+ */
+export const saveUserStreak = (streak) => {
+  const key = isSimulationMode()
+    ? "hobbylocal-simulation-streak"
+    : "hobbylocal-user-streak";
+  saveUserData(key, streak);
+};
+
+/**
+ * Carrega missões completadas (modo simulação ou padrão)
+ * @returns {Array} Array de IDs de missões completadas
+ */
+export const loadCompletedMissions = () => {
+  const key = isSimulationMode()
+    ? "hobbylocal-simulation-completed-missions"
+    : "hobbylocal-user-completed-missions";
+  return loadUserData(key, []);
+};
+
+/**
+ * Salva missões completadas (modo simulação ou padrão)
+ * @param {Array} missions - Array de IDs de missões completadas
+ */
+export const saveCompletedMissions = (missions) => {
+  const key = isSimulationMode()
+    ? "hobbylocal-simulation-completed-missions"
+    : "hobbylocal-user-completed-missions";
+  saveUserData(key, missions);
+};
+
+/**
+ * Marca uma missão como completada
+ * @param {string} missionId - ID da missão
+ * @returns {boolean} True se foi marcada agora (não estava completada antes)
+ */
+export const markMissionAsCompleted = (missionId) => {
+  const completed = loadCompletedMissions();
+  if (completed.includes(missionId)) {
+    return false; // Já estava completada
+  }
+  completed.push(missionId);
+  saveCompletedMissions(completed);
+  return true; // Foi marcada agora
+};
+
+/**
+ * Verifica se uma missão foi completada
+ * @param {string} missionId - ID da missão
+ * @returns {boolean} True se a missão foi completada
+ */
+export const isMissionAlreadyCompleted = (missionId) => {
+  const completed = loadCompletedMissions();
+  return completed.includes(missionId);
+};
+
+/**
+ * Rastreia categorias exploradas pelo usuário (modo simulação ou padrão)
+ * @param {string} category - Nome da categoria
+ */
+export const trackCategoryExplored = (category) => {
+  const key = isSimulationMode()
+    ? "hobbylocal-simulation-categories-explored"
+    : "hobbylocal-user-categories-explored";
+
+  const categories = loadUserData(key, []);
+  if (!categories.includes(category)) {
+    categories.push(category);
+    saveUserData(key, categories);
+  }
+};
+
+/**
+ * Carrega categorias exploradas pelo usuário
+ * @returns {Array} Array de categorias exploradas
+ */
+export const loadCategoriesExplored = () => {
+  const key = isSimulationMode()
+    ? "hobbylocal-simulation-categories-explored"
+    : "hobbylocal-user-categories-explored";
+  return loadUserData(key, []);
+};
+
+/**
+ * Carrega conquistas desbloqueadas (modo simulação ou padrão)
+ * @returns {Array} Array de IDs de conquistas desbloqueadas
+ */
+export const loadUnlockedAchievements = () => {
+  const key = isSimulationMode()
+    ? "hobbylocal-simulation-unlocked-achievements"
+    : "hobbylocal-user-unlocked-achievements";
+  return loadUserData(key, []);
+};
+
+/**
+ * Salva conquistas desbloqueadas (modo simulação ou padrão)
+ * @param {Array} achievements - Array de IDs de conquistas desbloqueadas
+ */
+export const saveUnlockedAchievements = (achievements) => {
+  const key = isSimulationMode()
+    ? "hobbylocal-simulation-unlocked-achievements"
+    : "hobbylocal-user-unlocked-achievements";
+  saveUserData(key, achievements);
+};
+
+/**
+ * Marca uma conquista como desbloqueada
+ * @param {string} achievementId - ID da conquista
+ * @returns {boolean} True se foi marcada agora (não estava desbloqueada antes)
+ */
+export const markAchievementAsUnlocked = (achievementId) => {
+  const unlocked = loadUnlockedAchievements();
+  if (unlocked.includes(achievementId)) {
+    return false; // Já estava desbloqueada
+  }
+  unlocked.push(achievementId);
+  saveUnlockedAchievements(unlocked);
+  return true; // Foi marcada agora
+};
+
+/**
+ * Verifica se uma conquista foi desbloqueada
+ * @param {string} achievementId - ID da conquista
+ * @returns {boolean} True se a conquista foi desbloqueada
+ */
+export const isAchievementAlreadyUnlocked = (achievementId) => {
+  const unlocked = loadUnlockedAchievements();
+  return unlocked.includes(achievementId);
+};
+
+/**
+ * Inicializa dados de demonstração para o modo simulação
+ * Adiciona alguns dados iniciais para mostrar o sistema funcionando
+ */
+export const initializeDemoData = () => {
+  // Começa sem favoritos (progresso 0/3)
+  saveUserData("hobbylocal-simulation-favorites", []);
+
+  console.log("✨ Dados de demonstração inicializados!");
+};
+
+/**
+ * Reseta todos os dados da simulação
+ * Remove todos os dados salvos no localStorage relacionados à simulação
+ */
+export const resetSimulationData = () => {
+  // Remove dados do usuário simulado
+  localStorage.removeItem("hobbylocal-simulation-user");
+
+  // Remove XP da simulação
+  localStorage.removeItem("hobbylocal-simulation-xp");
+
+  // Remove favoritos da simulação
+  localStorage.removeItem("hobbylocal-simulation-favorites");
+
+  // Remove eventos agendados da simulação
+  localStorage.removeItem("hobbylocal-simulation-scheduled-events");
+
+  // Remove marca de primeira confirmação
+  localStorage.removeItem("hobbylocal-simulation-first-confirmation");
+
+  // Remove hobbies do usuário (volta para vazio ou default)
+  localStorage.removeItem("hobbylocal-user-hobbies");
+
+  // Remove posts do usuário simulado
+  localStorage.removeItem("hobbylocal-user-posts");
+
+  // Remove streak da simulação
+  localStorage.removeItem("hobbylocal-simulation-streak");
+
+  // Remove missões completadas da simulação
+  localStorage.removeItem("hobbylocal-simulation-completed-missions");
+
+  // Remove categorias exploradas da simulação
+  localStorage.removeItem("hobbylocal-simulation-categories-explored");
+
+  // Remove conquistas desbloqueadas da simulação
+  localStorage.removeItem("hobbylocal-simulation-unlocked-achievements");
+
+  console.log("✅ Todos os dados da simulação foram resetados!");
+
+  // Inicializa dados de demonstração
+  initializeDemoData();
 };

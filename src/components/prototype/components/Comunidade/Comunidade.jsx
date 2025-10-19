@@ -19,7 +19,12 @@ const Comunidade = ({ setCurrentScreen }) => {
   const savedProfile = loadUserProfile();
 
   const userData = simulationUser
-    ? { ...defaultUser, ...simulationUser }
+    ? {
+        ...defaultUser,
+        ...simulationUser,
+        // No modo simulação, se não tiver avatar explícito, força null (placeholder)
+        avatar: simulationUser.avatar || null
+      }
     : { ...defaultUser, ...(savedProfile || {}) };
 
   // State para posts (carrega todos: usuário + comunidade)

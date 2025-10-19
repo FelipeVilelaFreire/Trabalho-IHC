@@ -8,11 +8,11 @@
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   z-index: 2000;
   animation: fadeIn 0.3s ease;
-  overflow-y: auto;
+  overflow: hidden;
   padding: 20px;
 }
 
@@ -32,9 +32,10 @@
   max-width: 500px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   animation: slideUp 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-  margin: auto;
-  max-height: 90vh;
-  overflow-y: auto;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 @keyframes slideUp {
@@ -93,6 +94,8 @@
 /* Filtros dentro do container */
 .filter-modal-filters {
   padding: 20px;
+  overflow-y: auto;
+  flex: 1;
 }
 
 .filter-modal-filters h3 {

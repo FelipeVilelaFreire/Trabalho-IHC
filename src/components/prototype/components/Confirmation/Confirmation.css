@@ -6,12 +6,42 @@
   align-items: center;
   justify-content: center;
   background: white;
+  position: relative;
+}
+
+/* Back button */
+.confirmation-back-btn {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: #f8f9fa;
+  color: #212529;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.confirmation-back-btn:hover {
+  background: #e9ecef;
+  transform: scale(1.05);
+}
+
+.confirmation-back-btn:active {
+  transform: scale(0.95);
 }
 
 /* Content wrapper with centered text and max-width */
 .confirmation-content {
   text-align: center;
-  padding: 40px 20px;
+  padding: 80px 20px 40px 20px;
   max-width: 300px;
 }
 
@@ -63,8 +93,8 @@
 .confirmation-content > p {
   font-size: 14px;
   color: #6c757d;
-  margin: 0 0 24px 0;
-  line-height: 1.6;
+  margin: 0 0 16px 0;
+  line-height: 1.4;
 }
 
 /* Confirmed activity card container */
@@ -124,7 +154,7 @@
 /* Base button styles (primary and secondary) */
 .btn-primary,
 .btn-secondary {
-  padding: 14px;
+  padding: 10px;
   border: none;
   border-radius: 12px;
   font-size: 14px;
