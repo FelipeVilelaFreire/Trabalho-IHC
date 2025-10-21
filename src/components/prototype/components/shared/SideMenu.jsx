@@ -73,23 +73,23 @@ const SideMenu = ({ isOpen, onClose, onNavigate }) => {
             <span className="side-menu-label">Cupons</span>
           </button>
 
-          {/* Comunidade */}
-          <button
+          {/* Comunidade - Comentado */}
+          {/* <button
             className="side-menu-item"
             onClick={() => handleNavigateAndClose('comunidade')}
           >
             <span className="side-menu-icon">💬</span>
             <span className="side-menu-label">Comunidade</span>
-          </button>
+          </button> */}
 
-          {/* Upload */}
-          <button
+          {/* Upload - Comentado */}
+          {/* <button
             className="side-menu-item"
             onClick={() => handleNavigateAndClose('upload')}
           >
             <span className="side-menu-icon">📤</span>
             <span className="side-menu-label">Criar Post</span>
-          </button>
+          </button> */}
 
           {/* Achievements */}
           <button

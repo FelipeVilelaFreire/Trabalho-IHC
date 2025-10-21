@@ -571,20 +571,22 @@ const Prototype = () => {
       case "cupons":
         return <Cupons setCurrentScreen={setCurrentScreen} />;
 
-      case "comunidade":
-        return (
-          <Comunidade
-            setCurrentScreen={setCurrentScreen}
-          />
-        );
+      // Comunidade - Comentado
+      // case "comunidade":
+      //   return (
+      //     <Comunidade
+      //       setCurrentScreen={setCurrentScreen}
+      //     />
+      //   );
 
-      case "upload":
-        return (
-          <Upload
-            setCurrentScreen={setCurrentScreen}
-            onPostCreated={checkAndRewardMissions}
-          />
-        );
+      // Upload - Comentado
+      // case "upload":
+      //   return (
+      //     <Upload
+      //       setCurrentScreen={setCurrentScreen}
+      //       onPostCreated={checkAndRewardMissions}
+      //     />
+      //   );
 
       case "achievements":
         return <Achievements setCurrentScreen={setCurrentScreen} initialTab={achievementsTab} />;

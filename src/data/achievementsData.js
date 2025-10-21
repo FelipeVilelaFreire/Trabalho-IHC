@@ -86,15 +86,16 @@ export const achievements = [
     requirement: "Participar de 5 categorias",
     rewardXP: 100,
   },
-  {
-    id: "first-post",
-    name: "Primeira Postagem",
-    description: "Compartilhe seu primeiro post",
-    icon: "📝",
-    color: "#EC4899",
-    category: "social",
-    requirement: "Criar 1 post",
-  },
+  // Comunidade - Comentado
+  // {
+  //   id: "first-post",
+  //   name: "Primeira Postagem",
+  //   description: "Compartilhe seu primeiro post",
+  //   icon: "📝",
+  //   color: "#EC4899",
+  //   category: "social",
+  //   requirement: "Criar 1 post",
+  // },
 ];
 
 /**
@@ -130,8 +131,9 @@ export const isAchievementUnlocked = (achievementId, userProgress) => {
       return activitiesCompleted >= 25;
     case "category-explorer":
       return categoriesExplored >= 5;
-    case "first-post":
-      return postsCreated >= 1;
+    // Comunidade - Comentado
+    // case "first-post":
+    //   return postsCreated >= 1;
     default:
       return false;
   }
@@ -189,10 +191,11 @@ export const getAchievementProgress = (achievementId, userProgress) => {
       current = categoriesExplored;
       total = 5;
       break;
-    case "first-post":
-      current = postsCreated;
-      total = 1;
-      break;
+    // Comunidade - Comentado
+    // case "first-post":
+    //   current = postsCreated;
+    //   total = 1;
+    //   break;
   }
 
   return {

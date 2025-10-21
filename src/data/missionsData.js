@@ -36,20 +36,21 @@ const beginnerMissions = [
     },
     difficulty: "easy",
   },
-  {
-    id: "beginner-3",
-    title: "Voz Ativa",
-    description: "Faça seu primeiro post na comunidade",
-    icon: "📝",
-    color: "#EC4899",
-    type: "posts",
-    target: 1,
-    reward: {
-      xp: 20,
-      badge: "Primeira Postagem",
-    },
-    difficulty: "easy",
-  },
+  // Comunidade - Comentado
+  // {
+  //   id: "beginner-3",
+  //   title: "Voz Ativa",
+  //   description: "Faça seu primeiro post na comunidade",
+  //   icon: "📝",
+  //   color: "#EC4899",
+  //   type: "posts",
+  //   target: 1,
+  //   reward: {
+  //     xp: 20,
+  //     badge: "Primeira Postagem",
+  //   },
+  //   difficulty: "easy",
+  // },
   {
     id: "beginner-0",
     title: "Primeira Participação",
@@ -132,20 +133,21 @@ const advancedMissions = [
     },
     difficulty: "hard",
   },
-  {
-    id: "advanced-4",
-    title: "Influenciador",
-    description: "Crie 3 posts na comunidade",
-    icon: "📱",
-    color: "#EC4899",
-    type: "posts",
-    target: 3,
-    reward: {
-      xp: 60,
-      badge: null,
-    },
-    difficulty: "hard",
-  },
+  // Comunidade - Comentado
+  // {
+  //   id: "advanced-4",
+  //   title: "Influenciador",
+  //   description: "Crie 3 posts na comunidade",
+  //   icon: "📱",
+  //   color: "#EC4899",
+  //   type: "posts",
+  //   target: 3,
+  //   reward: {
+  //     xp: 60,
+  //     badge: null,
+  //   },
+  //   difficulty: "hard",
+  // },
 ];
 
 /**
@@ -166,34 +168,35 @@ const expertMissions = [
     },
     difficulty: "expert",
   },
-  {
-    id: "expert-3",
-    title: "Líder Comunitário",
-    description: "Receba 50 curtidas em seus posts",
-    icon: "❤️",
-    color: "#EF4444",
-    type: "likes-received",
-    target: 50,
-    reward: {
-      xp: 120,
-      badge: null,
-    },
-    difficulty: "expert",
-  },
-  {
-    id: "expert-4",
-    title: "Mestre das Conversas",
-    description: "Faça 20 comentários em posts",
-    icon: "💬",
-    color: "#EC4899",
-    type: "comments",
-    target: 20,
-    reward: {
-      xp: 100,
-      badge: "Borboleta Social",
-    },
-    difficulty: "expert",
-  },
+  // Comunidade - Comentado
+  // {
+  //   id: "expert-3",
+  //   title: "Líder Comunitário",
+  //   description: "Receba 50 curtidas em seus posts",
+  //   icon: "❤️",
+  //   color: "#EF4444",
+  //   type: "likes-received",
+  //   target: 50,
+  //   reward: {
+  //     xp: 120,
+  //     badge: null,
+  //   },
+  //   difficulty: "expert",
+  // },
+  // {
+  //   id: "expert-4",
+  //   title: "Mestre das Conversas",
+  //   description: "Faça 20 comentários em posts",
+  //   icon: "💬",
+  //   color: "#EC4899",
+  //   type: "comments",
+  //   target: 20,
+  //   reward: {
+  //     xp: 100,
+  //     badge: "Borboleta Social",
+  //   },
+  //   difficulty: "expert",
+  // },
 ];
 
 /**
@@ -235,7 +238,8 @@ export const isMissionCompleted = (missionId, userProgress) => {
   if (missionId === "beginner-0") return false; // TODO: Configurar rastreamento depois
   if (missionId === "beginner-1") return activitiesCompleted >= 1;
   if (missionId === "beginner-2") return favoritesCount >= 3;
-  if (missionId === "beginner-3") return postsCreated >= 1;
+  // Comunidade - Comentado
+  // if (missionId === "beginner-3") return postsCreated >= 1;
 
   // Intermediate missions
   if (missionId === "intermediate-1") return weeklyActivitiesCompleted >= 3;
@@ -245,12 +249,14 @@ export const isMissionCompleted = (missionId, userProgress) => {
   // Advanced missions
   if (missionId === "advanced-1") return weeklyActivitiesCompleted >= 5;
   if (missionId === "advanced-2") return categoriesExplored >= 5;
-  if (missionId === "advanced-4") return postsCreated >= 3;
+  // Comunidade - Comentado
+  // if (missionId === "advanced-4") return postsCreated >= 3;
 
   // Expert missions
   if (missionId === "expert-1") return weeklyActivitiesCompleted >= 10;
-  if (missionId === "expert-3") return likesReceived >= 50;
-  if (missionId === "expert-4") return commentsCreated >= 20;
+  // Comunidade - Comentado
+  // if (missionId === "expert-3") return likesReceived >= 50;
+  // if (missionId === "expert-4") return commentsCreated >= 20;
 
   return false;
 };
