@@ -27,7 +27,7 @@
 
 .footer-subtitle {
   color: var(--white);
-  font-size: var(--text-lg);
+  font-size: var(--text-3xl);
   font-weight: var(--font-semibold);
   margin-bottom: 0.5rem;
 }
