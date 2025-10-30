@@ -658,49 +658,6 @@ const Prototype = () => {
           ✨ Simule você aqui
         </button>
       </div>
-
-      {/* Seção de funcionalidades demonstradas */}
-      <div className="prototype-features">
-        <h2>Funcionalidades Demonstradas</h2>
-        <div className="features-grid-section">
-          <div className="feature-card">
-            <span className="feature-icon">🎯</span>
-            <h3>Descoberta Inteligente</h3>
-            <p>
-              Encontre atividades próximas baseadas em sua localização e
-              preferências
-            </p>
-          </div>
-          <div className="feature-card">
-            <span className="feature-icon">🔍</span>
-            <h3>Busca Avançada</h3>
-            <p>Filtre por categoria, preço, distância e disponibilidade</p>
-          </div>
-          <div className="feature-card">
-            <span className="feature-icon">📋</span>
-            <h3>Informações Completas</h3>
-            <p>
-              Veja todos os detalhes: instrutor, nível, o que trazer e muito
-              mais
-            </p>
-          </div>
-          <div className="feature-card">
-            <span className="feature-icon">✨</span>
-            <h3>Inscrição Rápida</h3>
-            <p>Confirme sua participação em poucos segundos</p>
-          </div>
-          <div className="feature-card">
-            <span className="feature-icon">❤️</span>
-            <h3>Favoritos</h3>
-            <p>Salve suas atividades preferidas para acessar rapidamente</p>
-          </div>
-          <div className="feature-card">
-            <span className="feature-icon">👥</span>
-            <h3>Vagas em Tempo Real</h3>
-            <p>Acompanhe quantas vagas estão disponíveis para cada atividade</p>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };
