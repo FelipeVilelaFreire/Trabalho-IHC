@@ -62,7 +62,7 @@ const Home = () => {
   return (
     <div className="home">
       <Hero 
-        title="HobbyMap: Projeto de IHC"
+        title="HobbyLocal: Projeto de IHC"
         subtitle="Um estudo sobre descoberta e engajamento em atividades de lazer locais através de uma abordagem centrada no usuário"
         ctaText="Explorar Pesquisa"
         ctaLink="#about"

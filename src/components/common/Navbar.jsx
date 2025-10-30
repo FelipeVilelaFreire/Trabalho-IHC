@@ -38,7 +38,7 @@ const Navbar = () => {
             <path d="M20 10C20 10 25 15 25 20C25 25 20 30 20 30C20 30 15 25 15 20C15 15 20 10 20 10Z" fill="currentColor" opacity="0.8"/>
             <circle cx="20" cy="20" r="5" fill="white"/>
           </svg>
-          <span className="navbar-logo-text">HobbyMap</span>
+          <span className="navbar-logo-text">HobbyLocal</span>
         </Link>
 
         <button

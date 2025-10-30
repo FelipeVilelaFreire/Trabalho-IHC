@@ -1,35 +1,12 @@
 import Hero from "../components/sections/Hero";
-import Card from "../components/ui/Card";
-import Button from "../components/ui/Button";
 import PersonaCard from "../components/ui/solution/PersonaCard";
-import { SOLUTION_FEATURES } from "../utils/constants";
+import CenarioCard from "../components/ui/solution/CenarioCard";
+import ModeloTarefas from "../components/ui/solution/ModeloTarefas";
 import { PERSONAS } from "../data/personas";
+import { CENARIOS_PROBLEMA } from "../data/cenarios";
 import "./Solution.css";
 
 const Solution = () => {
-  const differentials = [
-    {
-      title: "Foco Hiperlocal",
-      description: "Atividades do seu bairro e cidade",
-      icon: "🎯",
-    },
-    {
-      title: "Interface Intuitiva",
-      description: "Design acessível para todos",
-      icon: "🎨",
-    },
-    {
-      title: "Calendário Integrado",
-      description: "Sincronize com sua agenda",
-      icon: "📅",
-    },
-    {
-      title: "Gamificação",
-      description: "Conquiste badges e níveis",
-      icon: "🏆",
-    },
-  ];
-
   return (
     <div className="solution-page">
       <Hero
@@ -38,16 +15,42 @@ const Solution = () => {
         showScrollIndicator={true}
       />
 
-      {/* <section className="section personas-section">
+      <section className="section personas-section">
         <div className="container">
           <h2 className="section-title">Personas</h2>
           <p className="section-subtitle">
             Perfis baseados em pesquisa real com usuários para entender melhor as necessidades e desafios
           </p>
 
-          <PersonaCard persona={PERSONAS[0]} />
+          {PERSONAS.map((persona) => (
+            <PersonaCard key={persona.id} persona={persona} />
+          ))}
         </div>
-      </section> */}
+      </section>
+
+      <section className="section cenarios-section">
+        <div className="container">
+          <h2 className="section-title">Cenários-problema</h2>
+          <p className="section-subtitle">
+            Situações reais que ilustram os principais desafios enfrentados por nossos usuários ao buscar hobbies e atividades locais
+          </p>
+
+          {CENARIOS_PROBLEMA.map((cenario, index) => (
+            <CenarioCard key={cenario.id} cenario={cenario} index={index} />
+          ))}
+        </div>
+      </section>
+
+      <section className="section modelo-tarefas-section">
+        <div className="container">
+          <h2 className="section-title">Modelo de Tarefas</h2>
+          <p className="section-subtitle">
+            Análise hierárquica das tarefas realizadas pelos usuários no HobbyLocal
+          </p>
+
+          <ModeloTarefas miroEmbedUrl="https://miro.com/app/live-embed/uXjVJy8uSyo=/?embedMode=view_only_without_ui&moveToViewport=-1241,-284,4187,1990&embedId=148831402463" />
+        </div>
+      </section>
 
       <section className="section prototype-cta-section">
         <div className="container">
@@ -59,22 +62,6 @@ const Solution = () => {
             <a href="/prototipo" className="cta-button">
               Acessar Protótipo
             </a>
-          </div>
-        </div>
-      </section>
-
-      <section className="section differentials-section">
-        <div className="container">
-          <h2 className="section-title">Nossos Diferenciais</h2>
-
-          <div className="differentials-grid">
-            {differentials.map((diff, index) => (
-              <div key={index} className="differential-item">
-                <div className="differential-icon">{diff.icon}</div>
-                <h3 className="differential-title">{diff.title}</h3>
-                <p className="differential-desc">{diff.description}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>

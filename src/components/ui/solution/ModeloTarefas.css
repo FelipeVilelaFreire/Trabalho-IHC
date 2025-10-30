@@ -1,0 +1,124 @@
+/* Modelo de Tarefas - Container Principal */
+.modelo-tarefas {
+  background: white;
+  border-radius: 20px;
+  padding: 3rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Introdução e HTA */
+.modelo-intro,
+.modelo-hta {
+  margin-bottom: 2.5rem;
+}
+
+.modelo-subtitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 1rem 0;
+  text-align: left;
+}
+
+.modelo-description {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #2d3748;
+  margin: 0;
+  text-align: justify;
+}
+
+.modelo-description strong {
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+/* Container do Miro */
+.modelo-miro-container {
+  width: 100%;
+  height: 600px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  background: #f5f7fa;
+  margin-top: 2rem;
+}
+
+.modelo-miro-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Responsividade - Tablet */
+@media (max-width: 1024px) {
+  .modelo-tarefas {
+    padding: 2.5rem;
+  }
+
+  .modelo-subtitle {
+    font-size: 1.4rem;
+  }
+
+  .modelo-description {
+    font-size: 1.1rem;
+  }
+
+  .modelo-miro-container {
+    height: 550px;
+  }
+}
+
+/* Responsividade - Mobile */
+@media (max-width: 768px) {
+  .modelo-tarefas {
+    padding: 2rem;
+    border-radius: 16px;
+  }
+
+  .modelo-intro,
+  .modelo-hta {
+    margin-bottom: 2rem;
+  }
+
+  .modelo-subtitle {
+    font-size: 1.25rem;
+  }
+
+  .modelo-description {
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  .modelo-miro-container {
+    height: 450px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modelo-tarefas {
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+
+  .modelo-intro,
+  .modelo-hta {
+    margin-bottom: 1.5rem;
+  }
+
+  .modelo-subtitle {
+    font-size: 1.15rem;
+  }
+
+  .modelo-description {
+    font-size: 1rem;
+  }
+
+  .modelo-miro-container {
+    height: 350px;
+    border-radius: 8px;
+  }
+}

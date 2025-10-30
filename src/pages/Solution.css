@@ -234,7 +234,7 @@
 }
 
 .personas-section .section-title {
-  font-size: 1.85rem;
+  font-size: 2.2rem;
   font-weight: 700;
   color: #1a1a1a;
   text-align: center;
@@ -242,7 +242,7 @@
 }
 
 .personas-section .section-subtitle {
-  font-size: 0.95rem;
+  font-size: 1.1rem;
   color: #6c757d;
   text-align: center;
   max-width: 700px;
@@ -261,7 +261,7 @@
   }
 
   .personas-section .section-subtitle {
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     margin-bottom: 2rem;
   }
 }
@@ -276,7 +276,117 @@
   }
 
   .personas-section .section-subtitle {
-    font-size: 0.88rem;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 0 10px;
+  }
+}
+
+/* Cenários Section */
+.cenarios-section {
+  background: white;
+  padding: 60px 0;
+}
+
+.cenarios-section .section-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.cenarios-section .section-subtitle {
+  font-size: 1.1rem;
+  color: #6c757d;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  line-height: 1.6;
+}
+
+/* Responsive adjustments for cenarios section */
+@media (max-width: 768px) {
+  .cenarios-section {
+    padding: 40px 0;
+  }
+
+  .cenarios-section .section-title {
+    font-size: 1.75rem;
+  }
+
+  .cenarios-section .section-subtitle {
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cenarios-section {
+    padding: 30px 0;
+  }
+
+  .cenarios-section .section-title {
+    font-size: 1.5rem;
+  }
+
+  .cenarios-section .section-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 0 10px;
+  }
+}
+
+/* Modelo de Tarefas Section */
+.modelo-tarefas-section {
+  background: #f5f7fa;
+  padding: 60px 0;
+}
+
+.modelo-tarefas-section .section-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.modelo-tarefas-section .section-subtitle {
+  font-size: 1.1rem;
+  color: #6c757d;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  line-height: 1.6;
+}
+
+/* Responsive adjustments for modelo tarefas section */
+@media (max-width: 768px) {
+  .modelo-tarefas-section {
+    padding: 40px 0;
+  }
+
+  .modelo-tarefas-section .section-title {
+    font-size: 1.75rem;
+  }
+
+  .modelo-tarefas-section .section-subtitle {
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modelo-tarefas-section {
+    padding: 30px 0;
+  }
+
+  .modelo-tarefas-section .section-title {
+    font-size: 1.5rem;
+  }
+
+  .modelo-tarefas-section .section-subtitle {
+    font-size: 1rem;
     margin-bottom: 1.5rem;
     padding: 0 10px;
   }
