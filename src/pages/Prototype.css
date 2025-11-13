@@ -1,135 +1,102 @@
-/* Prototype Page Container */
+/* Prototype Page */
 .prototype-page {
   padding-top: 70px;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   min-height: 100vh;
-  position: relative;
-  overflow-x: hidden;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f0f2f5;
+  overflow: hidden;
 }
 
-/* Intro Section */
-.prototype-intro {
-  text-align: center;
-  padding: 60px 20px 20px;
-  position: relative;
-  z-index: 1;
-}
-
-.prototype-intro h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 1rem;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.prototype-intro p {
-  font-size: 1.25rem;
-  color: #6c757d;
-  margin-bottom: 3rem;
-}
-
-/* Simulate Section */
-.simulate-section {
-  text-align: center;
-  padding: 40px 20px;
-}
-
-.simulate-btn {
-  display: inline-flex;
+/* Container do Figma */
+.figma-container {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 16px 32px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
-  border: none;
-  border-radius: 50px;
-  font-size: 1.125rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
-  font-family: inherit;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
-.simulate-btn:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(102, 126, 234, 0.5);
-}
-
-.simulate-btn:active {
-  transform: translateY(-2px);
-}
-
-/* Features Section */
-.prototype-features {
-  padding: 60px 20px 80px;
+/* Iframe do Figma */
+.figma-iframe {
+  width: 100%;
   max-width: 1200px;
+  height: 100%;
+  min-height: 600px;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  background: white;
+  display: block;
   margin: 0 auto;
 }
 
-.prototype-features h2 {
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 3rem;
+/* Responsivo - Tablet */
+@media (max-width: 1024px) {
+  .figma-container {
+    padding: 15px;
+  }
+
+  .figma-iframe {
+    border-radius: 8px;
+  }
 }
 
-.features-grid-section {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-}
-
-.feature-card {
-  background: white;
-  padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  text-align: center;
-}
-
-.feature-card .feature-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  display: inline-block;
-}
-
-.feature-card h3 {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #212529;
-  margin: 0 0 0.75rem 0;
-}
-
-.feature-card p {
-  font-size: 0.95rem;
-  color: #6c757d;
-  margin: 0;
-  line-height: 1.6;
-}
-
-/* Responsive Design */
+/* Responsivo - Mobile */
 @media (max-width: 768px) {
-  .prototype-intro h1 {
-    font-size: 2rem;
+  .prototype-page {
+    padding-top: 60px;
   }
 
-  .features-grid-section {
-    grid-template-columns: 1fr;
+  .figma-container {
+    padding: 10px;
+  }
+
+  .figma-iframe {
+    min-height: 500px;
+    border-radius: 8px;
   }
 }
 
+/* Responsivo - Mobile Small */
 @media (max-width: 480px) {
-  .prototype-intro h1 {
-    font-size: 1.75rem;
+  .prototype-page {
+    padding-top: 60px;
   }
 
-  .prototype-intro p {
-    font-size: 1rem;
+  .figma-container {
+    padding: 8px;
   }
+
+  .figma-iframe {
+    min-height: 400px;
+    border-radius: 6px;
+  }
+}
+
+/* Loading animation */
+.figma-container::before {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 1;
+}
+
+.figma-iframe:not([src=""]) ~ .figma-container::before {
+  display: none;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

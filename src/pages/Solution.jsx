@@ -1,12 +1,24 @@
+import { useState } from "react";
 import Hero from "../components/sections/Hero";
 import PersonaCard from "../components/ui/solution/PersonaCard";
 import CenarioCard from "../components/ui/solution/CenarioCard";
 import ModeloTarefas from "../components/ui/solution/ModeloTarefas";
+import Crazy4Modal from "../components/ui/solution/Crazy4Modal";
 import { PERSONAS } from "../data/personas";
 import { CENARIOS_PROBLEMA } from "../data/cenarios";
 import "./Solution.css";
 
 const Solution = () => {
+  const [isCrazy4ModalOpen, setIsCrazy4ModalOpen] = useState(false);
+
+  const handleOpenCrazy4 = () => {
+    setIsCrazy4ModalOpen(true);
+  };
+
+  const handleCloseCrazy4 = () => {
+    setIsCrazy4ModalOpen(false);
+  };
+
   return (
     <div className="solution-page">
       <Hero
@@ -41,6 +53,43 @@ const Solution = () => {
         </div>
       </section>
 
+      <section className="section crazy4-section">
+        <div className="container">
+          <h2 className="section-title">Crazy 4</h2>
+          <p className="section-subtitle">
+            Durante a fase de ideação, aplicamos a técnica Crazy 4, uma adaptação do método Crazy 8.
+            A dinâmica consistiu em gerar múltiplas ideias em tempo limitado, promovendo criatividade e
+            explorando diferentes ângulos para abordar o problema identificado.
+          </p>
+
+          <div className="crazy4-content">
+            <p className="crazy4-description">
+              Cada integrante da equipe propôs quatro soluções sob diferentes perspectivas: uma solução elaborada
+              e com alto investimento, uma alternativa simples e de rápida implementação, uma proposta baseada em
+              elementos de gamificação, e uma solução tecnológica utilizando IoT.
+            </p>
+
+            <p className="crazy4-description">
+              Após a etapa individual, reunimos as ideias do grupo e selecionamos os elementos mais promissores de cada proposta.
+              Dentre as contribuições, Felipe e Ruan desenvolveram o conceito de gamificação que incorporamos ao projeto,
+              incluindo funcionalidades como sistema de conquistas, missões progressivas e recompensas para aumentar o engajamento
+              e retenção dos usuários na plataforma.
+            </p>
+
+            <div className="crazy4-card-wrapper">
+              <div className="document-card crazy4-card">
+                <div className="document-icon">🎨</div>
+                <h4>Confira os detalhes das nossas ideias</h4>
+                <p>Clique para visualizar as 4 propostas desenvolvidas</p>
+                <button className="document-btn" onClick={handleOpenCrazy4}>
+                  Ver Ideias
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="section modelo-tarefas-section">
         <div className="container">
           <h2 className="section-title">Modelo de Tarefas</h2>
@@ -65,6 +114,8 @@ const Solution = () => {
           </div>
         </div>
       </section>
+
+      <Crazy4Modal isOpen={isCrazy4ModalOpen} onClose={handleCloseCrazy4} />
     </div>
   );
 };
